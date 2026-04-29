@@ -1,0 +1,123 @@
+{% extends "help_layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/help.css">
+<div class="main-content-wrapper">
+  <div class="pagetitle">
+    <h1>How can I update my profile information?</h1>
+    <p class="meta-info">Validated on <strong>15 Jan 2024</strong> • Last edited on <strong>27 Jun 2025</strong></p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body mt-3">
+          <h2 class="section-subtitle">Overview</h2>
+          <p class="description-text">
+            Keeping your profile information up to date ensures accurate communication and a personalized experience on Wheelluck. You can update your personal information, company details, and email address from your Profile settings page.
+          </p>
+          
+          <h2 class="section-subtitle mt-5">Accessing Your Profile Settings</h2>
+          <div class="description-step">
+            <ol>
+              <li>Log in to your Wheelluck dashboard.</li>
+              <li>Click on your profile icon in the top right corner.</li>
+              <li>Select <strong>Profile</strong> or <strong>Account Settings</strong> from the dropdown menu.</li>
+              <li>You'll be taken to your Profile page, which has two main tabs:
+                <ul>
+                  <li><strong>Overview:</strong> Update your personal and business information</li>
+                  <li><strong>Email:</strong> Change your email address</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Updating Profile Information (Overview Tab)</h2>
+          <div class="description-step">
+            <p class="description-text">In the <strong>Overview</strong> tab, you can update the following information:</p>
+            <ol>
+              <li><strong>Full Name:</strong>
+                <ul>
+                  <li>Enter your full name as it should appear on your account</li>
+                  <li><strong>Important:</strong> Full name can only contain alphabetic characters (letters) and spaces - no numbers or special characters</li>
+                  <li>Example: "John Smith" ✓ | "John123" ✗ | "John-Smith" ✗</li>
+                </ul>
+              </li>
+              <li><strong>Company:</strong>
+                <ul>
+                  <li>Enter your company or organization name</li>
+                  <li>This helps identify your business context</li>
+                </ul>
+              </li>
+              <li><strong>Market:</strong>
+                <ul>
+                  <li>Select your industry or market category from the dropdown menu</li>
+                  <li>Choose the category that best describes your business sector (e.g., E-Commerce, Retail, Software, etc.)</li>
+                </ul>
+              </li>
+              <li><strong>Business:</strong>
+                <ul>
+                  <li>Enter a description of your business or role</li>
+                  <li>This is a text area where you can provide additional context about your business</li>
+                </ul>
+              </li>
+            </ol>
+            <p class="description-text mt-3">After making your changes, click the <strong>Save Changes</strong> button to update your profile.</p>
+          </div>
+          
+          <h2 class="section-subtitle mt-5">Changing Your Email Address</h2>
+          <div class="description-step">
+            <ol>
+              <li>Go to your Profile settings page.</li>
+              <li>Click on the <strong>Email</strong> tab.</li>
+              <li>You'll see your current email address (displayed as read-only).</li>
+              <li>Click the <strong>Change email</strong> button to reveal the email change form.</li>
+              <li>Enter your new email address in the provided field.</li>
+              <li>Click <strong>Save Changes</strong>.</li>
+              <li><strong>Important:</strong> You'll receive a verification email at your new address.</li>
+              <li>Check your new email inbox and click the verification link in the email.</li>
+              <li>Your email address will only be updated after you verify it.</li>
+              <li>If you don't receive the verification email, you can click <strong>Resend Verification</strong> to send it again.</li>
+            </ol>
+            <div class="alert alert-info mt-3" style="background-color: #e7f3ff; border-left: 4px solid #2196F3; padding: 12px;">
+              <strong>Note:</strong> Your email modification requests will only become active after verification. Make sure to check your spam folder if you don't see the verification email.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Important Information</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Full Name Validation:</strong> Your full name must contain only letters (a-z, A-Z) and spaces. Numbers, special characters, or symbols are not allowed.</li>
+              <li><strong>Email Verification:</strong> Email changes require verification. Your new email won't be active until you verify it through the confirmation email.</li>
+              <li><strong>Email Uniqueness:</strong> Each email address can only be associated with one account. If you try to use an email that's already registered, you'll receive an error message.</li>
+              <li><strong>Profile Updates:</strong> Changes to your profile information (name, company, market, business) are saved immediately after clicking "Save Changes".</li>
+              <li><strong>Email Updates:</strong> Email changes require an additional verification step and are not immediate.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Troubleshooting</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Cannot save full name:</strong> Make sure your name contains only letters and spaces. Remove any numbers, hyphens, or special characters.</li>
+              <li><strong>Email verification not received:</strong>
+                <ul>
+                  <li>Check your spam/junk folder</li>
+                  <li>Wait a few minutes and try clicking "Resend Verification"</li>
+                  <li>Make sure you entered the correct email address</li>
+                  <li>Check if your email provider is blocking emails from Wheelluck</li>
+                </ul>
+              </li>
+              <li><strong>Email already in use:</strong> The email address you're trying to use is already associated with another account. Try using a different email address or contact support if you believe this is an error.</li>
+              <li><strong>Changes not saving:</strong> Make sure you clicked the "Save Changes" button. If issues persist, refresh the page and try again.</li>
+              <li><strong>Profile page not loading:</strong> Make sure you're logged in and have the correct permissions. Try logging out and logging back in.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="video-container mt-4">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/iI5AV_DHRDI?rel=0"
+          title="How to Update Profile Information"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+{% endblock %}

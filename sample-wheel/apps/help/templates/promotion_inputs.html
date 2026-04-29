@@ -1,0 +1,257 @@
+{% extends "help_layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/help.css">
+<div class="main-content-wrapper">
+  <div class="pagetitle">
+    <h1>How can I add custom input fields to my promotion?</h1>
+    <p class="meta-info">Validated on <strong>15 Jan 2024</strong> • Last edited on <strong>27 Jun 2025</strong></p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body mt-3">
+          <h2 class="section-subtitle">Overview</h2>
+          <p class="description-text">
+            The Input section allows you to add custom input fields to your promotion form, in addition to the default email field. This feature enables you to collect additional information from users such as their full name, phone number, company name, or birth date. These custom fields appear in your promotion popup below the email input field, allowing you to gather more detailed information from participants. This guide will show you how to add, manage, and remove custom input fields.
+          </p>
+
+          <h2 class="section-subtitle mt-5">Accessing Input Settings</h2>
+          <div class="description-step">
+            <ol>
+              <li>Log in to your Wheelluck dashboard.</li>
+              <li>Navigate to the <strong>Promotions</strong> section from the left-hand menu.</li>
+              <li>Click on the promotion you want to edit, or create a new promotion.</li>
+              <li>On the promotion editing page, locate the <strong>Input</strong> accordion section.</li>
+              <li>Click on the <strong>Input</strong> accordion to expand it and reveal the input field management options.</li>
+            </ol>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Understanding the Input Section</h2>
+          <div class="description-step">
+            <h3 class="section-subtitle">1. Email Field (Required)</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> The default email input field that is always present in your promotion form.
+            </p>
+            <ul>
+              <li>This field is <strong>required</strong> and cannot be removed or modified.</li>
+              <li>It appears at the top of the input fields section in your promotion popup.</li>
+              <li>Users must enter a valid email address to participate in the promotion.</li>
+              <li>The field is displayed as read-only in the editor to indicate it cannot be changed.</li>
+            </ul>
+            <div class="alert alert-info mt-2">
+              <strong>Note:</strong> The email field is essential for tracking participants and sending rewards, so it cannot be disabled or removed.
+            </div>
+
+            <h3 class="section-subtitle">2. Additional Input Fields</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> Custom input fields that you can add to collect additional information from users.
+            </p>
+            <ul>
+              <li>These fields appear below the email field in your promotion popup.</li>
+              <li>You can add multiple custom input fields to your form.</li>
+              <li>Each field type has a predefined format and validation.</li>
+              <li>Fields are saved to your database along with the email address when users participate.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Available Input Field Types</h2>
+          <div class="description-step">
+            <p class="description-text">
+              You can choose from the following predefined input field types:
+            </p>
+            
+            <h3 class="section-subtitle">1. Full Name</h3>
+            <ul>
+              <li><strong>Type:</strong> Text input</li>
+              <li><strong>Placeholder:</strong> "Enter your full name"</li>
+              <li><strong>Purpose:</strong> Collects the user's complete name (first and last name).</li>
+              <li><strong>Use Case:</strong> Personalize communications, create mailing lists, or for personalized rewards.</li>
+            </ul>
+
+            <h3 class="section-subtitle">2. Phone Number</h3>
+            <ul>
+              <li><strong>Type:</strong> Telephone input</li>
+              <li><strong>Placeholder:</strong> "Enter your phone number"</li>
+              <li><strong>Purpose:</strong> Collects the user's phone number for SMS marketing or direct contact.</li>
+              <li><strong>Use Case:</strong> SMS campaigns, customer support, or phone-based verification.</li>
+            </ul>
+
+            <h3 class="section-subtitle">3. Company Name</h3>
+            <ul>
+              <li><strong>Type:</strong> Text input</li>
+              <li><strong>Placeholder:</strong> "Enter your company name"</li>
+              <li><strong>Purpose:</strong> Collects the user's company or business name.</li>
+              <li><strong>Use Case:</strong> B2B marketing, lead qualification, or business-focused promotions.</li>
+            </ul>
+
+            <h3 class="section-subtitle">4. Birth Date</h3>
+            <ul>
+              <li><strong>Type:</strong> Date input</li>
+              <li><strong>Placeholder:</strong> "Select your birth date"</li>
+              <li><strong>Purpose:</strong> Collects the user's date of birth.</li>
+              <li><strong>Use Case:</strong> Birthday campaigns, age verification, or personalized birthday offers.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">How to Add Input Fields</h2>
+          <div class="description-step">
+            <ol>
+              <li>Open the <strong>Input</strong> section in your promotion editor.</li>
+              <li>Locate the <strong>"Additional Input Fields"</strong> dropdown menu.</li>
+              <li>Click on the dropdown to see available input field types.</li>
+              <li>Select the input field type you want to add (Full Name, Phone Number, Company Name, or Birth Date).</li>
+              <li>The selected field will immediately appear in the list below the dropdown.</li>
+              <li>You can add multiple fields by repeating this process.</li>
+              <li>Each field you add will appear in your promotion popup below the email field.</li>
+              <li>Click <strong>Save Changes</strong> to save your input field configuration.</li>
+            </ol>
+            <div class="alert alert-info mt-3">
+              <strong>Duplicate Prevention:</strong> You cannot add the same input field type twice. If you try to add a field that already exists, you'll see a message indicating it has already been added.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">How to Remove Input Fields</h2>
+          <div class="description-step">
+            <ol>
+              <li>In the <strong>Input</strong> section, locate the input field you want to remove.</li>
+              <li>Each added field displays its label (e.g., "Full Name", "Phone Number") with a red "X" button on the right.</li>
+              <li>Click the red "X" button next to the field you want to remove.</li>
+              <li>The field will be immediately removed from the list.</li>
+              <li>The field will also disappear from the preview.</li>
+              <li>Click <strong>Save Changes</strong> to permanently save the removal.</li>
+            </ol>
+            <div class="alert alert-warning mt-3">
+              <strong>Note:</strong> Removing a field updates the form from that point on. This product does not keep a server-side archive of past form submissions tied to the field list.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Field Display Order</h2>
+          <div class="description-step">
+            <p class="description-text">
+              Input fields appear in your promotion popup in the following order:
+            </p>
+            <ol>
+              <li><strong>Email Field</strong> (always first, cannot be moved or removed)</li>
+              <li><strong>Custom Input Fields</strong> (appear in the order you added them, below the email field)</li>
+            </ol>
+            <div class="alert alert-info mt-3">
+              <strong>Display:</strong> All input fields appear in a clean, consistent format matching the email field's style. They are displayed vertically, one below the other, in your promotion popup.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Data collection</h2>
+          <div class="description-step">
+            <p class="description-text">
+              The editor configures what visitors see in the popup. Per-field values and email addresses are not stored in this application for later viewing or export.
+            </p>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Best Practices</h2>
+          <div class="description-step">
+            <h3 class="section-subtitle">Choosing the Right Fields</h3>
+            <ul>
+              <li><strong>Keep It Relevant:</strong> Only add fields that are relevant to your promotion and marketing goals.</li>
+              <li><strong>Don't Overwhelm:</strong> Too many fields can reduce conversion rates. Keep it to 2-3 additional fields maximum.</li>
+              <li><strong>Consider Privacy:</strong> Be mindful of asking for sensitive information like birth dates. Only collect what you need.</li>
+              <li><strong>Match Your Goals:</strong> Choose fields that align with your marketing strategy (e.g., phone for SMS campaigns, company name for B2B).</li>
+            </ul>
+
+            <h3 class="section-subtitle">Field Order Strategy</h3>
+            <ul>
+              <li><strong>Start Simple:</strong> Add the most important fields first (e.g., Full Name before Company Name).</li>
+              <li><strong>Logical Flow:</strong> Order fields in a way that makes sense to users (e.g., Name → Phone → Company).</li>
+              <li><strong>Test Different Combinations:</strong> Experiment with different field combinations to see what works best for your audience.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Conversion Optimization</h3>
+            <ul>
+              <li><strong>Progressive Disclosure:</strong> Start with just email, then gradually add fields based on user engagement.</li>
+              <li><strong>Value Exchange:</strong> Make sure the value of your promotion justifies asking for additional information.</li>
+              <li><strong>Clear Purpose:</strong> Users are more likely to provide information if they understand why you need it.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Preview and Testing</h2>
+          <div class="description-step">
+            <p class="description-text">
+              Before publishing your promotion:
+            </p>
+            <ol>
+              <li>Use the preview panel on the left side of the editor to see how your input fields appear.</li>
+              <li>Check that all fields are visible and properly formatted.</li>
+              <li>Verify the field order matches your expectations.</li>
+              <li>Test the form on both desktop and mobile views using the preview toggle buttons.</li>
+              <li>Ensure placeholder text is clear and helpful for users.</li>
+            </ol>
+            <div class="alert alert-info mt-3">
+              <strong>Live Preview:</strong> Changes to input fields are immediately reflected in the preview panel, so you can see how they look in real-time.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Important Notes</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Email Field:</strong> The email field is always required and cannot be removed or modified.</li>
+              <li><strong>No Duplicates:</strong> You cannot add the same input field type more than once.</li>
+              <li><strong>Save Changes:</strong> Always click <strong>Save Changes</strong> after adding or removing fields to ensure your configuration is saved.</li>
+              <li><strong>Field list:</strong> Removing a field only changes the live form configuration going forward.</li>
+              <li><strong>Field Validation:</strong> Each field type has built-in validation (e.g., email format, date format, phone format).</li>
+              <li><strong>Mobile Compatibility:</strong> All input fields are fully responsive and work on mobile devices.</li>
+              <li><strong>Required Fields:</strong> Currently, only the email field is required. Additional fields are optional for users.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Troubleshooting</h2>
+          <div class="description-step">
+            <h3 class="section-subtitle">Cannot Add Input Field - "Already Added" Message</h3>
+            <ul>
+              <li>You're trying to add an input field type that has already been added.</li>
+              <li>Each field type can only be added once per promotion.</li>
+              <li>Check the list of added fields to see which ones are already present.</li>
+              <li>If you need that field type, you must first remove it and then add it again.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Input Field Not Appearing in Preview</h3>
+            <ul>
+              <li>Make sure you've clicked <strong>Save Changes</strong> after adding the field.</li>
+              <li>Refresh the preview panel or the entire page.</li>
+              <li>Check that the field was actually added to the list (it should appear below the dropdown).</li>
+              <li>Verify you're looking at the correct preview (desktop or mobile).</li>
+            </ul>
+
+            <h3 class="section-subtitle">Cannot Remove Input Field</h3>
+            <ul>
+              <li>Make sure you're clicking the red "X" button on the correct field.</li>
+              <li>Check that the field is actually in the list (it should be visible below the dropdown).</li>
+              <li>Try refreshing the page and attempting to remove it again.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Fields Not Saving</h3>
+            <ul>
+              <li>Make sure you've clicked the <strong>Save Changes</strong> button at the bottom of the page.</li>
+              <li>Wait for the success message confirming your changes were saved.</li>
+              <li>Check for any validation errors that might prevent saving.</li>
+              <li>Try refreshing the page and adding the fields again.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Fields Not Appearing in Live Promotion</h3>
+            <ul>
+              <li>Verify that you've saved your changes after adding the fields.</li>
+              <li>Check that your promotion is active and published.</li>
+              <li>Clear your browser cache and test again.</li>
+              <li>Verify the promotion code is correctly installed on your website.</li>
+              <li>Check that you're testing on the correct website URL where the promotion is installed.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Field data not visible after submit</h3>
+            <ul>
+              <li>Verify that the fields are visible in your live promotion popup.</li>
+              <li>Check that users are actually filling out the fields before submitting.</li>
+              <li>This app does not provide a stored log of submissions; use your own integrations or site tooling if you need that.</li>
+              <li>Ensure your promotion is active and receiving traffic.</li>
+            </ul>
+          </div>
+  </div>
+</div>
+{% endblock %}
+

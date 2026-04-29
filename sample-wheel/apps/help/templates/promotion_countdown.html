@@ -1,0 +1,274 @@
+{% extends "help_layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/help.css">
+<div class="main-content-wrapper">
+  <div class="pagetitle">
+    <h1>How can I configure the countdown timer?</h1>
+    <p class="meta-info">Validated on <strong>15 Jan 2024</strong> • Last edited on <strong>27 Jun 2025</strong></p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body mt-3">
+          <h2 class="section-subtitle">Overview</h2>
+          <p class="description-text">
+            The Countdown feature adds a timer that displays how much time remains for users to use their winning coupon code. This creates urgency and encourages users to complete their purchase before the coupon expires. The countdown appears after a user wins a reward and shows the remaining time in minutes and seconds. This guide will show you how to enable, configure, and customize the countdown timer.
+          </p>
+
+          <h2 class="section-subtitle mt-5">Accessing Countdown Settings</h2>
+          <div class="description-step">
+            <ol>
+              <li>Log in to your Wheelluck dashboard.</li>
+              <li>Navigate to the <strong>Promotions</strong> section from the left-hand menu.</li>
+              <li>Click on the promotion you want to edit, or create a new promotion.</li>
+              <li>On the promotion editing page, locate the <strong>Countdown</strong> accordion section.</li>
+              <li>Click on the <strong>Countdown</strong> accordion to expand it and reveal countdown configuration options.</li>
+            </ol>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Understanding the Countdown Timer</h2>
+          <div class="description-step">
+            <p class="description-text">
+              The countdown timer serves an important purpose in your promotion:
+            </p>
+            <ul>
+              <li><strong>When It Appears:</strong> The countdown appears after a user successfully spins the wheel and wins a reward (coupon code).</li>
+              <li><strong>What It Shows:</strong> It displays the remaining time (in minutes and seconds) that the user has to use their coupon code before it expires.</li>
+              <li><strong>Where It Appears:</strong> The countdown is displayed in the coupon code panel that appears after a win, typically showing the format "MM:SS" (minutes:seconds) or "HH:MM:SS" (hours:minutes:seconds) if the time is longer than an hour.</li>
+              <li><strong>Purpose:</strong> Creates urgency, encourages immediate action, and helps users understand they have limited time to use their reward.</li>
+            </ul>
+            <div class="alert alert-info mt-3">
+              <strong>User Experience:</strong> The countdown helps convert winners into customers by creating a sense of urgency. Users see the time ticking down and are more likely to complete their purchase quickly.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Enabling the Countdown</h2>
+          <div class="description-step">
+            <p class="description-text">
+              To enable the countdown timer:
+            </p>
+            <ol>
+              <li>In the <strong>Countdown</strong> section, you'll see a toggle switch labeled <strong>"Display countdown reward reminder"</strong>.</li>
+              <li>Click on the toggle switch to enable the countdown.</li>
+              <li>Once enabled, the <strong>Valid Time (Minutes)</strong> field will become required.</li>
+              <li>Enter the number of minutes you want the countdown to run (e.g., 15 for 15 minutes).</li>
+              <li>Configure the countdown colors (background and text) if desired.</li>
+              <li>Click <strong>Save</strong> to save your countdown settings.</li>
+            </ol>
+            <div class="alert alert-success mt-3">
+              <strong>Live Preview:</strong> When you enable the countdown, you'll see it appear in the preview panel, showing how it will look to users.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Setting Valid Time (Minutes)</h2>
+          <div class="description-step">
+            <p class="description-text">
+              The Valid Time determines how long users have to use their coupon code:
+            </p>
+            <ul>
+              <li><strong>Purpose:</strong> Sets the duration (in minutes) that the coupon code will be valid after a user wins.</li>
+              <li><strong>Required When Active:</strong> If countdown is enabled, this field is required and cannot be left empty.</li>
+              <li><strong>Format:</strong> Enter a number representing minutes (e.g., 15 for 15 minutes, 30 for 30 minutes, 60 for 1 hour).</li>
+              <li><strong>Validation:</strong> The value must be a valid number and cannot be negative.</li>
+              <li><strong>Default:</strong> The default value is typically 15 minutes.</li>
+            </ul>
+            <div class="alert alert-info mt-3">
+              <strong>Best Practice:</strong> Common valid times are 15, 30, or 60 minutes. Shorter times (15 minutes) create more urgency, while longer times (60+ minutes) give users more flexibility. Choose based on your business needs and typical checkout time.
+            </div>
+            <div class="alert alert-warning mt-2">
+              <strong>Important:</strong> The valid time is entered in <strong>minutes</strong>, not seconds or hours. For example, enter "15" for 15 minutes, not "900" (which would be 900 minutes).
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Customizing Countdown Colors</h2>
+          <div class="description-step">
+            <p class="description-text">
+              You can customize the appearance of the countdown timer by setting its colors:
+            </p>
+            <h3 class="section-subtitle">Countdown Background Color</h3>
+            <ul>
+              <li>This is the background color of the countdown timer display.</li>
+              <li>Click on the color box to open the color picker.</li>
+              <li>Select your desired background color.</li>
+              <li>The default colors are a light mint background (#cee8e8) and teal text (#2C7A7B).</li>
+            </ul>
+
+            <h3 class="section-subtitle">Countdown Text Color</h3>
+            <ul>
+              <li>This is the color of the countdown numbers/text.</li>
+              <li>Click on the color box to open the color picker.</li>
+              <li>Select your desired text color.</li>
+              <li>The default text color is typically black (#000000) or white (#ffffff).</li>
+            </ul>
+            <div class="alert alert-info mt-3">
+              <strong>Contrast Tip:</strong> Ensure there's good contrast between the background and text colors so the countdown is easily readable. For example, use dark text on a light background, or light text on a dark background.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">How the Countdown Works</h2>
+          <div class="description-step">
+            <p class="description-text">
+              Once configured, here's how the countdown functions:
+            </p>
+            <ol>
+              <li><strong>User Wins:</strong> When a user spins the wheel and wins a reward (coupon code), the countdown timer is activated.</li>
+              <li><strong>Timer Starts:</strong> The countdown begins immediately, starting from the valid time you set (e.g., 15:00 for 15 minutes).</li>
+              <li><strong>Display Format:</strong> The countdown displays in "MM:SS" format (e.g., "15:00", "14:59", "14:58") for times under an hour, or "HH:MM:SS" format for longer durations.</li>
+              <li><strong>Countdown Decreases:</strong> The timer counts down second by second, showing the remaining time.</li>
+              <li><strong>Expiration:</strong> When the countdown reaches "00:00", the coupon code expires and can no longer be used.</li>
+              <li><strong>Persistence:</strong> The countdown time is stored in the user's browser, so it continues counting even if they refresh the page or navigate away and return.</li>
+            </ol>
+            <div class="alert alert-info mt-3">
+              <strong>Technical Note:</strong> The countdown uses browser localStorage to persist the expiration time, ensuring the timer continues accurately even if the user closes and reopens the page.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Disabling the Countdown</h2>
+          <div class="description-step">
+            <p class="description-text">
+              If you want to disable the countdown timer:
+            </p>
+            <ol>
+              <li>Go to the <strong>Countdown</strong> section in your promotion editor.</li>
+              <li>Click on the <strong>"Display countdown reward reminder"</strong> toggle to turn it off.</li>
+              <li>The countdown will no longer appear after users win rewards.</li>
+              <li>The Valid Time field becomes optional when countdown is disabled.</li>
+              <li>Click <strong>Save</strong> to save your changes.</li>
+            </ol>
+            <div class="alert alert-info mt-3">
+              <strong>Note:</strong> When the countdown is disabled, users will still receive their coupon codes, but there will be no visible timer showing expiration time. The codes may still have expiration times set by your system, but users won't see a countdown.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Validation Rules</h2>
+          <div class="description-step">
+            <p class="description-text">
+              The following validation rules apply when configuring the countdown:
+            </p>
+            <ul>
+              <li><strong>Valid Time Required:</strong> If "Display countdown reward reminder" is enabled, the Valid Time field is required and cannot be left empty.</li>
+              <li><strong>Valid Number:</strong> The Valid Time must be a valid number. Non-numeric values (like letters or special characters) are not allowed.</li>
+              <li><strong>Cannot Be Negative:</strong> The Valid Time cannot be a negative number. It must be 0 or a positive number.</li>
+              <li><strong>Zero is Allowed:</strong> You can set the valid time to 0, though this would make the coupon expire immediately (not recommended).</li>
+            </ul>
+            <div class="alert alert-danger mt-3">
+              <strong>Validation Errors:</strong> If any of these rules are violated, you'll see specific error messages:
+              <ul class="mt-2">
+                <li>"If the countdown reminder is active, the valid time field cannot be left blank"</li>
+                <li>"The valid time must be a valid number"</li>
+                <li>"The valid time cannot be a negative number"</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Best Practices</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Choose Appropriate Time:</strong> Set a valid time that gives users enough time to complete their purchase but creates urgency. 15-30 minutes is often a good balance.</li>
+              <li><strong>Consider Checkout Time:</strong> Think about how long it typically takes users to complete checkout on your site. Set the countdown to be slightly longer than average checkout time.</li>
+              <li><strong>Test Different Durations:</strong> Experiment with different valid times to see what works best for your conversion rates.</li>
+              <li><strong>Color Contrast:</strong> Ensure the countdown colors have good contrast for readability. Test on different devices and screen sizes.</li>
+              <li><strong>Brand Consistency:</strong> Choose countdown colors that match your brand colors and overall promotion design.</li>
+              <li><strong>Mobile Visibility:</strong> Make sure the countdown is clearly visible on mobile devices, as many users will view it on phones.</li>
+              <li><strong>Clear Communication:</strong> Consider adding text near the countdown explaining what it means (e.g., "Use your code within the time shown").</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Important Notes</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Time Format:</strong> Valid Time is entered in <strong>minutes</strong>, not seconds or hours. The system converts this to the appropriate display format automatically.</li>
+              <li><strong>Required When Active:</strong> When countdown is enabled, the Valid Time field becomes required. You cannot save without entering a value.</li>
+              <li><strong>Save Your Changes:</strong> Always remember to click the <strong>Save</strong> button after configuring countdown settings to ensure the changes are saved permanently.</li>
+              <li><strong>Live Preview:</strong> Changes to countdown settings are immediately reflected in the preview panel, so you can see how it looks before saving.</li>
+              <li><strong>Browser Storage:</strong> The countdown uses browser localStorage to persist the expiration time, ensuring accuracy across page refreshes.</li>
+              <li><strong>Multiple Users:</strong> Each user who wins gets their own independent countdown timer that starts when they win.</li>
+              <li><strong>Expiration Behavior:</strong> When the countdown reaches zero, the coupon code expires. Make sure users understand this before the timer expires.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Troubleshooting</h2>
+          <div class="description-step">
+            <h3 class="section-subtitle">"If the countdown reminder is active, the valid time field cannot be left blank" Error</h3>
+            <ul>
+              <li>You've enabled "Display countdown reward reminder" but haven't entered a valid time value.</li>
+              <li>When countdown is enabled, the Valid Time field is required.</li>
+              <li>Enter a number (in minutes) in the Valid Time field.</li>
+              <li>Alternatively, disable the countdown if you don't want to use it.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"The valid time must be a valid number" Error</h3>
+            <ul>
+              <li>You've entered non-numeric text in the Valid Time field.</li>
+              <li>The Valid Time must be a number only (e.g., 15, 30, 60).</li>
+              <li>Remove any letters, spaces, or special characters from the field.</li>
+              <li>Enter only numeric digits.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"The valid time cannot be a negative number" Error</h3>
+            <ul>
+              <li>You've entered a negative number (e.g., -5) in the Valid Time field.</li>
+              <li>Valid Time must be 0 or a positive number.</li>
+              <li>Change the value to 0 or a positive number (e.g., 15, 30).</li>
+            </ul>
+
+            <h3 class="section-subtitle">Countdown Not Appearing After User Wins</h3>
+            <ul>
+              <li>Check if "Display countdown reward reminder" is enabled in the Countdown section.</li>
+              <li>Verify that a Valid Time value has been entered.</li>
+              <li>Make sure you saved your promotion after enabling the countdown.</li>
+              <li>Check if the user actually won a reward (countdown only appears for winning spins).</li>
+              <li>Test the promotion in a different browser or clear browser cache.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Countdown Not Counting Down</h3>
+            <ul>
+              <li>Check if JavaScript is enabled in the browser.</li>
+              <li>Verify that the countdown is properly enabled and saved in your promotion settings.</li>
+              <li>Check browser console for any JavaScript errors (press F12 to open developer tools).</li>
+              <li>Try refreshing the page or clearing browser cache.</li>
+              <li>Test in a different browser to rule out browser-specific issues.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Countdown Colors Not Changing</h3>
+            <ul>
+              <li>Make sure you clicked on the color box and selected a color from the color picker.</li>
+              <li>Check that the color boxes are enabled (not grayed out).</li>
+              <li>Try clicking on the color box again and selecting a different color.</li>
+              <li>Refresh the preview to see if the colors update.</li>
+              <li>Make sure you saved your promotion after changing colors.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Countdown Time Resets or Doesn't Persist</h3>
+            <ul>
+              <li>The countdown uses browser localStorage to persist time. If localStorage is disabled or cleared, the timer may reset.</li>
+              <li>Check if the browser allows localStorage (most modern browsers do by default).</li>
+              <li>If the user clears their browser data, the countdown timer will reset.</li>
+              <li>Each user gets their own independent timer that starts when they win.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Countdown Shows Wrong Time Format</h3>
+            <ul>
+              <li>The countdown automatically formats based on duration:
+                <ul>
+                  <li>Less than 1 hour: Shows as "MM:SS" (e.g., "15:00")</li>
+                  <li>1 hour or more: Shows as "HH:MM:SS" (e.g., "01:30:00")</li>
+                </ul>
+              </li>
+              <li>This is automatic and cannot be changed manually.</li>
+              <li>The format ensures the countdown is always readable.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Cannot Enable Countdown Toggle</h3>
+            <ul>
+              <li>Make sure you're logged in and have permission to edit the promotion.</li>
+              <li>Try refreshing the page and attempting again.</li>
+              <li>Check for any JavaScript errors in the browser console (press F12).</li>
+              <li>Ensure you're not in a read-only mode or trial account with limited features.</li>
+            </ul>
+          </div>
+  </div>
+</div>
+{% endblock %}
+
+

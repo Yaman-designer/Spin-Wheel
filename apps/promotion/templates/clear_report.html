@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="row">
+    <div class="col-lg-6">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Promotion Report Clear</h5>
+          <div class="alert alert-secondary border-secondary alert-dismissible fade show" role="alert">
+              <hr>
+          </div>
+          <form class="row g-3 mt-4" method="post" action="/promotion/clear" novalidate>
+            {% csrf_token %}
+            {{ form.promotion }}
+            <div class="row mb-3">
+              <div class="col-sm-6 text-center mt-5">
+                <a href="/" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-danger ">Clear</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+

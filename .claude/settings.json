@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip --version)",
+      "Bash(py --version)",
+      "Bash(python3 manage.py check)",
+      "PowerShell(Get-Command python, python3, py -ErrorAction SilentlyContinue)",
+      "PowerShell(py -3 --version 2>&1)",
+      "PowerShell(py -3 -c \"import sys; print\\(sys.executable\\)\" 2>&1)",
+      "PowerShell(py -3 -m pip list 2>&1)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://127.0.0.1:8000\" -TimeoutSec 5 -ErrorAction SilentlyContinue)",
+      "Bash(grep -rn \"transform=['\\\\\"]\\\\\\\\.\\\\\\\\.\\\\\\\\.['\\\\\"]\" \"c:/Users/Win10/Documents/sample-wheel/sample-wheel/apps/promotion/static/\")",
+      "Bash(xargs grep *)"
+    ]
+  }
+}

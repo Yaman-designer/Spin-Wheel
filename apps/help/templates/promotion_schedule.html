@@ -1,0 +1,247 @@
+{% extends "help_layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/help.css">
+<div class="main-content-wrapper">
+  <div class="pagetitle">
+    <h1>How can I schedule my promotion?</h1>
+    <p class="meta-info">Validated on <strong>15 Jan 2024</strong> • Last edited on <strong>27 Jun 2025</strong></p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body mt-3">
+          <h2 class="section-subtitle">Overview</h2>
+          <p class="description-text">
+            The Schedule feature allows you to set specific start and end dates and times for your promotion. This enables you to control exactly when your promotion will be active and visible to your website visitors. This guide will show you how to set up and manage scheduling for your promotions.
+          </p>
+
+          <h2 class="section-subtitle mt-5">Important: Subscription Requirement</h2>
+          <div class="description-step">
+            <div class="alert alert-warning">
+              <strong>Note:</strong> The Schedule feature is <strong>only available</strong> for users with active paid subscriptions. Trial users cannot use the schedule feature. If you're on a trial plan, you'll need to upgrade to a paid subscription to access scheduling.
+            </div>
+            <p class="description-text mt-3">
+              If you try to enable scheduling while on a trial plan, you'll see an error message: <em>"Subscribe to use all features."</em>
+            </p>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Accessing Schedule Settings</h2>
+          <div class="description-step">
+            <ol>
+              <li>Log in to your Wheelluck dashboard.</li>
+              <li>Navigate to the <strong>Promotions</strong> section from the left-hand menu.</li>
+              <li>Click on the promotion you want to edit, or create a new promotion.</li>
+              <li>On the promotion editing page, locate the <strong>Schedule</strong> accordion section.</li>
+              <li>Click on the <strong>Schedule</strong> accordion to expand it and reveal the schedule options.</li>
+            </ol>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Enabling Schedule</h2>
+          <div class="description-step">
+            <p class="description-text">
+              To enable scheduling for your promotion:
+            </p>
+            <ol>
+              <li>In the <strong>Schedule</strong> section, you'll see a toggle switch labeled <strong>"Set Schedule"</strong>.</li>
+              <li>Click on the toggle switch to enable scheduling.</li>
+              <li>Once enabled, the date and time input fields will appear below the toggle.</li>
+              <li>If you disable the toggle, the date and time fields will be hidden, and any previously set schedule will be cleared when you save.</li>
+            </ol>
+            <div class="alert alert-info mt-3">
+              <strong>Toggle Behavior:</strong> The schedule toggle controls whether your promotion uses scheduled start and end times. When disabled, your promotion will be active immediately (if it's set to active) and will continue until you manually deactivate it.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Setting Start Date and Time</h2>
+          <div class="description-step">
+            <p class="description-text">
+              The start date and time determine when your promotion will become active:
+            </p>
+            <ol>
+              <li>After enabling the "Set Schedule" toggle, you'll see a <strong>Start</strong> section with two fields.</li>
+              <li><strong>Start Date:</strong> Click on the date field and select the date when you want your promotion to start.</li>
+              <li><strong>Start Time:</strong> Click on the time field and select the specific time when you want your promotion to start.</li>
+              <li>Both fields are required when scheduling is enabled.</li>
+            </ol>
+            <div class="alert alert-warning mt-3">
+              <strong>Important:</strong> The start date cannot be in the past. You must select a date that is today or in the future. If you select a past date, you'll see an error message.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Setting End Date and Time</h2>
+          <div class="description-step">
+            <p class="description-text">
+              The end date and time determine when your promotion will automatically stop being active:
+            </p>
+            <ol>
+              <li>Below the Start section, you'll see an <strong>End</strong> section with two fields.</li>
+              <li><strong>End Date:</strong> Click on the date field and select the date when you want your promotion to end.</li>
+              <li><strong>End Time:</strong> Click on the time field and select the specific time when you want your promotion to end.</li>
+              <li>Both fields are required when scheduling is enabled.</li>
+            </ol>
+            <div class="alert alert-warning mt-3">
+              <strong>Important:</strong> The end date must be after the start date. If you select the same date for both start and end, the end time must be after the start time. The end date cannot be in the past.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Schedule Validation Rules</h2>
+          <div class="description-step">
+            <p class="description-text">
+              When scheduling is enabled, the following validation rules apply:
+            </p>
+            <h3 class="section-subtitle">Required Fields</h3>
+            <ul>
+              <li><strong>Start Date:</strong> Must be provided when schedule is enabled.</li>
+              <li><strong>Start Time:</strong> Must be provided when schedule is enabled.</li>
+              <li><strong>End Date:</strong> Must be provided when schedule is enabled.</li>
+              <li><strong>End Time:</strong> Must be provided when schedule is enabled.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Date and Time Rules</h3>
+            <ul>
+              <li><strong>No Past Dates:</strong> Both start date and end date cannot be in the past. They must be today or in the future.</li>
+              <li><strong>End After Start:</strong> The end date must be after the start date. If both dates are the same, the end time must be after the start time.</li>
+              <li><strong>Logical Order:</strong> The end date/time combination must occur after the start date/time combination.</li>
+            </ul>
+
+            <div class="alert alert-danger mt-3">
+              <strong>Validation Errors:</strong> If any of these rules are violated, you'll see specific error messages indicating what needs to be corrected before you can save your promotion.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">How Scheduling Works</h2>
+          <div class="description-step">
+            <p class="description-text">
+              Once you've set a schedule and saved your promotion:
+            </p>
+            <ul>
+              <li><strong>Before Start Time:</strong> Your promotion will not be active, even if it's marked as "Active" in the promotion settings. It won't appear on your website until the scheduled start date and time.</li>
+              <li><strong>During Active Period:</strong> Your promotion will be active and visible to visitors on your website between the start and end date/time you specified.</li>
+              <li><strong>After End Time:</strong> Your promotion will automatically become inactive once the end date and time are reached. It will no longer appear on your website, even if it's still marked as "Active" in the promotion settings.</li>
+            </ul>
+            <div class="alert alert-info mt-3">
+              <strong>Automatic Control:</strong> Scheduling provides automatic control over when your promotion is active. You don't need to manually activate or deactivate it during the scheduled period.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Disabling Schedule</h2>
+          <div class="description-step">
+            <p class="description-text">
+              If you want to remove scheduling from your promotion:
+            </p>
+            <ol>
+              <li>Go to the <strong>Schedule</strong> section in your promotion editor.</li>
+              <li>Click on the <strong>"Set Schedule"</strong> toggle to turn it off.</li>
+              <li>The date and time fields will be hidden.</li>
+              <li>Click <strong>Save</strong> to save your changes.</li>
+              <li>When you disable scheduling, all date and time values will be cleared from your promotion.</li>
+            </ol>
+            <div class="alert alert-warning mt-3">
+              <strong>Note:</strong> Disabling the schedule will clear all scheduled dates and times. If you want to use scheduling again later, you'll need to re-enter the dates and times.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Best Practices</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Plan Ahead:</strong> Set your schedule well in advance to ensure your promotion starts and ends at the right times.</li>
+              <li><strong>Time Zones:</strong> Be aware that times are set according to your account's time zone. Make sure you're setting times that align with when you want the promotion to be active for your target audience.</li>
+              <li><strong>Test Before Launch:</strong> Set a test schedule a few minutes in the future to verify that your promotion appears correctly when the start time arrives.</li>
+              <li><strong>Campaign Duration:</strong> Consider how long you want your promotion to run. Short-term promotions (hours or days) can create urgency, while longer promotions (weeks or months) provide more exposure.</li>
+              <li><strong>Multiple Promotions:</strong> You can schedule different promotions for different time periods. This allows you to run seasonal campaigns or special events.</li>
+              <li><strong>Monitor Performance:</strong> Keep track of when your scheduled promotions are active and monitor their performance during the scheduled period.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Important Notes</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Subscription Required:</strong> Remember that scheduling is only available for paid subscriptions. Trial users cannot use this feature.</li>
+              <li><strong>Save Your Changes:</strong> Always remember to click the <strong>Save</strong> button after setting or modifying your schedule to ensure the changes are saved permanently.</li>
+              <li><strong>Active Status:</strong> The schedule works in conjunction with the promotion's "Active" status. A promotion must be marked as "Active" to appear, but scheduling controls when it's actually visible during the scheduled period.</li>
+              <li><strong>Automatic Deactivation:</strong> When the end date and time are reached, your promotion will automatically become inactive, regardless of its "Active" status setting.</li>
+              <li><strong>No Past Dates:</strong> You cannot schedule a promotion to start in the past. All dates must be today or in the future.</li>
+              <li><strong>Clearing Schedule:</strong> When you disable scheduling, all date and time values are cleared. You'll need to re-enter them if you want to schedule again.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Troubleshooting</h2>
+          <div class="description-step">
+            <h3 class="section-subtitle">"Subscribe to use all features" Error</h3>
+            <ul>
+              <li>This message means scheduling is not available for your workspace in the current setup.</li>
+              <li>Check that your promotion is saved and that scheduling is allowed for your account.</li>
+              <li>If the message persists, contact support for help.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"Start date and time are required" Error</h3>
+            <ul>
+              <li>You've enabled the "Set Schedule" toggle but haven't filled in the start date and/or start time.</li>
+              <li>When scheduling is enabled, both start date and start time are required.</li>
+              <li>Fill in both the start date and start time fields.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"End date and time are required" Error</h3>
+            <ul>
+              <li>You've enabled the "Set Schedule" toggle but haven't filled in the end date and/or end time.</li>
+              <li>When scheduling is enabled, both end date and end time are required.</li>
+              <li>Fill in both the end date and end time fields.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"Start date cannot be in the past" Error</h3>
+            <ul>
+              <li>You've selected a start date that is before today's date.</li>
+              <li>Start dates must be today or in the future.</li>
+              <li>Select a start date that is today or later.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"End date cannot be in the past" Error</h3>
+            <ul>
+              <li>You've selected an end date that is before today's date.</li>
+              <li>End dates must be today or in the future.</li>
+              <li>Select an end date that is today or later.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"End date must be after start date" Error</h3>
+            <ul>
+              <li>The end date you selected is before or the same as the start date.</li>
+              <li>The end date must be after the start date.</li>
+              <li>Select an end date that is after your start date.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"End time must be after start time" Error</h3>
+            <ul>
+              <li>You've selected the same date for both start and end, but the end time is before or equal to the start time.</li>
+              <li>When both dates are the same, the end time must be after the start time.</li>
+              <li>Either select a later end date, or if using the same date, select an end time that is after the start time.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Schedule Toggle Not Working</h3>
+            <ul>
+              <li>Make sure you're logged in and have the necessary permissions to edit the promotion.</li>
+              <li>Check if you're on a trial plan (scheduling won't work for trial users).</li>
+              <li>Try refreshing the page and attempting again.</li>
+              <li>Check for any JavaScript errors in your browser console (press F12).</li>
+            </ul>
+
+            <h3 class="section-subtitle">Promotion Not Appearing at Scheduled Time</h3>
+            <ul>
+              <li>Verify that the promotion is marked as "Active" in the promotion settings.</li>
+              <li>Check that the current date and time have passed the scheduled start date and time.</li>
+              <li>Ensure the scheduled end date and time haven't already passed.</li>
+              <li>Check your account's time zone settings to ensure the schedule times are correct.</li>
+              <li>Verify that you saved the promotion after setting the schedule.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Date/Time Fields Not Appearing</h3>
+            <ul>
+              <li>Make sure you've enabled the "Set Schedule" toggle switch.</li>
+              <li>The date and time fields only appear when the schedule toggle is enabled.</li>
+              <li>Click on the toggle to enable scheduling and reveal the fields.</li>
+            </ul>
+          </div>
+  </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,2118 @@
+{% extends "base.html" %} {% block head %}
+<!-- <link rel="stylesheet" href="/static/popup.css"> -->
+<!-- <link rel="stylesheet" href="/static/popupMe.css" />
+ <link rel="stylesheet" href="/static/promotion.css" />-->
+<script src="https://cdn.jsdelivr.net/npm/vanilla-picker@2.11.1/dist/vanilla-picker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<link rel="stylesheet" href="/static/promotion-desktop.css" />
+<!-- <link rel="stylesheet" href="/static/promotion-mobile.css" /> -->
+<link rel="stylesheet" href="/static/promotion-ai.css" />
+{% if template_id_param %}
+<script>
+  window.SELECTED_TEMPLATE_FROM_REDIRECT = {{ template_id_param }};
+</script>
+{% endif %}
+
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
+/>
+
+{% endblock %} {% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-8">
+      <div>
+        <div class="popupContainer position-relative" id="popupContainer">
+          <div
+              id="loadingSpinner"
+              class="w-100 position-absolute d-flex align-items-center justify-content-center"
+              style="
+                background-color: rgba(255, 255, 255);
+                height: 100%;
+                z-index: 99;
+                overflow-y: hidden;
+              "
+            >
+              <div
+                class="spinner-box"
+                style="width: 7rem; height: 7rem"
+                role="status"
+              >
+                <img
+                  src="../static/img/logoSpinner.jpg"
+                  style="width: 7rem; height: 7rem"
+                  alt="logoSpinner"
+                />
+              </div>
+            </div>
+
+          <div id="mobilePhoneFrame" class="mobile-phone-frame">
+            <img src="/static/img/phone.png" alt="" class="mobile-phone-img" draggable="false" />
+          </div>
+
+          {# Countdown kupon çubuğu: accordion açıkken sol önizlemeye klonlanır (popup-manager.js). Accordion içinde gösterilmez. #}
+          <div
+            id="promotionCouponBarCapturePanel"
+            class="promotion-coupon-bar-capture-source"
+            aria-hidden="true"
+          >
+            <div class="logo" aria-hidden="true">
+              <img
+                src="/static/count_down_wheel.png"
+                alt=""
+                width="48"
+                height="48"
+                class="promotion-countdown-wheel-logo"
+                decoding="async"
+              />
+            </div>
+            <p class="coupon-code">
+              COUPON CODE<span class="copy-btn" aria-label="Copy code" title="Copy code"
+                ><i class="bi bi-copy" aria-hidden="true"></i></span>
+            </p>
+            <div class="countDownWrapper">
+              <span class="countdown"></span>
+              <span class="close-btn" aria-label="Close">&times;</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="bottomBar mt-3 d-flex flex-wrap gap-2 align-items-center">
+          <button
+            type="button"
+            name="btnDesktopView"
+            class="btn btn-wheelluck viewButton"
+          >
+            Desktop
+          </button>
+
+          <button
+            type="button"
+            name="btnMobileView"
+            class="btn btn-secondary viewButton"
+          >
+            Mobile
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="row">
+        <div class="col-12">
+          <div
+            class="accordion accordionContainer"
+            id="accordionExample"
+            data-panel-name="promotion-settings"
+            data-color-picker-boundary
+            data-popup-type="{{ theme.popup_type|default:'gaming' }}"
+            data-image-target="top"
+            data-layout-type="{% if theme.layout %}{{ theme.layout.type|default:'' }}{% endif %}"
+          >
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  <i class="bi bi-pencil-fill"></i
+                  >&nbsp;&nbsp;&nbsp;&nbsp;General
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse show"
+                aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <span class="custom-tooltip-inline-wrapper ms-auto">
+                    <a
+                      href="javascript:void(0);"
+                      class="custom-tooltip-trigger-inline"
+                    >
+                      <i class="bi bi-question-circle"></i>
+                    </a>
+                    <div
+                      class="custom-tooltip-inline"
+                      id="tooltip-inline-general"
+                    >
+                      <div class="custom-tooltip-content-inline">
+                        <h5>General Settings</h5>
+                        <p>
+                          Set the name, status, and website for your promotion.
+                        </p>
+                        <br />
+                        <div class="text-end">
+                          <a
+                            href="/help/manage-promotion/"
+                            class="help-cloud-link"
+                            target="_blank"
+                          >
+                            Learn More
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+                  <form
+                    name="base_form"
+                    data-promotion_id="{{ promotion.pk }}"
+                    method="post"
+                    novalidate
+                  >
+                    {% csrf_token %}
+                    <div class="row gap-2">
+                      <div class="row">
+                        <div class="col-md-10">
+                          <label for="validationDefault01" class="form-label"
+                            >Name</label
+                          >
+                          {{ base_form.name }}
+                        </div>
+                        <div class="col-md-2">
+                          <label class="form-check-label">Active</label>
+                          <div class="form-check form-switch m-2">
+                            {{ base_form.is_active }}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <label for="validationDefault02" class="form-label"
+                          >Website</label
+                        >
+                        {{ base_form.website }}
+                      </div>
+                      {{ base_form.theme }}
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTemplates">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseSix"
+                  aria-expanded="false"
+                  aria-controls="collapseSix"
+                >
+                  <i class="bi bi-ui-checks-grid"></i
+                  >&nbsp;&nbsp;&nbsp;&nbsp;Templates
+                </button>
+              </h2>
+              <div
+                id="collapseSix"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingTemplates"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <span class="custom-tooltip-inline-wrapper ms-auto">
+                    <a
+                      href="javascript:void(0);"
+                      class="custom-tooltip-trigger-inline"
+                    >
+                      <i class="bi bi-question-circle"></i>
+                    </a>
+                    <div
+                      class="custom-tooltip-inline"
+                      id="tooltip-inline-templates"
+                    >
+                      <div class="custom-tooltip-content-inline">
+                        <h5>Templates</h5>
+                        <p>
+                          Choose a pre-designed template or design your own custom theme for your promotion.
+                        </p>
+                        <br />
+                        <div class="text-end">
+                          <a
+                            href="/help/change-promotion-template/"
+                            class="help-cloud-link"
+                            target="_blank"
+                          >
+                            Learn More
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+                  <div class="col-md-12">
+                    <div class="template-info-container">
+                      <div class="mb-2 fw-medium template-name-display">        
+                          Template
+                      </div>
+                      <div class="text-end mt-2">
+                        <a href="/promotion/{{ promotion.pk }}/select-template" class="text-decoration-none text-primary">
+                          <i class="bi bi-arrow-repeat me-1"></i>Change Template
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Change the Game -->
+            <div class="accordion-item" id="changeGameAccordion" style="display: none;">
+              <h2 class="accordion-header" id="headingGameType">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseGameType"
+                  aria-expanded="false"
+                  aria-controls="collapseGameType"
+                >
+                  <i class="bi bi-controller"></i>
+                  &nbsp;&nbsp;&nbsp;&nbsp;Change the Game
+                </button>
+              </h2>
+              <div
+                id="collapseGameType"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingGameType"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <div class="mb-3" id="gameTypeSelectRow">
+                    <label for="gameTypeSelect" class="form-label">Game type</label>
+                    <select id="gameTypeSelect" class="form-select">
+                      <option value="wheel">🎡 Wheel</option>
+                      <option value="slot">🎰 Slot Machine</option>
+                      <option value="scratchcard">🪙 Scratch Card</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-3" id="gamePositionControls">
+                    <label class="form-label mb-2">Game position</label>
+                    <div
+                      id="gamePositionHorizontal"
+                      class="btn-group w-100"
+                      role="group"
+                      aria-label="Game position horizontal"
+                      style="display: none;"
+                    >
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="game_position"
+                        id="game_pos_h_left"
+                        value="left"
+                        autocomplete="off"
+                      />
+                      <label class="btn btn-outline-secondary btn-sm" for="game_pos_h_left">Left</label>
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="game_position"
+                        id="game_pos_h_right"
+                        value="right"
+                        autocomplete="off"
+                      />
+                      <label class="btn btn-outline-secondary btn-sm" for="game_pos_h_right">Right</label>
+                    </div>
+                    <div
+                      id="gamePositionVertical"
+                      class="btn-group w-100"
+                      role="group"
+                      aria-label="Game position vertical"
+                      style="display: none;"
+                    >
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="game_position"
+                        id="game_pos_v_left"
+                        value="left"
+                        autocomplete="off"
+                      />
+                      <label class="btn btn-outline-secondary btn-sm" for="game_pos_v_left">Left</label>
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="game_position"
+                        id="game_pos_v_top"
+                        value="top"
+                        autocomplete="off"
+                      />
+                      <label class="btn btn-outline-secondary btn-sm" for="game_pos_v_top">Top</label>
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="game_position"
+                        id="game_pos_v_right"
+                        value="right"
+                        autocomplete="off"
+                      />
+                      <label class="btn btn-outline-secondary btn-sm" for="game_pos_v_right">Right</label>
+                    </div>
+                  </div>
+
+                  <!-- Game SVG size (split layouts) -->
+                  <div class="mb-3" id="gameSvgSizeControls" style="display: none;">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <label class="form-label mb-0" for="lightPopupGameSvgHeight">Game SVG height (%)</label>
+                      <span class="small text-muted fw-medium" id="lightPopupGameSvgSizeValue">30%</span>
+                    </div>
+                    <input type="range" class="form-range" id="lightPopupGameSvgHeight" min="10" max="100" step="1" value="30">
+                  </div>
+
+                  <div id="slice-colors-section" class="slice-colors-wrapper mt-3 pt-1">
+                    <label class="form-label mb-2">Game Colors</label>
+                    <div class="row g-2 mb-1 small text-secondary">
+                      <div class="col-4"></div>
+                      <div class="col-4">Fill</div>
+                      <div class="col-4">Text</div>
+                    </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <label
+                        id="game-color-row-label-1"
+                        for="inputText"
+                        class="col-form-label form-label-colors"
+                        >Segment #1</label
+                      >
+                    </div>
+                    <div class="col-4 d-flex align-items-center">
+                      <div
+                        style="
+                          padding: 4px;
+                          border: 1px solid #ccc;
+                          border-radius: 8px;
+                        "
+                      >
+                        <div class="color-box" id="slice_1_bg_color_box"></div>
+                      </div>
+                      <input
+                        id="slice_1_bg_color"
+                        name="slice_1_bg_color"
+                        type="hidden"
+                        value="#808080"
+                      />
+                    </div>
+                    <div class="col-4 d-flex align-items-center">
+                      <div
+                        style="
+                          padding: 4px;
+                          border: 1px solid #ccc;
+                          border-radius: 8px;
+                        "
+                      >
+                        <div
+                          class="color-box"
+                          id="slice_1_text_color_box"
+                        ></div>
+                      </div>
+                      <input
+                        id="slice_1_text_color"
+                        name="slice_1_text_color"
+                        type="hidden"
+                        value="#ffffff"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <label
+                        id="game-color-row-label-2"
+                        for="inputText"
+                        class="col-form-label form-label-colors"
+                        >Segment #2</label
+                      >
+                    </div>
+                    <div class="col-4 d-flex align-items-center">
+                      <div
+                        style="
+                          padding: 4px;
+                          border: 1px solid #ccc;
+                          border-radius: 8px;
+                        "
+                      >
+                        <div class="color-box" id="slice_2_bg_color_box"></div>
+                      </div>
+                      <input
+                        id="slice_2_bg_color"
+                        name="slice_2_bg_color"
+                        type="hidden"
+                        value="#808080"
+                      />
+                    </div>
+                    <div class="col-4 d-flex align-items-center">
+                      <div
+                        style="
+                          padding: 4px;
+                          border: 1px solid #ccc;
+                          border-radius: 8px;
+                        "
+                      >
+                        <div
+                          class="color-box"
+                          id="slice_2_text_color_box"
+                        ></div>
+                      </div>
+                      <input
+                        id="slice_2_text_color"
+                        name="slice_2_text_color"
+                        type="hidden"
+                        value="#ffffff"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <label
+                        id="game-color-row-label-3"
+                        for="inputText"
+                        class="col-form-label form-label-colors"
+                        >Segment #3</label
+                      >
+                    </div>
+                    <div class="col-4 d-flex align-items-center">
+                      <div
+                        style="
+                          padding: 4px;
+                          border: 1px solid #ccc;
+                          border-radius: 8px;
+                        "
+                      >
+                        <div class="color-box" id="slice_3_bg_color_box"></div>
+                      </div>
+                      <input
+                        id="slice_3_bg_color"
+                        name="slice_3_bg_color"
+                        type="hidden"
+                        value="#808080"
+                      />
+                    </div>
+                    <div class="col-4 d-flex align-items-center">
+                      <div
+                        style="
+                          padding: 4px;
+                          border: 1px solid #ccc;
+                          border-radius: 8px;
+                        "
+                      >
+                        <div
+                          class="color-box"
+                          id="slice_3_text_color_box"
+                        ></div>
+                      </div>
+                      <input
+                        id="slice_3_text_color"
+                        name="slice_3_text_color"
+                        type="hidden"
+                        value="#ffffff"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <label
+                        id="game-color-row-label-4"
+                        for="inputText"
+                        class="col-form-label form-label-colors"
+                        >Segment #4</label
+                      >
+                    </div>
+                    <div class="col-4 d-flex align-items-center">
+                      <div
+                        style="
+                          padding: 4px;
+                          border: 1px solid #ccc;
+                          border-radius: 8px;
+                        "
+                      >
+                        <div class="color-box" id="slice_4_bg_color_box"></div>
+                      </div>
+                      <input
+                        id="slice_4_bg_color"
+                        name="slice_4_bg_color"
+                        type="hidden"
+                        value="#808080"
+                      />
+                    </div>
+                    <div class="col-4 d-flex align-items-center">
+                      <div
+                        style="
+                          padding: 4px;
+                          border: 1px solid #ccc;
+                          border-radius: 8px;
+                        "
+                      >
+                        <div
+                          class="color-box"
+                          id="slice_4_text_color_box"
+                        ></div>
+                      </div>
+                      <input
+                        id="slice_4_text_color"
+                        name="slice_4_text_color"
+                        type="hidden"
+                        value="#ffffff"
+                      />
+                    </div>
+                  </div>
+                  <div class="row gaming-popup-hide">
+                      <div class="col-4">
+                        <label
+                          id="game-color-label-center"
+                          for="inputText"
+                          class="col-form-label form-label-colors"
+                          >Center</label
+                        >
+                      </div>
+                      <div class="col-4 d-flex align-items-center">
+                        <div
+                          style="
+                            padding: 4px;
+                            border: 1px solid #ccc;
+                            border-radius: 8px;
+                          "
+                        >
+                          <div class="color-box" id="circle_bg_color_box"></div>
+                        </div>
+                        <input
+                          id="circle_bg_color"
+                          name="circle_bg_color"
+                          type="hidden"
+                          value="#808080"
+                        />
+                      </div>
+                      <div class="col-4 d-flex align-items-center">
+                        <div
+                          style="
+                            padding: 4px;
+                            border: 1px solid #ccc;
+                            border-radius: 8px;
+                          "
+                        >
+                          <div class="color-box" id="circle_text_color_box"></div>
+                        </div>
+                        <input
+                          id="circle_text_color"
+                          name="circle_text_color"
+                          type="hidden"
+                          value="#ffffff"
+                        />
+                      </div>
+                    </div>
+                    <div class="row gaming-popup-hide">
+                      <div class="col-4">
+                        <label
+                          id="game-color-label-pin"
+                          for="inputText"
+                          class="col-form-label form-label-colors"
+                          >Pointer</label
+                        >
+                      </div>
+                      <div class="col-4 d-flex align-items-center">
+                        <div
+                          style="
+                            padding: 4px;
+                            border: 1px solid #ccc;
+                            border-radius: 8px;
+                          "
+                        >
+                          <div class="color-box" id="pin_bg_color_box"></div>
+                        </div>
+                        <input
+                          id="pin_bg_color"
+                          name="pin_bg_color"
+                          type="hidden"
+                          value="#808080"
+                        />
+                      </div>
+                      <div class="col-4 d-flex align-items-center">
+                        <div
+                          style="
+                            padding: 4px;
+                            border: 1px solid #ccc;
+                            border-radius: 8px;
+                          "
+                        >
+                          <div class="color-box" id="pin_text_color_box"></div>
+                        </div>
+                        <input
+                          id="pin_text_color"
+                          name="pin_text_color"
+                          type="hidden"
+                          value="#ffffff"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /slice-colors-section (Game Colors: slices + circle + pin) -->
+
+                  <div class="mb-3 mt-3" id="gameTextFontRow" style="display: none;">
+                    <label class="form-label">Game text</label>
+                    <div class="row g-2">
+                      <div class="col-md-8 col-12">
+                        <label for="gameTextFontSelect" class="form-label small text-muted mb-1">Font</label>
+                        <select id="gameTextFontSelect" class="form-select" aria-describedby="gameTextFontHint"></select>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label for="gameTextFontSizeInput" class="form-label small text-muted mb-1">Size</label>
+                        <div class="input-group">
+                          <input
+                            type="number"
+                            id="gameTextFontSizeInput"
+                            class="form-control"
+                            min="8"
+                            max="96"
+                            step="1"
+                            value="28"
+                            aria-describedby="gameTextFontHint"
+                          />
+                          <span class="input-group-text">px</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="gameTextFontHint" class="form-text small text-muted mt-1">Font used for reward labels on the wheel, slot, and scratch layers.</div>
+
+                    <label class="form-label mt-3 mb-2">Game background color</label>
+                    <div class="d-flex align-items-center">
+                      <div class="promotion-color-swatch-frame">
+                        <div
+                          class="color-box"
+                          id="game_area_bg_color_box"
+                          role="button"
+                          tabindex="0"
+                          aria-label="Game background color"
+                        ></div>
+                      </div>
+                      <input type="hidden" name="game_area_bg_color" id="game_area_bg_color" value="" />
+                    </div>
+                    <div class="d-flex align-items-center gap-2 mt-2 flex-wrap w-100">
+                      <label class="form-label small text-muted mb-0" for="game_area_bg_opacity">Opacity</label>
+                      <input
+                        type="range"
+                        class="form-range flex-grow-1"
+                        id="game_area_bg_opacity"
+                        min="0"
+                        max="100"
+                        step="1"
+                        value="100"
+                        style="max-width: 220px"
+                      />
+                      <span class="small text-muted text-nowrap" id="game_area_bg_opacity_value">100%</span>
+                    </div>
+                  </div>
+
+                  <!-- Remove Game + Reset game -->
+                  <div class="d-flex flex-row flex-wrap gap-2 mt-3 align-items-center justify-content-end">
+                    <div id="removeGameButtonWrapper" style="display: none;">
+                      <button type="button" id="removeGameButton" class="btn btn-outline-danger btn-sm text-nowrap">
+                        <i class="bi bi-trash"></i> Remove Game
+                      </button>
+                    </div>
+                    <button
+                      class="btn btn-sm btn-outline-secondary text-nowrap"
+                      id="reset_template"
+                      type="button"
+                    >
+                      <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i> Reset game
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rewards Accordion -->
+            <div class="accordion-item" id="rewardsAccordion" style="display: none;">
+              <h2 class="accordion-header" id="headingRewards">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseRewards"
+                  aria-expanded="false"
+                  aria-controls="collapseRewards"
+                >
+                  <i class="bi bi-gift"></i
+                  >&nbsp;&nbsp;&nbsp;&nbsp;Rewards
+                </button>
+              </h2>
+              <div
+                id="collapseRewards"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingRewards"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <span class="custom-tooltip-inline-wrapper ms-auto">
+                    <a
+                      href="javascript:void(0);"
+                      class="custom-tooltip-trigger-inline"
+                    >
+                      <i class="bi bi-question-circle"></i>
+                    </a>
+                    <div
+                      class="custom-tooltip-inline"
+                      id="tooltip-inline-rewards"
+                    >
+                      <div class="custom-tooltip-content-inline">
+                        <h5>Rewards</h5>
+                        <p>
+                          Set up reward labels, coupon codes, and weights. Weights control how often each outcome is chosen (total should be 100% when Smart Reward is off).
+                        </p>
+                        <br />
+                        <div class="text-end">
+                          <a
+                            href="/help/promotion-rewards/"
+                            class="help-cloud-link"
+                            target="_blank"
+                          >
+                            Learn More
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+                  <div id="game-rewards-section">
+                    <div class="rewards" id="gameRewardsContainer">
+                      <!-- Reward rows generated dynamically by JS -->
+                    </div>
+                    <p
+                      id="game-rewards-weight-sum-alert"
+                      class="alert alert-warning small mt-2 mb-0 py-2"
+                      role="alert"
+                      hidden
+                    ></p>
+                    <p
+                      id="game-rewards-smart-note"
+                      class="game-rewards-smart-note small text-muted mt-2 mb-0"
+                      hidden
+                    >
+                      <i class="bi bi-info-circle me-1" aria-hidden="true"></i>
+                      AI powered triggers are on. Win rates are optimized from your Google Analytics
+                      data; the weights above are not used for distribution.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingPopupSettings">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapsePopupSettings"
+                  aria-expanded="false"
+                  aria-controls="collapsePopupSettings"
+                >
+                  <i class="bi bi-layout-sidebar"></i
+                  >&nbsp;&nbsp;&nbsp;&nbsp;Pop-up Settings
+                </button>
+              </h2>
+              <div
+                id="collapsePopupSettings"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingPopupSettings"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <span class="custom-tooltip-inline-wrapper ms-auto">
+                    <a
+                      href="javascript:void(0);"
+                      class="custom-tooltip-trigger-inline"
+                    >
+                      <i class="bi bi-question-circle"></i>
+                    </a>
+                    <div
+                      class="custom-tooltip-inline"
+                      id="tooltip-inline-popup-settings"
+                    >
+                      <div class="custom-tooltip-content-inline">
+                        <h5>Pop-up Settings</h5>
+                        <p>
+                          Configure colors, background image, and related options for your gaming promotion popup.
+                        </p>
+                        <br />
+                        <div class="text-end">
+                          <a
+                            href="/help/popup-settings/"
+                            class="help-cloud-link"
+                            target="_blank"
+                          >
+                            Learn More
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+                  <div class="row gy-4">
+                    <!-- Popup Colors -->
+                    <div class="col-12">
+                      <label class="form-label small mb-2">Colors</label>
+                      <div class="d-flex gap-3 align-items-center">
+                        <div class="d-flex align-items-center gap-2">
+                          <span class="form-label small mb-0">Container</span>
+                          <div style="padding: 4px; border: 1px solid #ccc; border-radius: 8px;">
+                            <div class="color-box" id="container_bg_color_box" style="border: 1px solid #ccc"></div>
+                          </div>
+                          <input id="container_bg_color" name="container_bg_color" type="hidden" value="#4154f1" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Popup container background image (default tile + up to 5 uploads) -->
+                    <div class="col-12 mt-3" id="popupBackgroundSettingsSection">
+                      <div class="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
+                        <label class="form-label small mb-0">Background image</label>
+                        <span class="custom-tooltip-inline-wrapper">
+                          <a href="javascript:void(0);" class="custom-tooltip-trigger-inline">
+                            <i class="bi bi-question-circle"></i>
+                          </a>
+                          <div class="custom-tooltip-inline" id="tooltip-inline-popup-bg">
+                            <div class="custom-tooltip-content-inline">
+                              <h5>Popup background</h5>
+                              <p>
+                                Applies to the popup container for your promotion. The template
+                                <strong>default</strong> image cannot be removed. You can upload up to
+                                <strong>5</strong> images (JPG, PNG, JPEG, WEBP, GIF, SVG, under 1&nbsp;MB).
+                              </p>
+                            </div>
+                          </div>
+                        </span>
+                      </div>
+                      <form
+                        id="uploadPopupBackgroundImageForm"
+                        method="post"
+                        enctype="multipart/form-data"
+                      >
+                        {% csrf_token %}
+                        <input
+                          type="file"
+                          name="image"
+                          id="popupBackgroundImageInput"
+                          style="display: none"
+                          accept="image/jpeg,image/png,image/jpg,image/webp,image/gif,image/svg+xml"
+                        />
+                      </form>
+                      <div id="popupBackgroundImageGallery" class="image-gallery">
+                        {% for image in promotion.images.all %}
+                          {% if image.usage == 'popup_bg' %}
+                          <div class="image-item" data-id="{{ image.pk }}">
+                            <img src="{{ image.image.url }}" alt="Popup background" loading="lazy" decoding="async" />
+                            <button type="button" class="delete-image" data-id="{{ image.pk }}">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                          {% endif %}
+                        {% endfor %}
+                        <div class="image-item upload-placeholder" id="popupBackgroundUploadPlaceholder">
+                          <i class="bi bi-cloud-arrow-up"></i>
+                        </div>
+                      </div>
+                      <div
+                        id="popupBackgroundImageError"
+                        class="text-danger mt-2 small"
+                        style="display: none"
+                      ></div>
+                    </div>
+
+                    <!-- Reset Popup Settings -->
+                    <div class="col-12 mt-2 d-flex justify-content-end">
+                      <button type="button" class="btn btn-outline-secondary btn-sm" id="resetPopupSettingsBtn">
+                        <i class="bi bi-arrow-counterclockwise"></i> Reset
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item" id="imageAccordionItem">
+              <h2 class="accordion-header" id="headingImage">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseImage"
+                  aria-expanded="false"
+                  aria-controls="collapseImage"
+                >
+                  <i class="bi bi-card-image"></i>
+                  &nbsp;&nbsp;&nbsp;&nbsp;Image
+                </button>
+              </h2>
+              <div
+                id="collapseImage"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingImage"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
+                        <label class="form-label small mb-0">Top image</label>
+                        <span class="custom-tooltip-inline-wrapper">
+                          <a
+                            href="javascript:void(0);"
+                            class="custom-tooltip-trigger-inline"
+                          >
+                            <i class="bi bi-question-circle"></i>
+                          </a>
+                          <div
+                            class="custom-tooltip-inline"
+                            id="tooltip-inline-general"
+                          >
+                            <div class="custom-tooltip-content-inline">
+                              <h5>Top image</h5>
+                              <p>
+                                Upload or pick an image for the decorative top image area when your template uses it.
+                                You can save up to <strong>5 uploaded images</strong> in the gallery.
+                                Images must be in <strong>JPG</strong> , <strong>PNG</strong>,<strong>JPEG</strong>, <strong>WEBP</strong>, <strong>GIF</strong> or <strong>SVG</strong> format and smaller than <strong>1&nbsp;MB</strong>.
+                              </p>
+                              <br />
+                              <div class="text-end">
+                                <a
+                                  href="/help/add-background-image/"
+                                  class="help-cloud-link"
+                                  target="_blank"
+                                >
+                                  Learn More
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </span>
+                      </div>
+                      <form
+                        id="uploadImageForm"
+                        method="post"
+                        enctype="multipart/form-data"
+                      >
+                        {% csrf_token %}
+                        <input
+                          type="file"
+                          name="image"
+                          id="imageInput"
+                          style="display: none"
+                        />
+                      </form>
+                      <div id="imageGallery" class="image-gallery">
+                        {% for image in promotion.images.all %}
+                          {% if image.usage == 'top' %}
+                        <div class="image-item" data-id="{{ image.pk }}">
+                          <img
+                            src="{{ image.image.url }}"
+                            alt="Promotion Image"
+                          />
+                          <button class="delete-image" data-id="{{ image.pk }}">
+                            <i class="bi bi-trash"></i>
+                          </button>
+                        </div>
+                          {% endif %}
+                        {% endfor %}
+                        <div class="image-item upload-placeholder">
+                          <i class="bi bi-cloud-arrow-up"></i>
+                        </div>
+                      </div>
+                      <div
+                        id="errorMessage"
+                        class="text-danger mt-2"
+                        style="display: none"
+                      ></div>
+                    </div>
+                  </div>
+
+                  <!-- Top Image Size Controls -->
+                  <div class="row m-2" id="topImageSizeWrapper">
+                    <div class="col-12 mt-5 mb-3">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <label class="form-label small mb-1">Resize Image</label>
+                        <span class="small text-muted" id="topImageSizeValue">30%</span>
+                      </div>
+                      <input type="range" class="form-range" id="topImageHeight" min="10" max="100" step="1" value="30">
+                      
+                    </div>
+                    <!-- Top Image Position -->
+                    <div class="col-12 mb-3" id="lightImagePositionControls">
+                      <label class="form-label small mb-2">Image Position</label>
+                      <div class="btn-group w-100" role="group">
+                        <input
+                          type="radio"
+                          class="btn-check"
+                          name="top_image_position"
+                          id="top_image_position_left"
+                          value="left"
+                          autocomplete="off"
+                        />
+                        <label class="btn btn-outline-secondary btn-sm" for="top_image_position_left">Left</label>
+
+                        <input
+                          type="radio"
+                          class="btn-check"
+                          name="top_image_position"
+                          id="top_image_position_top"
+                          value="top"
+                          autocomplete="off"
+                          checked
+                        />
+                        <label class="btn btn-outline-secondary btn-sm" id='top-position-option' for="top_image_position_top" >Top</label>
+
+                        <input
+                          type="radio"
+                          class="btn-check"
+                          name="top_image_position"
+                          id="top_image_position_right"
+                          value="right"
+                          autocomplete="off"
+                        />
+                        <label class="btn btn-outline-secondary btn-sm" for="top_image_position_right">Right</label>
+                      </div>
+                    </div>
+                    
+                  </div>
+
+                  <!-- Reset Buttons - Bottom Right -->
+                  <!-- Gaming Mode Reset -->
+                  <div class="row m-2" id="gamingImageControls">
+                    <div class="col-12 d-flex justify-content-end">
+                      <button
+                        class="btn btn-sm btn-outline-secondary"
+                        id="reset_wheel_popup_bg"
+                      >
+                        Reset Background
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="row m-2" id="lightTopImageReset">
+                    <div class="col-12 d-flex justify-content-end gap-2 flex-wrap">
+                      <button class="btn btn-sm btn-outline-secondary" type="button" id="reset_top_image">
+                        Reset Image
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingSchedule">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseSchedule"
+                  aria-expanded="false"
+                  aria-controls="collapseSchedule"
+                >
+                  <i class="bi bi-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;Schedule
+                </button>
+              </h2>
+              <div
+                id="collapseSchedule"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingSchedule"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <span class="custom-tooltip-inline-wrapper ms-auto">
+                    <a
+                      href="javascript:void(0);"
+                      class="custom-tooltip-trigger-inline"
+                    >
+                      <i class="bi bi-question-circle"></i>
+                    </a>
+                    <div
+                      class="custom-tooltip-inline"
+                      id="tooltip-inline-schedule"
+                    >
+                      <div class="custom-tooltip-content-inline">
+                        <h5>Schedule Settings</h5>
+                        <p>Set when your promotion will start and end.</p>
+                        <br />
+                        <div class="text-end">
+                          <a
+                            href="/help/promotion-schedule/"
+                            class="help-cloud-link"
+                            target="_blank"
+                          >
+                            Learn More
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+                  <div class="row">
+                    <div class="col-12 form-check form-switch m-2">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="schedule_checkbox"
+                      />
+                      <label class="form-check-label">Set Schedule</label>
+                    </div>
+
+                    <div class="col-12" style="display: none">
+                      <form name="schedule_form" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                          <div class="row">
+                            <label for="inputDate" class="col-12 col-form-label"
+                              >Start</label
+                            >
+                            <div
+                              class="col-12 col-sm-6 col-lg-12 col-xl-6 mb-2"
+                            >
+                              {{ schedule_form.start_date }}
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-12 col-xl-6">
+                              {{ schedule_form.start_time }}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <label for="inputDate" class="col-12 col-form-label"
+                              >End</label
+                            >
+                            <div
+                              class="col-12 col-sm-6 col-lg-12 col-xl-6 mb-2"
+                            >
+                              {{ schedule_form.end_date }}
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-12 col-xl-6">
+                              {{ schedule_form.end_time }}
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                >
+                  <i class="bi bi-filter-square-fill"></i
+                  >&nbsp;&nbsp;&nbsp;&nbsp;Options
+                </button>
+              </h2>
+              <div
+                id="collapseThree"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingThree"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <span class="custom-tooltip-inline-wrapper ms-auto">
+                    <a
+                      href="javascript:void(0);"
+                      class="custom-tooltip-trigger-inline"
+                    >
+                      <i class="bi bi-question-circle"></i>
+                    </a>
+                    <div
+                      class="custom-tooltip-inline"
+                      id="tooltip-inline-general"
+                    >
+                      <div class="custom-tooltip-content-inline">
+                        <h5>Options Settings</h5>
+                        <p>Adjust settings like verification and triggers.</p>
+                        <br />
+                        <div class="text-end">
+                          <a
+                            href="/help/promotion-options/"
+                            class="help-cloud-link"
+                            target="_blank"
+                          >
+                            Learn More
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+                  <div class="row">
+                    <div class="form-check form-switch m-2">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="prevent_dublicate"
+                      />
+                      <label class="form-check-label"
+                        >Prevent dublicate emails</label
+                      >
+                    </div>
+                    <div class="form-check form-switch m-2">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="show_on_mobile"
+                      />
+                      <label class="form-check-label">Set Mobile</label>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-12 form-check form-switch m-2">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="start_delay_active"
+                        />
+                        <label class="form-check-label"
+                          >Trigger With Delay (Seconds)</label
+                        >
+                      </div>
+                      <div class="col-12" style="display: none">
+                        <input
+                          class="form-control"
+                          type="number"
+                          name="start_delay"
+                          placeholder="Trigger With Delay (Seconds)"
+                          min="0"
+                          max="99999"
+                          maxlength="5"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div class="form-check form-switch m-2">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="trigger_intent_leave"
+                      />
+                      <label class="form-check-label"
+                        >Trigger when the user intends to leave</label
+                      >
+                    </div>
+                    <div class="form-check form-switch m-2">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="trigger_scroll_down"
+                      />
+                      <label class="form-check-label"
+                        >Trigger when scroll down</label
+                      >
+                    </div>
+                    <div class="form-check form-switch m-2">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="smart_reward"
+                      />
+                      <label class="form-check-label"
+                        >AI powered triggers</label
+                      >
+                    </div>
+                    <div class="col-12 m-2 px-2" style="display: none">
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="property_id"
+                        placeholder="Google Analytics Property ID"
+                        autocomplete="off"
+                      />
+                    </div>
+
+                    <div class="row mt-2">
+                      <label for="inputText" class="col-sm-6 col-form-label"
+                        >Trigger item click
+                        <p class="small">
+                          (If you have multiple items, separate them with a
+                          comma.)
+                        </p>
+                      </label>
+                      <div class="col-sm-6">
+                        <textarea
+                          name="specific_items"
+                          class="form-control text-end"
+                          rows="4"
+                          cols="80"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <label for="inputText" class="col-sm-6 col-form-label"
+                        >Trigger specific URL
+                        <p class="small">
+                          (If you have multiple urls, separate them with a
+                          comma.)
+                        </p>
+                      </label>
+                      <div class="col-sm-6">
+                        <textarea
+                          name="specific_urls"
+                          class="form-control text-end"
+                          rows="4"
+                          cols="80"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseText"
+                  aria-expanded="false"
+                  aria-controls="collapseText"
+                >
+                  <i class="bi bi-file-font-fill"></i
+                  >&nbsp;&nbsp;&nbsp;&nbsp;Texts
+                </button>
+              </h2>
+              <div
+                id="collapseText"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingThree"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <span class="custom-tooltip-inline-wrapper ms-auto">
+                    <a
+                      href="javascript:void(0);"
+                      class="custom-tooltip-trigger-inline"
+                    >
+                      <i class="bi bi-question-circle"></i>
+                    </a>
+                    <div
+                      class="custom-tooltip-inline"
+                      id="tooltip-inline-general"
+                    >
+                      <div class="custom-tooltip-content-inline">
+                        <h5>Texts Settings</h5>
+                        <p>Edit headlines, button labels, and other texts. All text fields accept a maximum of 100 characters.</p>
+                        <br />
+                          <div class="text-end">
+                            <a
+                              href="/help/promotion-texts/"
+                              class="help-cloud-link"
+                              target="_blank"
+                            >
+                              Learn More
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </span>
+                  <div class="texts-input-container">
+                  <div class="texts-input-row">
+                    <span class="texts-input-icon">H</span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="headline"
+                      maxlength="100"
+                      required
+                      placeholder="Headline"
+                    />
+                  </div>
+                  <div class="texts-input-row">
+                    <span class="texts-input-icon">T</span>
+                    <textarea
+                      class="form-control"
+                      name="description"
+                      rows="3"
+                      maxlength="100"
+                      placeholder="Description"
+                    ></textarea>
+                  </div>
+                  <div class="texts-input-row">
+                    <span class="texts-input-icon">D</span>
+                    <textarea
+                      class="form-control"
+                      name="disclaimer"
+                      rows="3"
+                      maxlength="100"
+                      placeholder="Disclaimer"
+                    ></textarea>
+                  </div>
+                  </div>
+                  <div class="row m-2 mt-3">
+                    <div class="col-12 d-flex justify-content-end">
+                      <button
+                        class="btn btn-sm btn-outline-secondary"
+                        id="resetTexts"
+                        type="button"
+                      >
+                        <i class="bi bi-arrow-counterclockwise"></i> Reset Texts
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Input Accordion -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingInput">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseInput"
+                  aria-expanded="false"
+                  aria-controls="collapseInput"
+                >
+                  <i class="bi bi-input-cursor-text"></i>&nbsp;&nbsp;&nbsp;&nbsp;Input
+                </button>
+              </h2>
+              <div
+                id="collapseInput"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingInput"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <span class="custom-tooltip-inline-wrapper ms-auto">
+                    <a
+                      href="javascript:void(0);"
+                      class="custom-tooltip-trigger-inline"
+                    >
+                      <i class="bi bi-question-circle"></i>
+                    </a>
+                    <div
+                      class="custom-tooltip-inline"
+                      id="tooltip-inline-input"
+                    >
+                      <div class="custom-tooltip-content-inline">
+                        <h5>Input Settings</h5>
+                        <p>
+                          Add custom input fields to your promotion form to collect additional information from users.
+                        </p>
+                        <br />
+                        <div class="text-end">
+                          <a
+                            href="/help/promotion-inputs/"
+                            class="help-cloud-link"
+                            target="_blank"
+                          >
+                            Learn More
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+                  
+                  <div class="row">
+                    <!-- Add Input Select -->
+                    <div class="col-md-12 mb-2" id="inputFieldsListSection">
+                      <label class="form-label mb-2">Additional Input Fields</label>
+                      <div class="d-flex gap-2 align-items-start">
+                        <div class="flex-grow-1" id="inputFieldSelectWrap">
+                          <select
+                            class="form-control flex-grow-1"
+                            id="inputFieldSelect"
+                          >
+                            <option value="">Select an input field to add...</option>
+                            <option value="full_name">Full Name</option>
+                            <option value="phone">Phone Number</option>
+                            <option value="address">Address</option>
+                            <option value="birth_date">Date</option>
+                            <option value="rating">Rating</option>
+                            <option value="email">Email</option>
+                            <option value="consent">Consent checkbox</option>
+                            <option value="button">Button</option>
+                          </select>
+                        </div>
+                        <div class="flex-grow-1" id="inputFieldPickerTriggerWrap">
+                          <button
+                            type="button"
+                            class="form-control d-flex justify-content-between align-items-center text-start"
+                            id="inputFieldPickerTrigger"
+                            aria-haspopup="dialog"
+                            aria-expanded="false"
+                            aria-controls="inputFieldPickerDialog"
+                          >
+                            <span class="text-truncate" id="inputFieldPickerTriggerLabel">Select an input field to add...</span>
+                            <i class="bi bi-chevron-down flex-shrink-0 ms-2" aria-hidden="true"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div id="inputFieldsContainer" class="col-md-12 mt-3">
+                        <!-- Dynamic inputs will be added here -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Inline Input Field Editor Template (UI aligned with Edit Button card) -->
+            <template id="inlineInputFieldEditorTemplate">
+              <div class="inline-input-field-editor card shadow-sm border-0 rounded-3 p-3 mt-2">
+                <input type="hidden" class="edit-input-field-id" />
+                <input type="hidden" class="edit-input-field-name" />
+                <input type="hidden" class="edit-input-field-type" />
+
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-secondary">
+                  <div>
+                    <h6 class="mb-0 fw-semibold">Edit input field</h6>
+                    <span class="small text-muted">Preview updates as you edit</span>
+                  </div>
+                  <button type="button" class="btn-close" aria-label="Close"></button>
+                </div>
+
+                <form class="edit-input-field-form">
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label class="form-label small fw-semibold mb-2">Field content</label>
+                      <div class="rounded-3 border bg-body-secondary bg-opacity-10 p-3">
+                        <div class="mb-3 edit-inline-placeholder-col">
+                          <label class="form-label small text-secondary mb-1">Placeholder</label>
+                          <input
+                            type="text"
+                            class="form-control form-control-sm rounded-2 edit-input-field-placeholder"
+                            placeholder="Enter placeholder text"
+                          />
+                        </div>
+                        <div class="form-check form-switch mb-0">
+                          <input
+                            class="form-check-input edit-input-field-required"
+                            type="checkbox"
+                            id="editInputFieldRequired"
+                          />
+                          <label class="form-check-label small" for="editInputFieldRequired">Required</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12 per-field-style-section">
+                      <label class="form-label small fw-semibold mb-2">Style</label>
+                      <div class="rounded-3 border bg-body-secondary bg-opacity-10 p-3">
+                        <div class="row g-2 align-items-end">
+                          <div class="col-6 col-md-3">
+                            <label class="form-label small text-secondary mb-1">Border width</label>
+                            <input
+                              type="number"
+                              class="form-control form-control-sm edit-style-borderWidth rounded-2"
+                              min="0"
+                              max="20"
+                              step="1"
+                              value="1"
+                            />
+                          </div>
+                          <div class="col-6 col-md-3">
+                            <label class="form-label small text-secondary mb-1">Corner radius</label>
+                            <input
+                              type="number"
+                              class="form-control form-control-sm edit-style-borderRadius rounded-2"
+                              min="0"
+                              max="50"
+                              step="1"
+                              value="4"
+                            />
+                          </div>
+                          <div class="col-6 col-md-3">
+                            <label class="form-label small text-secondary mb-1">Border color</label>
+                            <div class="d-flex align-items-center gap-1 flex-wrap">
+                              <div
+                                class="flex-shrink-0"
+                                style="padding: 4px; border: 1px solid #ccc; border-radius: 8px"
+                              >
+                                <div
+                                  class="color-box edit-style-borderColor-box"
+                                  title="Border color"
+                                  role="button"
+                                  tabindex="0"
+                                ></div>
+                              </div>
+                              <input type="hidden" class="edit-style-borderColor" value="#dee2e6" />
+                            </div>
+                          </div>
+                          <div class="col-6 col-md-3">
+                            <label class="form-label small text-secondary mb-1">Placeholder color</label>
+                            <div class="d-flex align-items-center gap-1 flex-wrap">
+                              <div
+                                class="flex-shrink-0"
+                                style="padding: 4px; border: 1px solid #ccc; border-radius: 8px"
+                              >
+                                <div
+                                  class="color-box edit-style-placeholderColor-box"
+                                  title="Placeholder color"
+                                  role="button"
+                                  tabindex="0"
+                                ></div>
+                              </div>
+                              <input type="hidden" class="edit-style-placeholderColor" value="#6c757d" />
+                            </div>
+                          </div>
+                          <div class="col-6 col-md-4">
+                            <label class="form-label small text-secondary mb-1">Width</label>
+                            <input
+                              type="number"
+                              class="form-control form-control-sm edit-style-width rounded-2"
+                              min="50"
+                              max="100"
+                              step="1"
+                              value="100"
+                              title="Percent of row"
+                            />
+                          </div>
+                          <div class="col-6 col-md-4">
+                            <label class="form-label small text-secondary mb-1">Height</label>
+                            <input
+                              type="number"
+                              class="form-control form-control-sm edit-style-height rounded-2"
+                              min="0"
+                              max="200"
+                              step="1"
+                              value="40"
+                              title="Pixels; 0 = auto"
+                            />
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <label class="form-label small text-secondary mb-1 d-block">Alignment</label>
+                            <div class="btn-group btn-group-sm w-100" role="group">
+                              <input
+                                type="radio"
+                                class="btn-check edit-style-alignment"
+                                name="editFieldAlignment"
+                                id="inlineFieldAlignLeft"
+                                value="left"
+                                autocomplete="off"
+                              />
+                              <label
+                                class="btn btn-outline-secondary rounded-start-2"
+                                for="inlineFieldAlignLeft"
+                                title="Left"
+                                ><i class="bi bi-text-left"></i></label>
+                              <input
+                                type="radio"
+                                class="btn-check edit-style-alignment"
+                                name="editFieldAlignment"
+                                id="inlineFieldAlignCenter"
+                                value="center"
+                                autocomplete="off"
+                                checked
+                              />
+                              <label class="btn btn-outline-secondary" for="inlineFieldAlignCenter" title="Center"
+                                ><i class="bi bi-text-center"></i></label>
+                              <input
+                                type="radio"
+                                class="btn-check edit-style-alignment"
+                                name="editFieldAlignment"
+                                id="inlineFieldAlignRight"
+                                value="right"
+                                autocomplete="off"
+                              />
+                              <label
+                                class="btn btn-outline-secondary rounded-end-2"
+                                for="inlineFieldAlignRight"
+                                title="Right"
+                                ><i class="bi bi-text-right"></i></label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div
+                        class="d-flex flex-wrap justify-content-end align-items-center gap-2 pt-2 border-top mt-1"
+                      >
+                        <button
+                          type="button"
+                          class="btn btn-outline-secondary btn-sm reset-edit-input-field rounded-2"
+                          title="Reset"
+                        >
+                          <i class="bi bi-arrow-counterclockwise"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </template>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseCountdown"
+                  aria-expanded="false"
+                  aria-controls="collapseCountdown"
+                >
+                  <i class="bi bi-clock-fill"></i
+                  >&nbsp;&nbsp;&nbsp;&nbsp;Countdown
+                </button>
+              </h2>
+              <div
+                id="collapseCountdown"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingThree"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <span class="custom-tooltip-inline-wrapper ms-auto">
+                    <a
+                      href="javascript:void(0);"
+                      class="custom-tooltip-trigger-inline"
+                    >
+                      <i class="bi bi-question-circle"></i>
+                    </a>
+                    <div
+                      class="custom-tooltip-inline"
+                      id="tooltip-inline-general"
+                    >
+                      <div class="custom-tooltip-content-inline">
+                        <h5>Countdown Settings</h5>
+                        <p>Add and style a countdown timer.</p>
+                        <br />
+                        <div class="text-end">
+                          <a
+                            href="/help/promotion-countdown/"
+                            class="help-cloud-link"
+                            target="_blank"
+                          >
+                            Learn More
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="form-check form-switch mt-4 mb-4">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="display_countdown_reminder"
+                        />
+                        <label
+                          class="form-check-label"
+                          for="flexSwitchCheckDefault"
+                          >Display countdown reward reminder</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="col-12">
+                      <div class="row">
+                        <label for="inputText" class="col-sm-6 col-form-label"
+                          >Valid Time (Minutes)</label
+                        >
+                        <div class="col-sm-6">
+                          <input
+                            type="number"
+                            class="form-control text-end"
+                            name="valid_time"
+                            min="1"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-4">
+                      <label
+                        for="inputText"
+                        class="col-form-label form-label-colors"
+                        >Element</label
+                      >
+                    </div>
+                    <div class="col-4">
+                      <label
+                        for="inputText"
+                        class="col-form-label form-label-colors"
+                        >Background</label
+                      >
+                    </div>
+                    <div class="col-4">
+                      <label
+                        for="inputText"
+                        class="col-form-label form-label-colors"
+                        >Text Color</label
+                      >
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-4">
+                      <label
+                        for="inputText"
+                        class="col-sm-2 col-form-label form-label-colors"
+                        >Countdown</label
+                      >
+                    </div>
+                    <div class="col-4 d-flex align-items-center">
+                      <div
+                        style="
+                          padding: 4px;
+                          border: 1px solid #ccc;
+                          border-radius: 8px;
+                        "
+                      >
+                        <div
+                          class="color-box"
+                          id="countdown_bg_color_box"
+                        ></div>
+                      </div>
+                      <input
+                        id="countdown_bg_color"
+                        name="countdown_bg_color"
+                        type="hidden"
+                        value="#cee8e8"
+                      />
+                    </div>
+                    <div class="col-4 d-flex align-items-center">
+                      <div
+                        style="
+                          padding: 4px;
+                          border: 1px solid #ccc;
+                          border-radius: 8px;
+                        "
+                      >
+                        <div
+                          class="color-box"
+                          id="countdown_text_color_box"
+                        ></div>
+                      </div>
+                      <input
+                        id="countdown_text_color"
+                        name="countdown_text_color"
+                        type="hidden"
+                        value="#2C7A7B"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-12 mt-2 d-flex justify-content-end">
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary btn-sm"
+                        id="resetCountdownSettingsBtn"
+                      >
+                        <i class="bi bi-arrow-counterclockwise"></i> Reset
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-wheelluck btn-block mt-2"
+              name="submit_button"
+              type="button"
+            >
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    {% endblock %} {% block script %}
+    <script
+      type="module"
+      src="/static/promotion.init.js"
+      charset="utf-8"
+    ></script>
+
+    <!-- Inline Text Editor Template (will be cloned and inserted) -->
+    <template id="inlineTextEditorTemplate">
+      <div class="inline-text-editor">
+        <div class="text-editor-toolbar">
+          <!-- Alignment Buttons -->
+          <div class="toolbar-group">
+            <button class="toolbar-btn" data-command="justifyLeft" title="Left Align">
+              <i class="bi bi-text-left"></i>
+            </button>
+            <button class="toolbar-btn" data-command="justifyCenter" title="Center Align">
+              <i class="bi bi-text-center"></i>
+            </button>
+            <button class="toolbar-btn" data-command="justifyRight" title="Right Align">
+              <i class="bi bi-text-right"></i>
+            </button>
+          </div>
+          <div class="toolbar-separator"></div>
+          <!-- Font Selection -->
+          <div class="toolbar-group">
+            <select class="toolbar-select fontFamilySelect" title="Font Family">
+              <option value="Arial">Arial</option>
+              <option value="Helvetica">Helvetica</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Courier New">Courier New</option>
+              <option value="Verdana">Verdana</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Palatino">Palatino</option>
+              <option value="Garamond">Garamond</option>
+              <option value="Bookman">Bookman</option>
+              <option value="Comic Sans MS">Comic Sans MS</option>
+              <option value="Trebuchet MS">Trebuchet MS</option>
+              <option value="Arial Black">Arial Black</option>
+              <option value="Impact">Impact</option>
+              <option value="Lucida Console">Lucida Console</option>
+              <option value="Tahoma">Tahoma</option>
+              <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+              <option value="Gill Sans">Gill Sans</option>
+              <option value="Century Gothic">Century Gothic</option>
+              <option value="Franklin Gothic Medium">Franklin Gothic Medium</option>
+              <option value="Book Antiqua">Book Antiqua</option>
+              <option value="MS Sans Serif">MS Sans Serif</option>
+              <option value="MS Serif">MS Serif</option>
+              <option value="Segoe UI">Segoe UI</option>
+              <option value="Roboto">Roboto</option>
+              <option value="Open Sans">Open Sans</option>
+              <option value="Lato">Lato</option>
+              <option value="Montserrat">Montserrat</option>
+              <option value="Raleway">Raleway</option>
+              <option value="Poppins">Poppins</option>
+              <option value="Ubuntu">Ubuntu</option>
+              <option value="Oswald">Oswald</option>
+              <option value="Playfair Display">Playfair Display</option>
+              <option value="Merriweather">Merriweather</option>
+              <option value="Source Sans Pro">Source Sans Pro</option>
+              <option value="PT Sans">PT Sans</option>
+              <option value="Droid Sans">Droid Sans</option>
+              <option value="Droid Serif">Droid Serif</option>
+              <option value="Nunito">Nunito</option>
+              <option value="Fira Sans">Fira Sans</option>
+              <option value="Noto Sans">Noto Sans</option>
+              <option value="Barlow">Barlow</option>
+              <option value="Inter">Inter</option>
+              <option value="Work Sans">Work Sans</option>
+              <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+              <option value="MS Sans Serif">MS Sans Serif</option>
+              <option value="MS Serif">MS Serif</option>
+              <option value="Symbol">Symbol</option>
+              <option value="Wingdings">Wingdings</option>
+              <!-- Display/Afiş Fontları -->
+              <option value="Bebas Neue">Bebas Neue</option>
+              <option value="Anton">Anton</option>
+              <option value="Righteous">Righteous</option>
+              <option value="Black Ops One">Black Ops One</option>
+              <option value="Fredoka One">Fredoka One</option>
+              <option value="Lobster">Lobster</option>
+              <option value="Pacifico">Pacifico</option>
+              <option value="Permanent Marker">Permanent Marker</option>
+              <option value="Rubik Mono One">Rubik Mono One</option>
+              <option value="Sigmar One">Sigmar One</option>
+              <option value="Staatliches">Staatliches</option>
+              <option value="Titillium Web">Titillium Web</option>
+              <option value="Ultra">Ultra</option>
+              <option value="Bangers">Bangers</option>
+              <option value="Creepster">Creepster</option>
+              <option value="Fascinate">Fascinate</option>
+              <option value="Fascinate Inline">Fascinate Inline</option>
+              <option value="Faster One">Faster One</option>
+              <option value="Monoton">Monoton</option>
+              <option value="Orbitron">Orbitron</option>
+              <option value="Russo One">Russo One</option>
+              <!-- El Yazısı/Script Fontları -->
+              <option value="Dancing Script">Dancing Script</option>
+              <option value="Great Vibes">Great Vibes</option>
+              <option value="Kalam">Kalam</option>
+              <option value="Satisfy">Satisfy</option>
+              <option value="Shadows Into Light">Shadows Into Light</option>
+              <option value="Caveat">Caveat</option>
+              <option value="Indie Flower">Indie Flower</option>
+              <option value="Amatic SC">Amatic SC</option>
+              <option value="Handlee">Handlee</option>
+              <option value="Patrick Hand">Patrick Hand</option>
+              <option value="Shadows Into Light Two">Shadows Into Light Two</option>
+              <option value="Comfortaa">Comfortaa</option>
+              <option value="Caveat Brush">Caveat Brush</option>
+              <option value="Dawning of a New Day">Dawning of a New Day</option>
+              <option value="Gloria Hallelujah">Gloria Hallelujah</option>
+              <option value="Homemade Apple">Homemade Apple</option>
+              <option value="Marck Script">Marck Script</option>
+              <option value="Nothing You Could Do">Nothing You Could Do</option>
+              <option value="Reenie Beanie">Reenie Beanie</option>
+              <option value="Sacramento">Sacramento</option>
+              <option value="Shadows Into Light">Shadows Into Light</option>
+              <option value="Sue Ellen Francisco">Sue Ellen Francisco</option>
+              <option value="Yellowtail">Yellowtail</option>
+              <option value="Roboto">Roboto</option>
+              <option value="Open Sans">Open Sans</option>
+              <option value="Lato">Lato</option>
+              <option value="Montserrat">Montserrat</option>
+              <option value="Oswald">Oswald</option>
+              <option value="Raleway">Raleway</option>
+              <option value="Poppins">Poppins</option>
+              <option value="Ubuntu">Ubuntu</option>
+              <option value="Playfair Display">Playfair Display</option>
+              <option value="Merriweather">Merriweather</option>
+            </select>
+          </div>
+          <div class="toolbar-separator"></div>
+          <!-- Font Size and Text Color -->
+          <div class="toolbar-group">
+            <input type="number" class="toolbar-input fontSizeInput" min="5" value="20" title="Font Size (px)">
+            <span class="toolbar-label">px</span>
+            <div class="toolbar-separator"></div>
+            <input type="hidden" class="textColorInput" value="#000000">
+            <div class="toolbar-btn textColorBox" id="textColorBox" style="position: relative; display: flex; align-items: center; justify-content: center;" title="Text Color">
+              <span class="textColorLetter" style="font-size: 13px; font-weight: 700; color: #4a5568; position: relative; z-index: 1;">
+                <span class="textColorUnderline" style="border-bottom: 3px solid #000000; display: inline-block; line-height: 1;">A</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Style: segmented B | I | U | strikethrough (like compact style picker) -->
+          <div class="toolbar-group format-buttons-group text-editor-style-wrap">
+            <span class="text-editor-style-label">Style</span>
+            <div class="text-editor-style-segmented" role="group" aria-label="Text style">
+              <button type="button" class="toolbar-btn" data-command="bold" title="Bold">
+                <strong>B</strong>
+              </button>
+              <button type="button" class="toolbar-btn" data-command="italic" title="Italic">
+                <em>I</em>
+              </button>
+              <button type="button" class="toolbar-btn" data-command="underline" title="Underline">
+                <u>U</u>
+              </button>
+              <button type="button" class="toolbar-btn" data-command="strikeThrough" title="Strikethrough">
+                <s>T</s>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="text-editor-content">
+          <div class="text-editor-textarea-wrapper">
+            <div 
+              contenteditable="true" 
+              class="text-editor-textarea"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    {% endblock %}
+  </div>
+</div>
+
+

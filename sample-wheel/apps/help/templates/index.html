@@ -1,0 +1,58 @@
+{% extends "help_layout.html" %}
+{% block content %}
+<link rel="stylesheet" href="/static/help.css">
+<div class="main-content-wrapper">
+  <div class="pagetitle">
+    <h1>Help Center</h1>
+    <p class="meta-info">Validated on <strong>15 Jan 2024</strong> • Last edited on <strong>27 Jun 2025</strong></p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body mt-3">
+          <h2 class="section-subtitle">Most Viewed Articles</h2>
+          {% if left_topics and right_topics %}
+          <div class="list-group-wrapper">
+            <div class="row">
+              <div class="col-md-6">
+                {% for topic in left_topics %}
+                <div class="list-group-item">
+                  <a href="{% url 'help:detail' topic.slug %}">
+                    <span class="topic-number">{{ forloop.counter }}.</span>{{ topic.title }}
+                  </a>
+                </div>
+                {% endfor %}
+              </div>
+              <div class="col-md-6 ">
+                {% for topic in right_topics %}
+                <div class="list-group-item">
+                  <a href="{% url 'help:detail' topic.slug %}">
+                    <span class="topic-number">{{ forloop.counter|add:left_len }}.</span>{{ topic.title }}
+                  </a>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <p class="no-topics">no topic right now</p>
+          {% endif %}
+          <p class="description-text mt-4">
+            Welcome to the Wheelluck Help Center — your go-to destination for answers, guidance, and best practices.
+            Whether you're just getting started or managing an advanced campaign, we’re here to help you succeed.
+          </p>
+          <p class="description-text">
+            Browse through our curated help articles to learn how to install, customize, and optimize your gamified
+            popups. From setting up rewards and promotions to understanding analytics and tracking user engagement — we've
+            got it all covered.
+          </p>
+          <p class="description-text">
+            Need assistance? Each guide is designed to be practical, easy to follow, and tailored to real use-cases.
+            Still stuck? Feel free to reach out to our support team anytime.
+          </p>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/S5Ro_3SUsJs" allowfullscreen></iframe>
+          </div>
+
+        </div>
+      </div>
+{% endblock %}

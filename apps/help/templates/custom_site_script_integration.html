@@ -1,0 +1,113 @@
+{% extends "help_layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/help.css">
+<div class="main-content-wrapper">
+  <div class="pagetitle">
+    <h1>Custom site script</h1>
+    <p class="meta-info">Validated on <strong>15 Jan 2024</strong> • Last edited on <strong>27 Jun 2025</strong></p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body mt-3">
+          <h2 class="section-subtitle">Overview</h2>
+          <p class="description-text">
+            Use this guide if your website is built with a custom tech stack (HTML, React, Vue, Laravel, etc.).
+            You will copy a single script tag from Wheelluck and paste it into the <strong>&lt;head&gt;</strong> of every page
+            where you want the promotion to appear. Once the script loads, your active promotion displays automatically.
+          </p>
+
+          <h2 class="section-subtitle mt-5">Before you start</h2>
+          <div class="description-step">
+            <ul>
+              <li>You need an active promotion in Wheelluck.</li>
+              <li>You must have access to edit your website’s HTML templates or theme files.</li>
+              <li>Make sure you can publish or deploy changes after editing the code.</li>
+              <li>If you use a staging environment, install and test there first.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Step 1 — Copy the Wheelluck script</h2>
+          <div class="description-step">
+            <ol>
+              <li>Log in to Wheelluck and open the promotion you want to install.</li>
+              <li>Go to <strong>Install widget</strong>.</li>
+              <li>In the <strong>Custom Website</strong> tab, click the copy button next to the script tag.</li>
+              <li>Keep this tab open in case you need to copy the script again.</li>
+            </ol>
+            <div class="alert alert-info mt-3">
+              <strong>Tip:</strong> The script string is unique per promotion. If you duplicate a promotion, repeat this step to get the new link.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Step 2 — Paste the script into your website</h2>
+          <div class="description-step">
+            <ol>
+              <li>Open your site’s layout file(s) in your code editor or CMS.</li>
+              <li>Locate the closing <code>&lt;/head&gt;</code> tag. The Wheelluck script should appear <strong>before</strong> this closing tag.</li>
+              <li>Paste the script exactly as copied. Example:</li>
+            </ol>
+
+<pre class="code-block"><code>&lt;script src="https://cdn.wheelluck.com/promotions/abc123.js" type="text/javascript" id="wheelluck-script" defer&gt;&lt;/script&gt;</code></pre>
+
+            <ol start="4">
+              <li>Save the file and publish/deploy your changes.</li>
+            </ol>
+            <div class="alert alert-warning mt-3">
+              <strong>Important:</strong> Keep the attribute <code>id="wheelluck-script"</code>. Removing it prevents Wheelluck from detecting the installation automatically.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Step 3 — Verify the installation</h2>
+          <div class="description-step">
+            <ol>
+              <li>Return to the <strong>Install widget</strong> page in Wheelluck.</li>
+              <li>Enter the page URL in the <strong>Retry</strong> checker and click the button.</li>
+              <li>If the script is found, you will see <strong>Setup is successful</strong>. If not, review the troubleshooting tips below.</li>
+              <li>Visit your live site in an incognito/private window and trigger the promotion to confirm it loads.</li>
+            </ol>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Optional adjustments</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Single-page applications:</strong> Insert the script in the main HTML shell (e.g., <code>public/index.html</code>) so it runs regardless of route changes.</li>
+              <li><strong>Tag managers:</strong> You can load the script via Google Tag Manager or similar tools. Ensure it fires on every page view.</li>
+              <li><strong>Lazy loading:</strong> The script uses <code>defer</code>. Avoid wrapping it in additional lazy loaders which may delay the popup beyond the page view.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Troubleshooting</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Checker says “script not found”:</strong>
+                <ul>
+                  <li>Double-check the script tag is present inside the <code>&lt;head&gt;</code> on the published site.</li>
+                  <li>Make sure caching/CDN layers have been cleared after deployment.</li>
+                  <li>Verify the URL you entered in the checker exactly matches the page where the script lives.</li>
+                </ul>
+              </li>
+              <li><strong>Promotion does not appear:</strong>
+                <ul>
+                  <li>Confirm the promotion status is <strong>Active</strong> in Wheelluck.</li>
+                  <li>Check if other scripts or popup blockers on your site are preventing the popup.</li>
+                  <li>Try disabling aggressive cookie banners or script blockers temporarily to test.</li>
+                </ul>
+              </li>
+              <li><strong>SPA route change issue:</strong> If the popup shows only on first load, trigger a manual page reload after route changes or fire <code>window.wheelluckReload()</code> after navigation.</li>
+              <li><strong>Multiple promotions:</strong> Only one promotion can be active per script. Switch the active promotion in Wheelluck if the wrong campaign appears.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Need more help?</h2>
+          <div class="description-step">
+            <p class="description-text">
+              If you run into edge cases (custom build pipelines, SSR frameworks, etc.), contact Wheelluck support at
+              <a href="mailto:info@wheelluck.com">info@wheelluck.com</a> with details about your stack and deployment process.
+            </p>
+          </div>
+        </div>
+      </div>
+{% endblock %}
+
+

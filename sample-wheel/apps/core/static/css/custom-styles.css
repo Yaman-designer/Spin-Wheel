@@ -1,0 +1,150 @@
+.btn-wheelluck {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    z-index: 99;
+}
+
+.btn-wheelluck:hover{
+  color: #fff;
+  background-color: var(--primary-color-opacity);
+  border-color: var(--primary-color-opacity);
+}
+
+.btn-wheelluck:disabled {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-wheelluck-secondary{
+  color: #fff;
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-wheelluck-secondary:hover{
+  color: #fff;
+  background-color: var(--secondary-color-opacity);
+  border-color: var(--secondary-color-opacity);
+}
+
+.btn-outline-wheelluck-secondary-wrapper {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.current-plan-label {
+  color: #6c757d;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: -2px;
+}
+
+.btn-outline-wheelluck-secondary {
+  color: #6c757d;
+  background-color: #fff;
+  position: relative;
+  bottom: 0;
+}
+
+.btn-outline-wheelluck-secondary:hover {
+  color: #fff;
+  background-color: var(--secondary-color);
+}
+
+.big-icon {
+  font-size:5vh;
+}
+
+.upgrade-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background-color: var(--secondary-color);
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.upgrade-button:hover {
+  color: #fff;
+  background-color: var(--secondary-color-opacity);
+  border-color: var(--secondary-color-opacity);
+}
+
+/* confirmation modal styles */
+.confirmation-modal .modal-content {
+    border-radius: 8px;
+    border: none;
+}
+
+.confirmation-modal .modal-header {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.confirmation-modal .modal-body {
+    padding-top: 0;
+}
+
+.confirmation-modal .modal-footer {
+    border-top: none;
+    justify-content: center;
+    padding-top: 0;
+}
+
+.confirmation-modal .alert-icon {
+    background-color: #883246;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.confirmation-modal .alert-icon i {
+    color: white;
+    font-size: 40px;
+}
+
+.confirmation-modal h4 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.confirmation-modal .modal-divider {
+    border-top: 1px dashed rgba(255, 255, 255, 0.2);
+    margin: 15px 0;
+}
+
+.confirmation-modal .modal-body p {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.confirmation-modal .btn-cancel {
+    background-color: transparent;
+    border: 1px solid #f25476;
+    color: #f25476;
+    border-radius: 4px;
+    padding: 6px 20px;
+    margin-right: 10px;
+}
+
+.confirmation-modal .btn-confirm {
+    background-color: #f25476;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    padding: 6px 20px;
+}

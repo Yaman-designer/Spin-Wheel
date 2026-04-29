@@ -1,0 +1,165 @@
+{% extends "help_layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/help.css">
+<div class="main-content-wrapper">
+  <div class="pagetitle">
+    <h1>How can I change the promotion template?</h1>
+    <p class="meta-info">Validated on <strong>15 Jan 2024</strong> • Last edited on <strong>27 Jun 2025</strong></p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body mt-3">
+          <h2 class="section-subtitle">Overview</h2>
+          <p class="description-text">
+            Templates allow you to quickly design your promotion with pre-configured styles, colors, and layouts. You can choose from a variety of built-in templates or create your own custom theme. This guide will show you how to change the template for your promotion.
+          </p>
+
+          <h2 class="section-subtitle mt-5">Accessing Template Settings</h2>
+          <div class="description-step">
+            <ol>
+              <li>Log in to your Wheelluck dashboard.</li>
+              <li>Navigate to the <strong>Promotions</strong> section from the left-hand menu.</li>
+              <li>Click on the promotion you want to edit, or create a new promotion.</li>
+              <li>On the promotion editing page, locate the <strong>Templates</strong> accordion section.</li>
+              <li>Click on the <strong>Templates</strong> accordion to expand it and reveal the template dropdown menu.</li>
+            </ol>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Understanding Popup Types</h2>
+          <div class="description-step">
+            <p class="description-text">
+              Wheelluck supports two types of popup templates:
+            </p>
+            <ul>
+              <li><strong>Gaming Popups:</strong> These templates include interactive game elements like spinning wheels, slot machines, or scratch cards. They are designed for gamified promotions where users interact with the game to win rewards.</li>
+              <li><strong>Light Popups:</strong> These are simpler, form-based popups without game elements. They focus on collecting user information (email, name, etc.) and are ideal for straightforward lead generation campaigns.</li>
+            </ul>
+            <div class="alert alert-info mt-3">
+              <strong>Note:</strong> The template dropdown will show different options based on the popup type. Some templates are specifically designed for gaming popups, while others are for gaming popups.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Selecting a Template</h2>
+          <div class="description-step">
+            <ol>
+              <li>In the <strong>Templates</strong> section, you will see a dropdown menu labeled with template options.</li>
+              <li>Click on the dropdown to view all available templates.</li>
+              <li>The first option in the list is <strong>"Create Custom Theme"</strong>, which allows you to design your promotion from scratch with custom colors and settings.</li>
+              <li>Below that, you will see a list of pre-designed templates with various styles and color schemes.</li>
+              <li>Templates are categorized by popup type:
+                <ul>
+                  <li><strong>Gaming Templates:</strong> Templates with game elements (wheel, slot machine, scratch card)</li>
+                  <li><strong>Gaming Templates:</strong> Simple form-based templates (gaming templates)</li>
+                </ul>
+              </li>
+              <li>Select the template you want to use by clicking on it from the dropdown menu.</li>
+            </ol>
+            <div class="alert alert-info mt-3">
+              <strong>Note:</strong> When you select a template, it will automatically apply the template's design settings to your promotion, including colors, styles, and layout configurations. The popup type (gaming) will be automatically set based on the selected template.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">What Happens When You Change a Template?</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Automatic Application:</strong> The selected template's design settings are immediately applied to your promotion preview.</li>
+              <li><strong>Popup Type Change:</strong> When switching between gaming and gaming popup templates, the popup type will automatically change. This affects available features:
+                <ul>
+                  <li><strong>Gaming Popups:</strong> Show game elements (wheel, slot machine, etc.) and support background images only.</li>
+                  <li><strong>Light Popups:</strong> Show form fields and support both background images and top images.</li>
+                </ul>
+              </li>
+              <li><strong>Color Reset:</strong> When switching templates, the system may reset some color settings to match the new template's design. You can use the "Reset Template" button to restore default template colors.</li>
+              <li><strong>Background Images:</strong> If you had a custom background image selected, it may be cleared when switching to a new template (except when selecting "Create Custom Theme").</li>
+              <li><strong>Top Images (Light Popups Only):</strong> When switching to a gaming popup template, you can add a top image that appears above the form content. Top images can be resized using the height slider (10% to 200%).</li>
+              <li><strong>Preview Update:</strong> The promotion preview on the right side of the screen will update to show how your promotion looks with the new template.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Using "Create Custom Theme"</h2>
+          <div class="description-step">
+            <p class="description-text">
+              If you select <strong>"Create Custom Theme"</strong> from the template dropdown:
+            </p>
+            <ul>
+              <li>You can design your promotion completely from scratch.</li>
+              <li>All color and styling options become available for manual customization.</li>
+              <li>If you had previously uploaded a custom background image, it will be preserved and displayed.</li>
+              <li>You have full control over every aspect of the promotion's appearance.</li>
+              <li>For gaming popups, you can add and customize top images with adjustable height (10% to 200%).</li>
+              <li>You can switch between gaming and gaming popup modes manually if needed.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Top Images for Light Popups</h2>
+          <div class="description-step">
+            <p class="description-text">
+              Light popup templates support an additional <strong>Top Image</strong> feature that is not available in gaming popups:
+            </p>
+            <ul>
+              <li><strong>Adding Top Images:</strong> In the Image section, you can select "Top Image" as the image target (instead of "Background"). This allows you to upload an image that appears at the top of the popup, above the form content.</li>
+              <li><strong>Resizing Top Images:</strong> After adding a top image, you can adjust its height using the slider control. The height can be set between 10% and 200% of the container height.</li>
+              <li><strong>Template Compatibility:</strong> Top images are only available for gaming popup templates. Gaming popups only support background images.</li>
+              <li><strong>Reset Function:</strong> You can reset the decorative image at any time using the "Reset Image" button, which will remove the image and restore the default layout when applicable.</li>
+            </ul>
+            <div class="alert alert-warning mt-3">
+              <strong>Important:</strong> Top images are only visible and functional when using gaming popup templates. If you switch to a gaming popup template, top images will be automatically removed.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Important Notes</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Save Your Changes:</strong> After selecting a template, make sure to save your promotion by clicking the <strong>Save</strong> button to apply the changes permanently.</li>
+              <li><strong>Template Preview:</strong> You can see a live preview of how your promotion will look with the selected template in the preview area on the right side of the screen.</li>
+              <li><strong>Customization After Template:</strong> Even after selecting a template, you can still customize colors, text, and other settings to match your brand.</li>
+              <li><strong>Multiple Changes:</strong> You can change templates as many times as you want before saving your promotion.</li>
+              <li><strong>Color Warnings:</strong> Some templates may show warnings about color combinations to ensure optimal visibility and user experience.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Troubleshooting</h2>
+          <div class="description-step">
+            <h3 class="section-subtitle">Template Not Applying</h3>
+            <ul>
+              <li>Make sure you have clicked on the template name in the dropdown menu.</li>
+              <li>Check that the preview area is visible and not hidden.</li>
+              <li>Try refreshing the page and selecting the template again.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Colors Not Changing</h3>
+            <ul>
+              <li>Some templates may have specific color schemes that override manual color settings.</li>
+              <li>If you want full control over colors, select <strong>"Create Custom Theme"</strong> instead.</li>
+              <li>After selecting a template, you can manually adjust colors in the Colors section if needed.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Background Image Disappeared</h3>
+            <ul>
+              <li>When switching from a custom theme to a pre-designed template, background images may be cleared.</li>
+              <li>To keep your background image, either stay with <strong>"Create Custom Theme"</strong> or re-upload the image after selecting a template.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Top Image Not Showing</h3>
+            <ul>
+              <li>Top images are only available for gaming popup templates. If you're using a gaming popup template, top images will not be displayed.</li>
+              <li>Make sure you've selected "Top Image" as the image target (not "Background") when uploading in the Image section.</li>
+              <li>Check that you're using a gaming popup template and select a gaming template from the list.</li>
+              <li>Verify that the top image height slider is set to a value greater than 0%.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Popup Type Changed Unexpectedly</h3>
+            <ul>
+              <li>When you select a template, the popup type (gaming) is automatically set based on the template type.</li>
+              <li>Gaming templates will set the popup type to "gaming", while gaming templates will set it to "gaming".</li>
+              <li>If you want to change the popup type manually, you can do so in the Pop-up Settings section.</li>
+              <li>Note that switching popup types may affect available features (e.g., top images are only available for gaming popups).</li>
+            </ul>
+          </div>
+  </div>
+</div>
+{% endblock %}
+
+
+

@@ -1,0 +1,525 @@
+{% extends "base.html" %} {% load custom_filters %} {% block content %}
+<style>
+  .apexcharts-zoom-icon {
+    display: none !important;
+  }
+
+  .apexcharts-reset-icon,
+  .apexcharts-zoom-icon {
+    z-index: 100 !important;
+  }
+  .card .card-title {
+  padding-right: 40px; 
+}
+
+  .custom-tooltip-inline-wrapper {
+    position: absolute;
+    top: 1.5rem; 
+    right: 1.5rem; 
+    z-index: 10;
+    transform: none; 
+  }
+  .custom-tooltip-inline {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 100%; 
+    margin-top: 8px; 
+    z-index: 1050;
+    min-width: 280px;
+    max-width: 340px;
+    transition: all 0.2s ease;
+  }
+
+  .custom-tooltip-trigger-inline:hover {
+    color: #3268e6;
+    transform: scale(1.1);
+  }
+
+  .custom-tooltip-inline {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 1050;
+    min-width: 280px;
+    max-width: 340px;
+    transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    transform: translateY(5px);
+    pointer-events: none;
+  }
+
+  .custom-tooltip-inline.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(10px);
+    pointer-events: auto;
+  }
+
+  .custom-tooltip-content-inline {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15),
+      0 4px 10px rgba(67, 139, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    position: relative;
+  }
+
+  .custom-tooltip-content-inline::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    width: 16px;
+    height: 16px;
+    background: #ffffff;
+    transform: rotate(45deg);
+    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.05);
+    z-index: -1;
+  }
+  .custom-tooltip-trigger-inline {
+    cursor: pointer;
+    color: #1434e7;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+
+  .custom-tooltip-trigger-inline:hover {
+    color: #3268e6;
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: none; 
+  }
+  /* Tooltip Header */
+  .custom-tooltip-content-inline h5 {
+    color: #3268e6;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+
+  /* Tooltip Text */
+  .custom-tooltip-content-inline p {
+    color: #495057;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* Learn More Link */
+  .help-cloud-link {
+    display: inline-block;
+    color: #3268e6;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+  }
+
+  .help-cloud-link:hover {
+    color: #1a4fad;
+    text-decoration: underline;
+    transform: translateX(2px);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 576px) {
+    .custom-tooltip-inline {
+      min-width: 240px;
+      max-width: calc(100vw - 40px);
+      right: 0;
+      left: auto;
+    }
+
+    .custom-tooltip-content-inline::before {
+      right: 15px;
+    }
+
+    .custom-tooltip-inline-wrapper {
+      right: 10px;
+    }
+  }
+
+  body.tooltip-active {
+    overflow: hidden;
+  }
+
+  .card .filter .custom-tooltip-inline-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+    top: auto;
+    right: auto;
+  }
+
+  .card .filter .custom-tooltip-inline {
+    top: 100%;
+    right: auto;
+    left: 0;
+  }
+
+  .card .filter .custom-tooltip-content-inline::before {
+    right: auto;
+    left: 10px;
+  }
+
+</style>
+
+<div class="pagetitle">
+  <h1>Dashboard</h1>
+</div>
+<!-- End Page Title -->
+
+<section class="section dashboard">
+  <div class="row">
+    <!-- Left side columns -->
+    <div class="col-12">
+      <div class="row">
+        <!-- Sales Card -->
+        <div class="col-xxl-4 col-md-6">
+          <div class="card info-card sales-card">
+            <div class="filter">
+              <span class="custom-tooltip-inline-wrapper me-2">
+              <a
+                href="javascript:void(0);"
+                class="custom-tooltip-trigger-inline"
+              >
+                <i class="bi bi-question-circle"></i>
+              </a>
+              <div class="custom-tooltip-inline" id="tooltip-inline-general">
+                <div class="custom-tooltip-content-inline">
+                  <h5>Balance</h5>
+                  <p>
+                    Available balance for running campaigns. Higher credits =
+                    Longer campaign duration.
+                  </p>
+                  <br />
+                  <div class="text-end">
+                    <a href="/help/check-remaining-limits/" class="help-cloud-link" target="_blank">
+                      Learn More
+                    </a>
+                  </div>
+                </div>
+              </div>
+              </span>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">Balance <span>| Today</span></h5>
+
+              <div class="d-flex align-items-center">
+                <div
+                  class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                >
+                  <i class="bi bi-wallet2"></i>
+                </div>
+                <div class="ps-3">
+                  <h6>{{ active_subscription.left_credit }}</h6>
+
+                  {% if active_subscription.credit_level == "Excellent" %}
+                  <span class="text-success small pt-1 fw-bold"
+                    >{{ active_subscription.credit_level }}</span
+                  >
+                  {% elif active_subscription.credit_level == "Good" %}
+                  <span class="text-primary small pt-1 fw-bold"
+                    >{{ active_subscription.credit_level }}</span
+                  >
+                  {% elif active_subscription.credit_level == "Warning" %}
+                  <span class="text-warning small pt-1 fw-bold"
+                    >{{ active_subscription.credit_level }}</span
+                  >
+                  {% elif active_subscription.credit_level == "Critical" %}
+                  <span class="text-danger small pt-1 fw-bold"
+                    >{{ active_subscription.credit_level }}</span
+                  >
+                  {% else %}
+                  <span class="text-danger small pt-1 fw-bold"
+                    >{{ active_subscription.credit_level }}</span
+                  >
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Sales Card -->
+
+        <!-- Revenue Card -->
+        <div class="col-xxl-4 col-md-6">
+          <div class="card info-card revenue-card" data-report="{{ awards }}">
+            <div class="filter">
+              <span class="custom-tooltip-inline-wrapper me-2">
+                <a
+                  href="javascript:void(0);"
+                  class="custom-tooltip-trigger-inline"
+                >
+                  <i class="bi bi-question-circle"></i>
+                </a>
+                <div class="custom-tooltip-inline">
+                  <div class="custom-tooltip-content-inline">
+                    <h5>Awards Information</h5>
+                    <p>
+                      Displays the number of prizes awarded and growth rate for
+                      the selected time period
+                    </p>
+                    <br />
+                    <div class="text-end">
+                      <a
+                        href="/help/check-remaining-limits/"
+                        class="help-cloud-link"
+                        target="_blank"
+                      >
+                        Learn More
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </span>
+              <a class="icon" href="#" data-bs-toggle="dropdown">
+                <i class="bi bi-three-dots"></i>
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <li class="dropdown-header text-start">
+                  <h6>Filter</h6>
+                </li>
+
+                <li>
+                  <a class="dropdown-item" href="#" data-filter="today"
+                    >Today</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" data-filter="month"
+                    >This Month</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" data-filter="year"
+                    >This Year</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">Awards <span>| This Month</span></h5>
+
+              <div class="d-flex align-items-center">
+                <div
+                  class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                >
+                  <i class="bi bi-gift"></i>
+                </div>
+                <div class="ps-3">
+                  <h6>0</h6>
+                  <span class="text-success small pt-1 fw-bold percentage"
+                    >1%</span
+                  >
+                  <span class="text-muted small pt-2 ps-1 explanation"
+                    >increase</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Revenue Card -->
+
+        <!-- Customers Card -->
+        <div class="col-xxl-4 col-xl-12">
+          <div
+            class="card info-card conversion-card"
+            data-report="{{ conversion_rates }}"
+          >
+            <div class="filter">
+              <span class="custom-tooltip-inline-wrapper me-2">
+                <a
+                  href="javascript:void(0);"
+                  class="custom-tooltip-trigger-inline"
+                >
+                  <i class="bi bi-question-circle"></i>
+                </a>
+                <div class="custom-tooltip-inline">
+                  <div class="custom-tooltip-content-inline">
+                    <h5>Conversion Rate Analytics</h5>
+                    <p>
+                      Shows the percentage of visitors who completed desired actions.
+                    </p>
+                    <br />
+                    <div class="text-end">
+                      <a
+                        href="/help/check-remaining-limits/"
+                        class="help-cloud-link"
+                        target="_blank"
+                      >
+                        Learn More
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </span>
+              <a class="icon" href="#" data-bs-toggle="dropdown"
+                ><i class="bi bi-three-dots"></i
+              ></a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <li class="dropdown-header text-start">
+                  <h6>Filter</h6>
+                </li>
+
+                <li>
+                  <a class="dropdown-item" href="#" data-filter="today"
+                    >Today</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" data-filter="month"
+                    >This Month</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" data-filter="year"
+                    >This Year</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">Conversion <span>| This Year</span></h5>
+
+              <div class="d-flex align-items-center">
+                <div
+                  class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                >
+                  <i class="bi bi-people"></i>
+                </div>
+                <div class="ps-3">
+                  <h6>0</h6>
+                  <span class="text-danger small pt-1 fw-bold rate">12%</span>
+                  <span class="text-muted small pt-2 ps-1 explanation"
+                    >decrease</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Customers Card -->
+
+        <!-- Recent Sales -->
+        <div class="col-12">
+          <div class="card recent-sales overflow-auto">
+            <div class="card-body">
+              <h5 class="card-title">Promotions</h5>
+
+              <table
+                class="table table-borderless datatable"
+                id="recent-sales-table"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Promotion</th>
+                    <th scope="col">Views</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for promotion in promotions %}
+                  <tr>
+                    <th scope="row"><a href="#">{{ forloop.counter }}</a></th>
+                    <td>{{ promotion.name }}</td>
+                    <td>
+                      <span class="text-primary"
+                        >{{ promotion.views_number }}</span
+                      >
+                    </td>
+                    <td>
+                      {% if promotion.status == "in_progress" %}
+                      <span class="badge bg-success">In Progress</span>
+                      {% elif promotion.status == "stopped" %}
+                      <span class="badge bg-danger">Stopped</span>
+                      {% elif promotion.status == "time_up" %}
+                      <span class="badge bg-secondary">Time Up</span>
+                      {% else %}
+                      <span class="badge bg-primary">Created</span>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- End Recent Sales -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    table.datatable ::before,
+    ::after {
+      display: none;
+    }
+  }
+</style>
+
+{% endblock %} {% block script %}
+<script src="/static/home.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Tooltip aç/kapat
+    document
+      .querySelectorAll(".custom-tooltip-trigger-inline")
+      .forEach(function (trigger) {
+        trigger.addEventListener("click", function (e) {
+          e.preventDefault();
+          const wrapper = trigger.closest(".custom-tooltip-inline-wrapper");
+          const tooltip = wrapper.querySelector(".custom-tooltip-inline");
+          // Diğer açık tooltipleri kapat
+          document
+            .querySelectorAll(".custom-tooltip-inline.active")
+            .forEach(function (openTip) {
+              if (openTip !== tooltip) openTip.classList.remove("active");
+            });
+          tooltip.classList.toggle("active");
+        });
+      });
+    document.querySelectorAll(".help-cloud-link").forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        window.location.href = link.href;
+      });
+    });
+
+    // Tooltip dışında bir yere tıklayınca kapat
+    document.addEventListener("mousedown", function (e) {
+      document
+        .querySelectorAll(".custom-tooltip-inline.active")
+        .forEach(function (openTip) {
+          const wrapper = openTip.closest(".custom-tooltip-inline-wrapper");
+          const trigger = wrapper.querySelector(
+            ".custom-tooltip-trigger-inline"
+          );
+          // Eğer tıklanan şey bir .custom-tooltip-inline içindeki bir <a> ise KAPATMA!
+          if (!openTip.contains(e.target) && !trigger.contains(e.target)) {
+            openTip.classList.remove("active");
+          }
+        });
+    });
+  });
+</script>
+{% endblock %}

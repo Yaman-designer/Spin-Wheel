@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Email Address | Wheelluck</title>
+    <style>
+        body {
+            font-family: "Open Sans", system-ui, -apple-system, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .header {
+            padding: 30px 20px;
+            text-align: center;
+            background-color: #ffffff;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .header img {
+            max-width: 180px;
+            height: auto;
+        }
+        .content {
+            padding: 30px;
+            color: #222;
+        }
+        .content h1 {
+            color: #2c3e50;
+            font-size: 26px;
+            font-weight: 600;
+            margin: 0 0 20px;
+            text-align: center;
+        }
+        .content p {
+            font-size: 15px;
+            margin: 0 0 20px;
+            color: #444;
+        }
+        .security-note {
+            background-color: #f8f9fa;
+            border-left: 4px solid #00c39a;
+            padding: 14px;
+            margin: 25px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .security-note p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .button {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: #00c39a;
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        .button:hover {
+            background-color: #00aa85;
+        }
+        .verification-link {
+            word-break: break-all;
+            font-size: 13px;
+            color: #0077cc;
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 15px 0 25px;
+            font-family: monospace;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 25px 20px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        .footer-social {
+            margin: 20px 0;
+        }
+        .footer-social a {
+            display: inline-block;
+            margin: 0 10px;
+            transition: transform 0.2s;
+        }
+        .footer-social a:hover {
+            transform: translateY(-2px);
+        }
+        .footer-social img {
+            width: 32px;
+            height: 32px;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 13px;
+            color: #777;
+        }
+        .footer p.disclaimer {
+            margin-top: 15px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="{{ CDN_URL }}/media/image/logo.png" alt="Wheelluck Logo">
+        </div>
+        
+        <div class="content">
+            <h1>Verify Your Email Address</h1>
+            
+            <p>Hello <strong>{{ user.first_name }}</strong>,</p>
+            
+            <p>Thank you for signing up with Wheelluck! To complete your registration and access all features, please verify your email address.</p>
+            
+            <div class="security-note">
+                <p><strong>Important:</strong> This verification ensures we can send you critical account information and security notifications.</p>
+            </div>
+            
+            <div class="button-container">
+                <a href="{{ link }}" class="button" target="_blank">Verify Email Address</a>
+            </div>
+            
+            <p style="font-size: 14px; color: #666;">If the button doesn't work, copy and paste this link into your browser:</p>
+            <div class="verification-link">{{ link }}</div>
+            
+            <p style="font-size: 14px; color: #666;">This link will expire in 24 hours for security reasons.</p>
+            
+            <p>If you didn't create an account with Wheelluck, please ignore this email or <a href="mailto:{{ infoMailAdress }}" style="color: #00c39a; font-weight: 600;">contact support</a> if you have concerns.</p>
+            
+            <p>Best regards,<br><strong>The Wheelluck Team</strong></p>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/company/wheelluck/" target="_blank"><img src="https://cdn-images.mailchimp.com/icons/social-block-v2/color-linkedin-96.png" alt="LinkedIn"></a>
+                <a href="https://www.instagram.com/wheelluck.ai" target="_blank"><img src="https://cdn-images.mailchimp.com/icons/social-block-v2/color-instagram-96.png" alt="Instagram"></a>
+                <a href="https://www.youtube.com/channel/UCz0FW4Oor-Bw6IU1RSTyTFA" target="_blank"><img src="https://cdn-images.mailchimp.com/icons/social-block-v2/color-youtube-96.png" alt="YouTube"></a>
+            </div>
+            <p>© 2024 Wheelluck. All rights reserved.</p>
+            <p class="disclaimer">This is an automated message - please do not reply directly to this email.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,543 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+<section class="section" 
+  data-promotion-name="{% if promotion %}{{ promotion.name|escape }}{% elif promotion_name %}{{ promotion_name|escape }}{% endif %}"
+  data-promotion-website="{% if promotion %}{{ promotion.website|escape }}{% elif promotion_website %}{{ promotion_website|escape }}{% endif %}"
+  data-current-popup-type="{% if current_popup_type %}{{ current_popup_type|escape }}{% else %}gaming{% endif %}"
+  data-current-template-id="{% if current_template_id %}{{ current_template_id }}{% endif %}">
+  <style>
+    /* Template Selection Page Modern Styles */
+    .template-select-page {
+      padding: 20px 0;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+  
+    
+    .template-select-title {
+      color: #012970;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+    
+    .template-select-label {
+      color: #012970;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      width: 100%;
+    }
+    
+    .template-category-label {
+      color: #012970;
+    }
+    
+    /* Device Toggle Buttons - Modern Style */
+    .device-toggle-group {
+      display: inline-flex;
+      background: #fff;
+      border-radius: 8px;
+      padding: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+    
+    .device-toggle-group .btn {
+      border: none;
+      padding: 8px 20px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border-radius: 6px;
+    }
+    
+    .device-toggle-group .btn:not(.active) {
+      background: transparent;
+      color: #6c757d;
+    }
+    
+    .device-toggle-group .btn.active {
+      background: var(--primary-color);
+      color: #fff;
+      box-shadow: 0 2px 4px rgba(0,195,154,0.3);
+    }
+    
+    /* Filter Panel - Modern Style */
+    .template-filter-panel {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      height: fit-content;
+      position: sticky;
+      top: 90px;
+    }
+    
+    .template-filter-panel .list-group-item {
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      padding: 12px 16px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .template-filter-panel .list-group-item:not(.active) {
+      background: #f8f9fa;
+      color: #444;
+    }
+    
+    .template-filter-panel .list-group-item:not(.active):hover {
+      background: #e9ecef;
+      transform: translateX(4px);
+    }
+    
+    .template-filter-panel .list-group-item.active {
+      background: var(--primary-color);
+      color: #fff;
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0,195,154,0.3);
+    }
+    
+    /* Category Tags Style */
+    .category-tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    
+    .category-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 20px;
+      color: #24292f;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      gap: 6px;
+    }
+    
+    .category-tag:hover {
+      background: #e9ecef;
+      border-color: #dee2e6;
+      transform: translateY(-1px);
+      color: #24292f;
+    }
+    
+    .category-tag.active {
+      background: #e9ecef;
+      border-color: #dee2e6;
+      color: #24292f;
+    }
+    
+    .category-tag .badge {
+      background: rgba(0, 0, 0, 0.1);
+      color: inherit;
+      font-size: 0.75rem;
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    
+    .category-tag.active .badge {
+      background: rgba(0, 0, 0, 0.1);
+      color: inherit;
+    }
+    
+    .category-tag[data-category-type="all-templates"] {
+      background: #e9ecef;
+      border-color: #dee2e6;
+      color: #24292f;
+    }
+    
+    .category-tag[data-category-type="all-templates"]:hover {
+      background: #dee2e6;
+      border-color: #ced4da;
+    }
+    
+    .category-tag[data-category-type="all-templates"].active {
+      background: #e9ecef;
+      border-color: #dee2e6;
+      color: #24292f;
+    }
+    
+    .category-tag[data-category-type="all-templates"] .badge {
+      background: rgba(0, 0, 0, 0.1);
+      color: inherit;
+    }
+    
+    .category-tag[data-category-type="all-templates"].active .badge {
+      background: rgba(0, 0, 0, 0.1);
+      color: inherit;
+    }
+    
+    /* Template Cards - Modern Style */
+    .template-card {
+      border: none;
+      border-radius: 16px !important;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      background: #fff;
+      position: relative;
+      cursor: pointer;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+    
+    .template-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    
+    
+    .template-card .card-media {
+      border-radius: 16px !important;
+      overflow: hidden;
+    }
+    
+    /* İçerideki div'lere de radius ekle */
+    .template-card .card-media > div {
+      border-radius: 16px !important;
+      overflow: hidden;
+    }
+    
+    .template-card .card-body {
+      padding: 12px 20px 8px 20px;
+    }
+    
+    #templateGrid {
+      --bs-gutter-y: 0.75rem !important;
+      --bs-gutter-x: 0.75rem !important;
+    }
+    
+    #templateGrid > [class*="col"] {
+      margin-bottom: 0.75rem;
+      min-width: 0;
+    }
+    
+    /* Light popup cards - make them more square */
+    .gaming-popup-card .template-card {
+      aspect-ratio: 3 / 2;
+      max-height: none;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .gaming-popup-card .template-card .card-media {
+      height: auto !important;
+      aspect-ratio: 1 / 1;
+      flex: 1;
+      min-height: 280px;
+    }
+    
+    .gaming-popup-template-card {
+      aspect-ratio: 3/2;
+      max-height: none;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .gaming-popup-template-card .card-media {
+      height: auto !important;
+      aspect-ratio: 1 / 1;
+      flex: 1;
+      min-height: 280px;
+    }
+    
+    @media (max-width: 768px) {
+      .gaming-popup-card .template-card .card-media {
+        min-height: 260px;
+      }
+      .gaming-popup-template-card .card-media {
+        min-height: 260px;
+      }
+    }
+    
+    .template-card .card-body .fw-semibold {
+      color: #012970;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+    
+    .template-card .card-media {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .template-card:hover .card-media::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 16px !important; /* 4 kenara radius */
+      pointer-events: none;
+      z-index: 50;
+    }
+    
+    .template-card:hover .card-media .tpl-wheel,
+    .template-card:hover .card-media .tpl-text {
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Use Template Button - Site Style */
+    .template-card .btn-primary {
+      background: transparent;
+      border: 2px solid #6c757d;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-weight: 500;
+      color: #6c757d;
+      transition: all 0.3s ease;
+    }
+    
+    .template-card .btn-primary:hover {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,195,154,0.3);
+    }
+    
+    /* Fine-tune preview input placeholder inside template cards */
+    .mini-ph::placeholder {
+      font-size: clamp(.44rem, .6vw, .54rem);
+      text-align: left;
+    }
+    .mini-ph {
+      text-align: left;
+    }
+    
+    /* responsive stacking for mobile */
+    .tpl-row { display:flex; }
+    .tpl-wheel { position:relative; }
+
+    /* Force portrait layout when Mobile toggle is active, regardless of viewport */
+    .force-mobile-templates .card-media { 
+      height: 300px !important; 
+      padding-top: 8px; 
+      padding-bottom: 8px; 
+      border-radius: 16px !important; /* 4 kenara radius */
+    }
+    .force-mobile-templates .tpl-row { flex-direction: column; align-items: center; justify-content: flex-start; gap: 8px; height: 100%; }
+    .force-mobile-templates .tpl-wheel { width: min(88%, 280px) !important; max-width: none !important; margin: 0 auto 4px !important; flex-shrink: 0; }
+    .force-mobile-templates .tpl-text { max-width: 100% !important; width: 100% !important; margin: 0 auto !important; min-width: 0 !important; padding-left: 4px; padding-right: 4px; box-sizing: border-box; }
+    .force-mobile-templates .gaming-popup-card .template-card,
+    .force-mobile-templates .gaming-popup-template-card {
+      aspect-ratio: auto;
+    }
+    .force-mobile-templates .gaming-popup-card .template-card .card-media,
+    .force-mobile-templates .gaming-popup-template-card .card-media {
+      aspect-ratio: 16 / 11;
+      min-height: 200px;
+      height: auto !important;
+    }
+    .force-mobile-templates .gaming-popup-card .template-card .card-media img,
+    .force-mobile-templates .gaming-popup-template-card .card-media img {
+      object-fit: contain !important;
+      object-position: center center;
+    }
+    .force-mobile-templates .tpl-pin { top:50%; left:100%; transform: translate(-25%, -50%) rotate(30deg); width:32px; height:32px; }
+    
+    @media (max-width: 420px) {
+      .force-mobile-templates .card-media { 
+        height: 260px !important; 
+        border-radius: 16px !important; /* 4 kenara radius */
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .template-select-page {
+        padding-left: max(12px, env(safe-area-inset-left, 0px));
+        padding-right: max(12px, env(safe-area-inset-right, 0px));
+      }
+      #templateGrid.row {
+        --bs-gutter-x: 0.5rem;
+        --bs-gutter-y: 0.65rem;
+      }
+      /* Make the media area a vertical (portrait) rectangle */
+      .card-media { 
+        height: 280px !important; 
+        padding-top: 8px; 
+        padding-bottom: 8px; 
+        border-radius: 16px !important; /* 4 kenara radius */
+      }
+      .tpl-row { flex-direction: column; align-items: center; justify-content: flex-start; gap: 8px; height: 100%; }
+      .tpl-wheel { width: min(88%, 280px) !important; max-width: none !important; margin: 0 auto 4px !important; flex-shrink: 0; }
+      .tpl-text { max-width: 100% !important; width: 100% !important; margin: 0 auto !important; min-width: 0 !important; padding-left: 4px; padding-right: 4px; box-sizing: border-box; }
+
+      /* Light popup: avoid 3/2 outer + 1/1 inner squeeze; wide ratio fits split thumbnails */
+      .gaming-popup-card .template-card,
+      .gaming-popup-template-card {
+        aspect-ratio: auto;
+      }
+      .gaming-popup-card .template-card .card-media,
+      .gaming-popup-template-card .card-media {
+        aspect-ratio: 16 / 11;
+        min-height: 200px;
+        height: auto !important;
+      }
+      .gaming-popup-card .template-card .card-media img,
+      .gaming-popup-template-card .card-media img {
+        object-fit: contain !important;
+        object-position: center center;
+      }
+
+      
+      .template-filter-panel {
+        position: relative;
+        top: 0;
+        margin-bottom: 20px;
+      }
+      
+      /* Light popup cards mobile görünümü için radius */
+      .gaming-popup-card .template-card .card-media,
+      .gaming-popup-template-card .card-media {
+        border-radius: 16px !important; /* 4 kenara radius */
+      }
+    }
+    
+    /* Skip link styling */
+    .skip-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    
+    .skip-link:hover {
+      color: var(--primary-color-opacity);
+      text-decoration: underline;
+    }
+
+    /* Empty state - no templates match search/filters */
+    .template-grid-wrapper {
+      position: relative;
+      min-height: 320px;
+    }
+
+    .template-empty-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 48px 24px;
+      background: #f8fafc;
+      border-radius: 16px;
+      border: 2px dashed #e2e8f0;
+      margin-top: 24px;
+    }
+
+    .template-empty-state.is-visible {
+      display: flex;
+    }
+
+    .template-empty-state-icon {
+      color: #94a3b8;
+      margin-bottom: 16px;
+    }
+
+    .template-empty-state-title {
+      color: #012970;
+      font-weight: 600;
+      font-size: 1.125rem;
+      margin-bottom: 8px;
+    }
+
+    .template-empty-state-text {
+      color: #64748b;
+      font-size: 0.9375rem;
+      margin-bottom: 4px;
+      max-width: 360px;
+    }
+
+    .template-empty-state-hint {
+      color: #94a3b8;
+      font-size: 0.8125rem;
+    }
+  </style>
+  <div class="template-select-page">
+    <div class="template-select-header">
+      <div class="mb-4">
+        <div class="row align-items-center">
+          <h5 class="col-12 template-select-title">Choose a Template</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-9 order-lg-1 mb-4">
+        <div class="template-grid-wrapper">
+          <div class="row g-4" id="templateGrid"></div>
+          <div id="templateEmptyState" class="template-empty-state" aria-live="polite">
+            <div class="template-empty-state-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+            </div>
+            <h6 class="template-empty-state-title">No templates found</h6>
+            <p class="template-empty-state-text">Try adjusting your search or filters to find the perfect template.</p>
+            <p class="template-empty-state-hint">You can try different categories or clear the search field.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 order-lg-2">
+        <div class="template-filter-panel">
+          <!-- Search -->
+          <div class="mb-4">
+            <label class="form-label fw-semibold mb-2 template-category-label">Search</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="templateSearchInput" 
+              placeholder="Search by category..."
+            />
+          </div>
+          
+          <!-- Platform Type -->
+          <div class="mb-4">
+            <label class="form-label fw-semibold mb-2 template-category-label">Platform Type</label>
+            <select class="form-select" id="platformTypeSelect">
+              <option value="desktop" selected>Desktop</option>
+              <option value="mobile">Mobile</option>
+            </select>
+          </div>
+          
+          <input type="hidden" id="popupTypeFilter" name="popupTypeFilter" value="gaming" />
+          
+          <!-- Categories -->
+          <div class="mb-4">
+            <label class="form-label fw-semibold mb-2 template-category-label">Categories</label>
+            <div class="category-tags-container" id="templateCategoriesList">
+              <a href="#" class="category-tag active" data-category-type="all-templates">
+                All
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="module" src="/static/template-selector.js"></script>
+{% endblock %}
+
+
+

@@ -1,0 +1,308 @@
+{% extends "help_layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/help.css">
+<div class="main-content-wrapper">
+  <div class="pagetitle">
+    <h1>How can I configure promotion options?</h1>
+    <p class="meta-info">Validated on <strong>15 Jan 2024</strong> • Last edited on <strong>27 Jun 2025</strong></p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body mt-3">
+          <h2 class="section-subtitle">Overview</h2>
+          <p class="description-text">
+            The Options section provides advanced settings to control how your promotion behaves, when it appears, and how users interact with it. These settings allow you to customize triggers, prevent duplicate entries, manage consent, limit rewards, and configure mobile display. This guide will help you understand and configure all available options.
+          </p>
+
+          <h2 class="section-subtitle mt-5">Important: Subscription Requirement</h2>
+          <div class="description-step">
+            <div class="alert alert-warning">
+              <strong>Note:</strong> Most options settings are <strong>only available</strong> for users with active paid subscriptions. Trial users are limited to default options settings and cannot modify them. If you're on a trial plan, you'll need to upgrade to a paid subscription to access advanced options.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Accessing Options Settings</h2>
+          <div class="description-step">
+            <ol>
+              <li>Log in to your Wheelluck dashboard.</li>
+              <li>Navigate to the <strong>Promotions</strong> section from the left-hand menu.</li>
+              <li>Click on the promotion you want to edit, or create a new promotion.</li>
+              <li>On the promotion editing page, locate the <strong>Options</strong> accordion section.</li>
+              <li>Click on the <strong>Options</strong> accordion to expand it and reveal all available option settings.</li>
+            </ol>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Available Options</h2>
+          <div class="description-step">
+            <h3 class="section-subtitle">1. Prevent Duplicate Emails</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> Prevents the same email address from participating in your promotion multiple times.
+            </p>
+            <ul>
+              <li>When enabled, users who have already entered their email and spun the wheel cannot participate again using the same email address.</li>
+              <li>This helps ensure fair distribution of rewards and prevents abuse.</li>
+              <li>This option is enabled by default.</li>
+            </ul>
+            <div class="alert alert-info mt-2">
+              <strong>Tip:</strong> Keep this enabled unless you have a specific reason to allow multiple entries from the same email address.
+            </div>
+
+            <h3 class="section-subtitle">2. Display Consent Checkbox</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> Shows a consent checkbox on your promotion popup, typically for privacy policy or terms acceptance.
+            </p>
+            <ul>
+              <li>When enabled, a checkbox will appear on the promotion form asking users to agree to terms or privacy policy.</li>
+              <li>Users must check the box before they can spin the wheel.</li>
+              <li>When this option is enabled, you <strong>must</strong> provide a valid consent link (URL) to your privacy policy or terms page.</li>
+            </ul>
+            <div class="alert alert-warning mt-2">
+              <strong>Required:</strong> If you enable "Display consent checkbox", you must enter a valid URL in the "Consent link" field that appears below. The link must be a valid, accessible URL.
+            </div>
+
+            <h3 class="section-subtitle">3. Limit Rewards Quantity</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> Sets a maximum number of rewards that can be given out for this promotion.
+            </p>
+            <ul>
+              <li>When enabled, you can set a specific number of rewards that will be distributed.</li>
+              <li>Once the limit is reached, the promotion will automatically stop giving out rewards, even if it's still active.</li>
+              <li>When this option is enabled, you <strong>must</strong> enter a number in the "Rewards quantity" field.</li>
+              <li>The rewards quantity cannot be negative.</li>
+              <li>The rewards quantity cannot exceed your current remaining credit balance.</li>
+            </ul>
+            <div class="alert alert-info mt-2">
+              <strong>Credit Limit:</strong> The rewards quantity you set cannot be more than your current available credit. Check your credit balance before setting this limit.
+            </div>
+
+            <h3 class="section-subtitle">4. Set Mobile</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> Controls whether your promotion appears on mobile devices.
+            </p>
+            <ul>
+              <li>When enabled, your promotion will be visible and functional on mobile devices (smartphones, tablets).</li>
+              <li>When disabled, your promotion will only appear on desktop computers.</li>
+              <li>This option is enabled by default.</li>
+            </ul>
+            <div class="alert alert-info mt-2">
+              <strong>Recommendation:</strong> Keep this enabled unless you have a specific reason to exclude mobile users, as a significant portion of web traffic comes from mobile devices.
+            </div>
+
+            <h3 class="section-subtitle">5. Trigger With Delay (Seconds)</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> Delays the appearance of your promotion popup by a specified number of seconds after the page loads.
+            </p>
+            <ul>
+              <li>When enabled, you can set a delay in seconds before the promotion popup appears.</li>
+              <li>This allows users to view your page content before the promotion is shown.</li>
+              <li>When this option is enabled, you <strong>must</strong> enter a number (in seconds) in the delay field.</li>
+              <li>The delay value cannot be negative.</li>
+              <li>Default delay is 10 seconds if not specified.</li>
+            </ul>
+            <div class="alert alert-info mt-2">
+              <strong>Best Practice:</strong> A delay of 5-15 seconds is recommended to give users time to engage with your content before showing the promotion.
+            </div>
+
+            <h3 class="section-subtitle">6. Trigger When User Intends to Leave</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> Shows the promotion popup when a user moves their mouse cursor toward the browser's close button or tries to leave the page.
+            </p>
+            <ul>
+              <li>When enabled, the promotion will appear as an exit-intent trigger.</li>
+              <li>This is useful for capturing users who are about to leave your site.</li>
+              <li>This can help reduce bounce rate and increase conversions.</li>
+            </ul>
+            <div class="alert alert-info mt-2">
+              <strong>Use Case:</strong> This trigger is effective for re-engaging users who might otherwise leave without taking action.
+            </div>
+
+            <h3 class="section-subtitle">7. Trigger When Scroll Down</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> Shows the promotion popup when a user scrolls down the page.
+            </p>
+            <ul>
+              <li>When enabled, the promotion will appear after the user scrolls down a certain amount on the page.</li>
+              <li>This indicates the user is engaged with your content.</li>
+              <li>This can help increase engagement with users who are actively browsing.</li>
+            </ul>
+
+            <h3 class="section-subtitle">8. AI Powered Triggers (Smart Reward)</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> Uses artificial intelligence and Google Analytics data to intelligently determine when to show your promotion for maximum effectiveness.
+            </p>
+            <ul>
+              <li>When enabled, the system uses AI to analyze user behavior and determine optimal timing for showing the promotion.</li>
+              <li>This feature expects Google Analytics to be set up on your site if you rely on traffic insights.</li>
+              <li>When this option is enabled, you <strong>must</strong> provide your Google Analytics Property ID.</li>
+              <li>The Property ID field cannot be left empty when Smart Reward is enabled.</li>
+            </ul>
+            <div class="alert alert-warning mt-2">
+              <strong>Required:</strong> If you enable "AI powered triggers", you must enter your Google Analytics Property ID (e.g., UA-123456789-1) in the field that appears below.
+            </div>
+            <div class="alert alert-info mt-2">
+              <strong>Note:</strong> When Smart Reward is enabled, the total weight of rewards doesn't need to equal 100, as the AI system manages reward distribution intelligently.
+            </div>
+
+            <h3 class="section-subtitle">9. Trigger Item Click</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> Shows the promotion popup when users click on specific HTML elements or items on your page.
+            </p>
+            <ul>
+              <li>You can specify CSS selectors, class names, or element IDs that should trigger the promotion.</li>
+              <li>If you have multiple items, separate them with commas.</li>
+              <li>Examples: <code>#add-to-cart-button</code>, <code>.product-card</code>, <code>button.buy-now</code></li>
+            </ul>
+            <div class="alert alert-info mt-2">
+              <strong>Format:</strong> Enter CSS selectors separated by commas. For example: <code>#button1, .class1, button.add-to-cart</code>
+            </div>
+
+            <h3 class="section-subtitle">10. Trigger Specific URL</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> Shows the promotion popup only on specific URLs or pages of your website.
+            </p>
+            <ul>
+              <li>You can specify exact URLs or URL patterns where the promotion should appear.</li>
+              <li>If you have multiple URLs, separate them with commas.</li>
+              <li>Examples: <code>/products</code>, <code>/checkout</code>, <code>https://yoursite.com/sale</code></li>
+            </ul>
+            <div class="alert alert-info mt-2">
+              <strong>Format:</strong> Enter URLs separated by commas. You can use full URLs or relative paths. For example: <code>/products, /checkout, /sale-page</code>
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">How to Configure Options</h2>
+          <div class="description-step">
+            <ol>
+              <li>Open the <strong>Options</strong> section in your promotion editor.</li>
+              <li>Review all available option toggles and settings.</li>
+              <li>Enable or disable each option according to your needs by clicking the toggle switches.</li>
+              <li>For options that require additional input (like consent link, rewards quantity, delay, property ID), fill in the fields that appear when you enable those options.</li>
+              <li>For "Trigger item click" and "Trigger specific URL", enter your values in the textarea fields.</li>
+              <li>Click <strong>Save</strong> to save your options configuration.</li>
+            </ol>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Validation Rules</h2>
+          <div class="description-step">
+            <p class="description-text">
+              The following validation rules apply when configuring options:
+            </p>
+            <ul>
+              <li><strong>Consent Link:</strong> If "Display consent checkbox" is enabled, the consent link field is required and must be a valid URL.</li>
+              <li><strong>Rewards Quantity:</strong> If "Limit rewards quantity" is enabled, the rewards quantity field is required, must be a number, cannot be negative, and cannot exceed your current credit balance.</li>
+              <li><strong>Start Delay:</strong> If "Trigger with delay" is enabled, the delay field is required, must be a number, and cannot be negative.</li>
+              <li><strong>Property ID:</strong> If "AI powered triggers" is enabled, the Google Analytics Property ID field is required and cannot be empty.</li>
+            </ul>
+            <div class="alert alert-danger mt-3">
+              <strong>Validation Errors:</strong> If any of these rules are violated, you'll see specific error messages indicating what needs to be corrected before you can save your promotion.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Best Practices</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Prevent Duplicate Emails:</strong> Keep this enabled to ensure fair distribution of rewards and prevent abuse.</li>
+              <li><strong>Consent Checkbox:</strong> Enable this if you need GDPR compliance or want users to explicitly agree to terms. Always provide a valid privacy policy or terms URL.</li>
+              <li><strong>Limit Rewards:</strong> Use this to control campaign costs and ensure you don't exceed your budget. Set a limit based on your available credits.</li>
+              <li><strong>Mobile Display:</strong> Keep this enabled unless you have a specific reason to exclude mobile users, as mobile traffic is significant.</li>
+              <li><strong>Trigger Delays:</strong> Use a delay of 5-15 seconds to give users time to engage with your content before showing the promotion.</li>
+              <li><strong>Multiple Triggers:</strong> You can enable multiple triggers (scroll, exit intent, delay, etc.) to show the promotion in different scenarios.</li>
+              <li><strong>Specific URLs:</strong> Use this to show promotions only on relevant pages (e.g., product pages, checkout) rather than every page.</li>
+              <li><strong>Smart Reward:</strong> Consider using AI-powered triggers if you have Google Analytics set up and want intelligent, data-driven promotion timing.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Important Notes</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Subscription Required:</strong> Most options are only available for paid subscriptions. Trial users are limited to default settings.</li>
+              <li><strong>Save Your Changes:</strong> Always remember to click the <strong>Save</strong> button after configuring options to ensure the changes are saved permanently.</li>
+              <li><strong>Required Fields:</strong> When you enable an option that requires additional input, make sure to fill in the required fields, or you'll receive validation errors.</li>
+              <li><strong>Credit Limits:</strong> When setting rewards quantity limits, ensure you have sufficient credits available. The limit cannot exceed your current credit balance.</li>
+              <li><strong>Trigger Combinations:</strong> You can enable multiple triggers simultaneously. The promotion will appear when any of the enabled triggers are activated.</li>
+              <li><strong>Smart Reward Override:</strong> When Smart Reward is enabled, the total weight of rewards doesn't need to equal 100, as the AI manages distribution.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Troubleshooting</h2>
+          <div class="description-step">
+            <h3 class="section-subtitle">"Subscribe to use all features" Error</h3>
+            <ul>
+              <li>This message means some options are not available for your workspace in the current setup.</li>
+              <li>Check that your promotion is saved and that the feature is enabled for your account.</li>
+              <li>If the message persists, contact support for help.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"If the consent option is active, the consent link field cannot be left blank" Error</h3>
+            <ul>
+              <li>You've enabled "Display consent checkbox" but haven't entered a consent link.</li>
+              <li>When consent checkbox is enabled, a valid URL is required.</li>
+              <li>Enter a valid URL to your privacy policy or terms page in the consent link field.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"Invalid consent link" Error</h3>
+            <ul>
+              <li>The consent link you entered is not a valid URL format.</li>
+              <li>Make sure the link starts with <code>http://</code> or <code>https://</code>.</li>
+              <li>Verify that the URL is accessible and correctly formatted.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"Rewards quantity cannot be more than the current credit" Error</h3>
+            <ul>
+              <li>You've set a rewards quantity limit that exceeds your available credit balance.</li>
+              <li>Check your current credit balance in your account dashboard.</li>
+              <li>Set a rewards quantity that is equal to or less than your available credits.</li>
+              <li>Consider purchasing more credits if you need a higher limit.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"The rewards quantity cannot be a negative number" Error</h3>
+            <ul>
+              <li>You've entered a negative number in the rewards quantity field.</li>
+              <li>Rewards quantity must be zero or a positive number.</li>
+              <li>Enter a valid positive number or zero.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"If the start delay option is active, the Start delay field cannot be left blank" Error</h3>
+            <ul>
+              <li>You've enabled "Trigger with delay" but haven't entered a delay value.</li>
+              <li>When delay is enabled, a number (in seconds) is required.</li>
+              <li>Enter a number representing the delay in seconds (e.g., 10 for 10 seconds).</li>
+            </ul>
+
+            <h3 class="section-subtitle">"If the Ai powered triggers is active, the property id field cannot be left empty" Error</h3>
+            <ul>
+              <li>You've enabled "AI powered triggers" but haven't entered a Google Analytics Property ID.</li>
+              <li>When Smart Reward is enabled, a Property ID is required.</li>
+              <li>Enter your Google Analytics Property ID (format: UA-123456789-1 or G-XXXXXXXXXX).</li>
+              <li>You can find your Property ID in your Google Analytics account settings.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Promotion Not Appearing on Mobile</h3>
+            <ul>
+              <li>Check if "Set Mobile" option is enabled.</li>
+              <li>If disabled, the promotion will only appear on desktop devices.</li>
+              <li>Enable "Set Mobile" to show the promotion on mobile devices.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Promotion Not Triggering on Specific URLs</h3>
+            <ul>
+              <li>Verify that the URLs you entered in "Trigger specific URL" match the actual page URLs.</li>
+              <li>Check for typos or incorrect URL formats.</li>
+              <li>Make sure URLs are separated by commas if you have multiple URLs.</li>
+              <li>Test with a simple URL first (e.g., <code>/</code> for homepage) to verify the feature works.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Promotion Not Triggering on Item Click</h3>
+            <ul>
+              <li>Verify that the CSS selectors you entered match the actual elements on your page.</li>
+              <li>Check for typos in class names, IDs, or selectors.</li>
+              <li>Make sure selectors are separated by commas if you have multiple items.</li>
+              <li>Use browser developer tools (F12) to inspect elements and verify their selectors.</li>
+            </ul>
+          </div>
+  </div>
+</div>
+{% endblock %}
+
+

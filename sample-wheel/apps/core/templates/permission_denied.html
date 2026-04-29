@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4 p-md-5 text-center">
+          <div class="mb-3">
+            <i class="bi bi-shield-lock text-warning" style="font-size: 2.5rem;"></i>
+          </div>
+          <h2 class="h4 mb-2">Permission denied</h2>
+          <p class="text-muted mb-4">
+            You do not have permission to access this page. The requested resource
+            may belong to another account.
+          </p>
+          <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
+            <a class="btn btn-primary" href="#" onclick="history.back(); return false;">Go back</a>
+            <a class="btn btn-outline-secondary" href="/">Go to dashboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

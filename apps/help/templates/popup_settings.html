@@ -1,0 +1,293 @@
+{% extends "help_layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/help.css">
+<div class="main-content-wrapper">
+  <div class="pagetitle">
+    <h1>How can I configure pop-up settings?</h1>
+    <p class="meta-info">Validated on <strong>15 Jan 2024</strong> • Last edited on <strong>04 Feb 2026</strong></p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body mt-3">
+          <h2 class="section-subtitle">Overview</h2>
+          <p class="description-text">
+            The Pop-up Settings section allows you to customize the appearance and behavior of your promotion popup, including its size, position on the screen, opening animation effects, font family, and input field styles. These settings help you create a popup that matches your brand and provides the best user experience. This guide will explain all available settings and the differences between gaming and gaming popup types.
+          </p>
+
+          <h2 class="section-subtitle mt-5">Understanding Popup Types</h2>
+          <div class="description-step">
+            <p class="description-text">
+              Wheelluck supports two types of popups, each with different available settings:
+            </p>
+            <ul>
+              <li><strong>Gaming Popups:</strong> Interactive popups with game elements (spinning wheel, slot machine, scratch card). These popups have limited position options (left/right only).</li>
+              <li><strong>Light Popups:</strong> Simple form-based popups without game elements. These popups support advanced grid positioning (9 positions) for more flexible placement.</li>
+            </ul>
+            <div class="alert alert-info mt-3">
+              <strong>Note:</strong> The popup type is automatically set when you select a template. Gaming templates set the popup type to "gaming", while gaming templates set it to "gaming". You can also manually change the popup type in the Pop-up Settings section.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Accessing Pop-up Settings</h2>
+          <div class="description-step">
+            <ol>
+              <li>Log in to your Wheelluck dashboard.</li>
+              <li>Navigate to the <strong>Promotions</strong> section from the left-hand menu.</li>
+              <li>Click on the promotion you want to edit, or create a new promotion.</li>
+              <li>On the promotion editing page, locate the <strong>Pop-up Settings</strong> accordion section.</li>
+              <li>Click on the <strong>Pop-up Settings</strong> accordion to expand it and reveal all available settings.</li>
+            </ol>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Available Settings</h2>
+          <div class="description-step">
+            <h3 class="section-subtitle">1. Popup Size</h3>
+            <p class="description-text">
+              <strong>Available for:</strong> Light Popups only
+            </p>
+            <p class="description-text">
+              Control the overall size of your popup window. This setting affects how much space the popup occupies on the screen.
+            </p>
+            <ul>
+              <li><strong>Small:</strong> Compact popup size, ideal for minimal designs or smaller screens.</li>
+              <li><strong>Medium:</strong> Standard popup size (default), balanced for most use cases.</li>
+              <li><strong>Large:</strong> Larger popup size, provides more space for content and better visibility.</li>
+            </ul>
+            <div class="alert alert-warning mt-2">
+              <strong>Note:</strong> Gaming popups use automatic sizing based on their content and game elements. Size options are not available for gaming popups.
+            </div>
+            <div class="alert alert-info mt-2">
+              <strong>Tip:</strong> For gaming popups, the size you choose should match your content. Gaming popups can work well with any size depending on your form length.
+            </div>
+
+            <h3 class="section-subtitle mt-4">2. Popup Position</h3>
+            <p class="description-text">
+              <strong>Available for:</strong> Both Gaming and Light Popups (with different options)
+            </p>
+            
+            <h4 class="section-subtitle mt-3">Gaming Popups</h4>
+            <p class="description-text">
+              Gaming popups support <strong>two position options</strong>:
+            </p>
+            <ul>
+              <li><strong>Left:</strong> Popup appears on the left side of the screen.</li>
+              <li><strong>Right:</strong> Popup appears on the right side of the screen (default).</li>
+            </ul>
+            <div class="alert alert-warning mt-2">
+              <strong>Note:</strong> Gaming popups are limited to left/right positioning due to their interactive game elements and layout requirements.
+            </div>
+
+            <h4 class="section-subtitle mt-3">Light Popups</h4>
+            <p class="description-text">
+              Gaming popups support <strong>advanced grid positioning</strong> with <strong>9 position options</strong>:
+            </p>
+            <ul>
+              <li><strong>Top Row:</strong> top_left, top_center, top_right</li>
+              <li><strong>Middle Row:</strong> middle_left, middle_center (default), middle_right</li>
+              <li><strong>Bottom Row:</strong> bottom_left, bottom_center, bottom_right</li>
+            </ul>
+            <p class="description-text mt-2">
+              This grid system allows you to position your gaming popup anywhere on the screen, giving you complete control over where it appears. The default position is <strong>middle_center</strong>, which centers the popup both horizontally and vertically.
+            </p>
+            <div class="alert alert-info mt-2">
+              <strong>Tip:</strong> For gaming popups, center positions (top_center, middle_center, bottom_center) are often the most effective as they draw user attention without being intrusive.
+            </div>
+
+            <h3 class="section-subtitle mt-4">3. Opening Effects</h3>
+            <p class="description-text">
+              <strong>Available for:</strong> Light Popups only
+            </p>
+            <p class="description-text">
+              Choose how your popup appears when it first opens. These animation effects can make your popup more engaging and draw user attention.
+            </p>
+            <div class="alert alert-warning mt-2">
+              <strong>Note:</strong> Opening effects are not available for gaming popups. Gaming popups use a standard display method optimized for their interactive game elements.
+            </div>
+            <ul>
+              <li><strong>Fade In Scale:</strong> Popup fades in while scaling up (default). Smooth and professional.</li>
+              <li><strong>Slide from Left:</strong> Popup slides in from the left side of the screen.</li>
+              <li><strong>Slide from Right:</strong> Popup slides in from the right side of the screen.</li>
+              <li><strong>Slide from Top:</strong> Popup slides down from the top of the screen.</li>
+              <li><strong>Slide from Bottom:</strong> Popup slides up from the bottom of the screen.</li>
+              <li><strong>Zoom In:</strong> Popup zooms in from the center, creating a focus effect.</li>
+              <li><strong>Zoom Out:</strong> Popup zooms out from a larger size, creating a dramatic entrance.</li>
+            </ul>
+
+            <h4 class="section-subtitle mt-3">Duration (ms)</h4>
+            <p class="description-text">
+              Control how long the opening animation takes to complete. The duration is measured in milliseconds (ms). This setting is only available for gaming popups.
+            </p>
+            <ul>
+              <li><strong>Minimum:</strong> 100ms (very fast)</li>
+              <li><strong>Maximum:</strong> 3000ms (3 seconds, slow)</li>
+              <li><strong>Default:</strong> 700ms (balanced)</li>
+              <li><strong>Step:</strong> 100ms increments</li>
+            </ul>
+            <div class="alert alert-info mt-2">
+              <strong>Tip:</strong> Faster animations (100-500ms) feel snappy and modern, while slower animations (1000-3000ms) are more dramatic but may feel sluggish. The default 700ms is a good balance for most use cases.
+            </div>
+
+            <h3 class="section-subtitle mt-4">4. Font Family</h3>
+            <p class="description-text">
+              <strong>Available for:</strong> Both Gaming and Light Popups
+            </p>
+            <p class="description-text">
+              Select the font family that will be used for all text within your promotion popup. This includes headlines, descriptions, button text, and form labels.
+            </p>
+            <p class="description-text mt-2">
+              Available font options include:
+            </p>
+            <ul>
+              <li><strong>Sans-serif fonts:</strong> Arial, Roboto, Verdana, Trebuchet MS, Impact, Tahoma, Gill Sans, Century Gothic, Franklin Gothic Medium</li>
+              <li><strong>Serif fonts:</strong> Times New Roman, Georgia, Palatino Linotype</li>
+              <li><strong>Monospace fonts:</strong> Courier New, Lucida Console</li>
+              <li><strong>Decorative fonts:</strong> Comic Sans MS</li>
+            </ul>
+            <div class="alert alert-info mt-2">
+              <strong>Tip:</strong> Sans-serif fonts (like Arial, Roboto) are generally more readable on screens and work well for modern designs. Serif fonts (like Times New Roman) can add a classic, formal feel. Choose a font that matches your brand identity.
+            </div>
+
+            <h3 class="section-subtitle mt-4">5. Input Fields Style Settings</h3>
+            <p class="description-text">
+              <strong>Available for:</strong> Both Gaming and Light Popups
+            </p>
+            <p class="description-text">
+              Customize the appearance of all input fields in your popup (except Rating field). These styles apply globally to all input fields, ensuring a consistent look across your form.
+            </p>
+            <p class="description-text mt-2">
+              Available style options include:
+            </p>
+            <ul>
+              <li><strong>Alignment:</strong> Control how input fields are positioned horizontally:
+                <ul>
+                  <li><strong>Left:</strong> Aligns input fields to the left side of the popup.</li>
+                  <li><strong>Center:</strong> Centers input fields horizontally (default).</li>
+                  <li><strong>Right:</strong> Aligns input fields to the right side of the popup.</li>
+                </ul>
+              </li>
+              <li><strong>Border Width:</strong> Set the thickness of input field borders (0-20px). Default is 1px.</li>
+              <li><strong>Border Color:</strong> Choose the color of input field borders. Default is light gray (#dee2e6).</li>
+              <li><strong>Border Radius:</strong> Control the roundness of input field corners (0-20px). Default is 4px.</li>
+              <li><strong>Placeholder Text Color:</strong> Set the color of placeholder text inside input fields. Default is gray (#6c757d).</li>
+              <li><strong>Width:</strong> Control the width of input fields as a percentage of the popup width (0-100%). Default is 100%.</li>
+              <li><strong>Height:</strong> Set the height of input fields in pixels. Leave empty for auto height based on content.</li>
+            </ul>
+            <div class="alert alert-info mt-2">
+              <strong>Note:</strong> These styles apply to all input fields except the Rating field. The Rating field maintains its own internal centering while respecting the alignment and width settings for its container.
+            </div>
+            <div class="alert alert-warning mt-2">
+              <strong>Important:</strong> Changes to input field styles are immediately visible in the preview. Make sure to click "Save Changes" to apply your style settings permanently.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Gaming vs Light Popup: Feature Comparison</h2>
+          <div class="description-step">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>Gaming Popup</th>
+                    <th>Light Popup</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Popup Size</strong></td>
+                    <td>✗ Not Available (Auto size only)</td>
+                    <td>✓ Available (Small, Medium, Large)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Popup Position</strong></td>
+                    <td>Limited: Left or Right only</td>
+                    <td>Advanced: 9 grid positions (top_left, top_center, top_right, middle_left, middle_center, middle_right, bottom_left, bottom_center, bottom_right)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Opening Effects</strong></td>
+                    <td>✗ Not Available</td>
+                    <td>✓ Available (7 effects)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Effect Duration</strong></td>
+                    <td>✗ Not Available</td>
+                    <td>✓ Available (100-3000ms)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Font Family</strong></td>
+                    <td>✓ Available (15+ fonts)</td>
+                    <td>✓ Available (15+ fonts)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Input Fields Style Settings</strong></td>
+                    <td>✓ Available (Alignment, Border, Width, Height, Placeholder Color)</td>
+                    <td>✓ Available (Alignment, Border, Width, Height, Placeholder Color)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Important Notes</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Position Limitations:</strong> Gaming popups are restricted to left/right positioning because their interactive game elements (wheel, slot machine, etc.) require a specific layout that works best with side positioning.</li>
+              <li><strong>Grid Position Default:</strong> When you switch to a gaming popup template, the position automatically defaults to <strong>middle_center</strong> for optimal visibility.</li>
+              <li><strong>Template Impact:</strong> When you change templates, the popup type may change automatically, which can affect available position options. Make sure to review your position settings after changing templates.</li>
+              <li><strong>Preview Updates:</strong> All settings changes are immediately reflected in the preview area on the right side of the screen, so you can see how your popup will look before saving.</li>
+              <li><strong>Save Changes:</strong> Remember to click the <strong>Save</strong> button to apply your popup settings permanently.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Troubleshooting</h2>
+          <div class="description-step">
+            <h3 class="section-subtitle">Position Options Not Available</h3>
+            <ul>
+              <li>If you're using a gaming popup, only left/right positions are available. This is by design and cannot be changed.</li>
+              <li>To access grid positioning (9 positions), you need to switch to a gaming popup template.</li>
+              <li>Check your current popup type in the Pop-up Settings section or Templates section.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Grid Position Not Working</h3>
+            <ul>
+              <li>Grid positioning is only available for gaming popups. Make sure you're using a gaming popup template.</li>
+              <li>If you recently switched from a gaming template to a gaming template, the position should automatically update to middle_center.</li>
+              <li>Try refreshing the page and checking the popup type again.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Opening Effect Not Visible</h3>
+            <ul>
+              <li>Opening effects are only available for gaming popups. If you're using a gaming popup, this feature is not available.</li>
+              <li>Check that the duration is set to a reasonable value (not too fast, like 100ms, which may be hard to notice).</li>
+              <li>Try a different effect to see if the issue is specific to one animation.</li>
+              <li>Make sure you've saved your changes after selecting an effect.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Popup Size Options Not Available</h3>
+            <ul>
+              <li>Popup size options (Small, Medium, Large) are only available for gaming popups.</li>
+              <li>Gaming popups use automatic sizing based on their content and game elements. Size cannot be manually adjusted for gaming popups.</li>
+              <li>To access size options, you need to switch to a gaming popup template.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Font Not Applying</h3>
+            <ul>
+              <li>Make sure you've selected a font from the dropdown menu.</li>
+              <li>Some fonts may not display correctly if the user's browser doesn't support them. Common web-safe fonts (Arial, Times New Roman, etc.) are most reliable.</li>
+              <li>Try refreshing the preview to see if the font change takes effect.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Input Fields Style Not Applying</h3>
+            <ul>
+              <li>Make sure you have input fields added to your popup. Style settings only apply when input fields are present.</li>
+              <li>Note that Rating fields maintain their own internal centering while respecting alignment and width settings for their container.</li>
+              <li>If styles aren't updating in the preview, try clicking "Style Settings" button in the Input Fields section to ensure you're viewing the correct settings panel.</li>
+              <li>Remember to click "Save Changes" after modifying input field styles.</li>
+              <li>Width is set as a percentage (0-100%). If input fields appear too narrow or wide, adjust the width percentage accordingly.</li>
+            </ul>
+          </div>
+  </div>
+</div>
+{% endblock %}
+
+

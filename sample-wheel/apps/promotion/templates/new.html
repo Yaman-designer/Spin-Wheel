@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="row">
+    <div class="col-lg-6">
+
+      <div class="card" style="position: relative;">
+        <div class="card-body">
+          <h5 class="card-title">New Promotion</h5>
+          <div class="alert alert-secondary border-secondary alert-dismissible fade show" role="alert">
+            <p>Create a new promotion and visualize it. Let's win with spin-win.</p>
+            <hr>
+          </div>
+          <form class="row g-3 mt-4" method="post" action="/promotion/new" novalidate>
+            {% csrf_token %}
+            {{ form.user }}
+            <div class="row mb-3">
+              <label class="form-label">Name</label>
+              <div class="col-sm-10">
+                {{ form.name }}
+              </div>
+              <div class="col-12 m-0">
+                  <ul>
+                      {%for error in form.name.errors%}
+                      <li><small class="text-danger" style="color:red;">{{error}}</small></li>
+                      {%endfor%}
+                  </ul>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="form-label">Website</label>
+              <div class="col-sm-10">
+                {{ form.website }}
+              </div>
+              <div class="col-12 m-0">
+                  <ul>
+                      {%for error in form.website.errors%}
+                      <li><small class="text-danger" style="color:red;">{{error}}</small></li>
+                      {%endfor%}
+                  </ul>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-10 text-end">
+                <a href="/" class="btn btn-secondary">Cancel</a>
+                <button type="submit" id="second-tour" class="btn btn-primary float-right">Continue <i class="bi bi-arrow-right me-1"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+

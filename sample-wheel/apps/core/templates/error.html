@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Error - Wheelluck</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="/static/img/favicon.png" rel="icon" />
+    <link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="/static/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="/static/css/style.css" rel="stylesheet" />
+
+    <style>
+      /* body {
+        margin-top: 100px;
+      }
+      .error-page {
+        text-align: center;
+        background: #fff;
+        border-top: 1px solid #eee;
+      }
+      .error-page .error-inner {
+        display: inline-block;
+      }
+      .error-page .error-inner h1 {
+        font-size: 140px;
+        text-shadow: 3px 5px 2px #3333;
+        color: #00C39A;
+        font-weight: 700;
+      }
+      .error-page .error-inner h1 span {
+        display: block;
+        font-size: 25px;
+        color: #333;
+        font-weight: 600;
+        text-shadow: none;
+      }
+      .error-page .error-inner p {
+        padding: 20px 15px;
+      }
+      .error-page .search-form {
+        width: 100%;
+        position: relative;
+      }
+      .error-page .search-form input {
+        width: 400px;
+        height: 50px;
+        padding: 0px 78px 0 30px;
+        border: none;
+        background: #f6f6f6;
+        border-radius: 5px;
+        display: inline-block;
+        margin-right: 10px;
+        font-weight: 400;
+        font-size: 14px;
+      }
+      .error-page .search-form input:hover {
+        padding-left: 35px;
+      }
+      .error-page .search-form .btn {
+        width: 80px;
+        height: 50px;
+        border-radius: 5px;
+        cursor: pointer;
+        background: #006dfe;
+        display: inline-block;
+        position: relative;
+        top: -2px;
+      }
+      .error-page .search-form .btn i {
+        font-size: 16px;
+      }
+      .error-page .search-form .btn:hover {
+        background: #333;
+      } */
+      .card-internal-error{
+        background: #fff;
+        box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+        padding:30px;
+        border: none;
+      }
+      .card-internal-error .errorNumber{
+        font-size:5rem;
+        color:var(--primary-color);
+        text-shadow: 3px 5px 2px #3333;
+      }
+      .card-internal-error h2{
+        font-size: 25px;
+      	color: #333;
+      	font-weight: 600;
+      	text-shadow: none;
+      	margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="min-vh-100 d-flex align-items-center justify-content-center">
+      <div class="container">
+       <div class="row d-flex align-items-center justify-content-center">
+         <div class="col-10 col-md-8">
+           <div class="card-internal-error d-flex flex-column align-items-center justify-content-center text-center">
+             <div class="errorNumber">
+              500
+             </div>
+             <div>
+                 <h2>Opps! Internal Server Error!</h2>
+             </div>
+             <div class="my-4">
+                 <p>Unfortunately we're having trouble loading the page you are looking for. Please come back in a while.</p>
+             </div>
+             <div>
+                 <a href="/" class="btn btn-primary">Go Home</a>
+             </div>
+         </div>
+         </div>
+       </div>
+      </div>
+    </div>
+  </body>
+</html>

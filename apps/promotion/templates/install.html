@@ -1,0 +1,266 @@
+{% extends "base.html" %} {% block head %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css" rel="stylesheet"/>
+<style>
+  .box h4 i {
+    margin: 0 6px 0 0;
+    font-size: 90%;
+  }
+
+  .box p a {
+    margin: 0 3px;
+  }
+
+  .box a,
+  .box a:visited {
+    color: inherit;
+    border-bottom: 1px solid #e4dfef;
+    font-weight: 600;
+  }
+
+  .box a:hover,
+  .box a:focus {
+    color: #4e4877;
+    border-color: #85819c;
+  }
+
+  .box .box-body pre.language-html {
+    background: #f5f2f0;
+    border: 0;
+    border-radius: 6px;
+    padding: 10px 12px 12px;
+    box-shadow: inset 1px 1px rgba(0, 0, 0, 0.1);
+    font-size: 13px;
+    margin: 15px 0 7px;
+    position: relative;
+    overflow: visible;
+  }
+  .box .box-body pre.language-html .copy {
+    content: "copy";
+    padding: 4px 10px 0px;
+    line-height: 15px;
+    position: absolute;
+    top: -18px;
+    right: 15px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: #4e4877;
+    background: #f5f2ef;
+    cursor: pointer;
+    box-shadow: inset 1px 1px rgba(0, 0, 0, 0.1);
+    transition: all 200ms ease;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06rem;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .box .box-body pre.language-html:hover .copy {
+    top: -22px;
+    padding: 4px 10px 4px;
+  }
+  .box .box-body pre.language-html:hover .copy:hover {
+    color: #000;
+  }
+  .box .box-body pre.language-html code {
+    white-space: normal;
+  }
+
+  .box-notification {
+    position: relative;
+    font-size: 78%;
+    padding: 14px 90px 14px 25px;
+    margin: 20px 0;
+    border-radius: 8px;
+    color: #4e4877;
+    font-size: 15px;
+    border: 1px solid #d0cfda;
+    background: transparent;
+  }
+
+  .box-notification strong {
+    font-weight: 600;
+  }
+
+  .box-notification input {
+    width: 40%;
+    border-radius: 5px;
+    border: 1px solid #d0cfda;
+    padding: 3px 8px;
+    margin: 0 8px;
+  }
+
+  .box-notification button.btn {
+    position: absolute;
+    right: 10px;
+    top: 14px;
+    box-shadow: none;
+    text-shadow: none;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #4e4877;
+    font-size: 11px;
+    border: 1px solid #4e4877;
+    background: transparent;
+    border-radius: 5px;
+  }
+
+  .box-notification button.btn:hover,
+  .box-notification button.btn:focus {
+    background: #4e4877;
+    color: #fff;
+  }
+
+  .box-notification i.fa {
+    font-size: 110%;
+    vertical-align: -1px;
+    margin-right: 5px;
+  }
+
+  @media (max-width: 576px) {
+
+  .box .box-body pre.language-html {
+    font-size: 11px;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+
+  .box .box-body pre.language-html .copy {
+    right: 10px;
+    top: -16px;
+  }
+
+  .box-notification input[name="domain"] {
+
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+
+  .box-notification .status-message {
+    width: 100%;
+  }
+}
+</style>
+{% endblock %} {% block content %}
+<div class="content-wrapper">
+  <div class="content">
+    <div class="row mb-4">
+      <div class="col-12">
+        <h3>Install widget</h3>
+        <p>
+          Add the following code to allow Wheelluck Widget to display this
+          promotion to your website visitors and collect leads.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card">
+        <div class="card-body">
+          <div class="tab-content pt-2" id="borderedTabContent">
+            <div class="tab-pane fade show active" id="install-manually" role="tabpanel" aria-labelledby="home-tab">
+                <div class="row p-4">
+                  <div class="col-sm-9">
+                    <div class="box">
+                      <div class="box-body">
+                        <p>
+                          Place this code into the
+                          <span class="token tag"
+                            ><span class="token punctuation">&lt;</span>head<span
+                              class="token punctuation"
+                              >&gt;</span
+                            ></span
+                          >
+                          of every page where you want to run this promotion.
+                        </p>
+                        <pre
+                          class="language-html"
+                        ><div class="copy">copy</div><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{{ link }}<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wheelluck-script<span class="token punctuation">"</span></span> <span class="token attr-name">defer</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>defer<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></code></pre>
+                        <div class="text-end mt-3">
+                          <a href="/help/custom-site-script/" class="help-cloud-link" target="_blank">
+                            Read the step-by-step custom site guide
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="box-notification">
+                      <form>
+                        {% csrf_token %}
+                        <button type="button" name="btn_check_script" class="btn btn-sm btn-secondary pull-right">
+                          <i class="bi bi-arrow-repeat"></i>
+                          Retry
+                        </button>
+                        <span class="status-icon"></span>
+                        — Enter URL to try again:
+                        <input type="text" name="domain" value="{{ domain }}" />
+
+                        <!-- Sadece durum mesajı gösterimi -->
+                        <p class="status-message" style="margin: 15px 0 5px; font-size: 14px; width: 106%;">
+
+                        </p>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="row mb-4">
+      <div class="col-12">
+        <h3>Need help?</h3>
+        <p>
+          If you are not that familiar with HTML code, please use these
+          step-by-step instructions for your CMS from the list on the right.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="box">
+          <div class="box-body">
+            <h4><i class="bi bi-clipboard"></i>Installation guides</h4>
+            <p>
+              We put together several guides for popular content-management and
+              ecommerce systems, please select the one you are using on {{ domain }} for this promotion.
+            </p>
+
+            <hr />
+
+            <h4><i class="bi bi-question-circle"></i>Still need help?</h4>
+            <p>
+              If you have any questions or feel confused, don't worry, just
+              <a href="/help">contact the team</a> with your account manager.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block script %}
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/components/prism-core.min.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/plugins/autoloader/prism-autoloader.min.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"
+></script>
+<script type="text/javascript" src="/static/install.init.js"></script>
+
+{% endblock %}
+

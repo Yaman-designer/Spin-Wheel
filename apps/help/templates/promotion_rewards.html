@@ -1,0 +1,381 @@
+{% extends "help_layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/help.css">
+<div class="main-content-wrapper">
+  <div class="pagetitle">
+    <h1>How can I configure promotion rewards?</h1>
+    <p class="meta-info">Validated on <strong>15 Jan 2024</strong> • Last edited on <strong>27 Jun 2025</strong></p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body mt-3">
+          <h2 class="section-subtitle">Overview</h2>
+          <p class="description-text">
+            The Rewards section allows you to configure the prizes, discounts, or outcomes that users can win when they spin the wheel. You can set up to 12 different rewards, each with a label (what users see), a coupon code (for winning rewards), and a weight (win probability). This guide will show you how to configure rewards and understand how Smart Reward (AI-powered triggers) affects reward management.
+          </p>
+
+          <h2 class="section-subtitle mt-5">Accessing Rewards Settings</h2>
+          <div class="description-step">
+            <ol>
+              <li>Log in to your Wheelluck dashboard.</li>
+              <li>Navigate to the <strong>Promotions</strong> section from the left-hand menu.</li>
+              <li>Click on the promotion you want to edit, or create a new promotion.</li>
+              <li>On the promotion editing page, locate the <strong>Rewards</strong> accordion section.</li>
+              <li>Click on the <strong>Rewards</strong> accordion to expand it and reveal all reward configuration fields.</li>
+            </ol>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Understanding Reward Structure</h2>
+          <div class="description-step">
+            <p class="description-text">
+              Your promotion has <strong>12 reward slots</strong>, arranged in an alternating pattern:
+            </p>
+            <ul>
+              <li><strong>Win Rewards (Editable):</strong> Positions 1, 3, 5, 7, 9, and 11 are "win" rewards that users can actually win. These have editable labels, coupon codes, and weights.</li>
+              <li><strong>No-Win Rewards (Locked):</strong> Positions 2, 4, 6, 8, 10, and 12 are "no-win" messages (like "Sorry", "Almost", "Next time"). These are locked and cannot be edited when Smart Reward is disabled.</li>
+            </ul>
+            <div class="alert alert-info mt-3">
+              <strong>Note:</strong> When Smart Reward is disabled, only the win rewards (positions 1, 3, 5, 7, 9, 11) can be edited. When Smart Reward is enabled, all rewards become locked and are managed by the AI system.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Reward Fields Explained</h2>
+          <div class="description-step">
+            <h3 class="section-subtitle">1. Label</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> The text that appears on the wheel slice that users see when spinning.
+            </p>
+            <ul>
+              <li>This is what users see on the wheel before and during the spin.</li>
+              <li>Maximum length: <strong>13 characters</strong></li>
+              <li>This field is <strong>required</strong> for all rewards.</li>
+              <li>Examples: "50% OFF", "Free Shipping", "20% OFF", "Try Again"</li>
+            </ul>
+            <div class="alert alert-info mt-2">
+              <strong>Tip:</strong> Keep labels short and clear since they appear on the wheel. Use abbreviations if needed (e.g., "50% OFF" instead of "Fifty Percent Off").
+            </div>
+
+            <h3 class="section-subtitle">2. Coupon Code</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> The actual discount code or coupon that users receive when they win that reward.
+            </p>
+            <ul>
+              <li>This code is displayed to users after they win and can be used during checkout.</li>
+              <li>Maximum length: <strong>10 characters</strong></li>
+              <li><strong>Required for win rewards only</strong> (positions 1, 3, 5, 7, 9, 11).</li>
+              <li>No-win rewards (positions 2, 4, 6, 8, 10, 12) don't need coupon codes and the field is disabled.</li>
+              <li>Examples: "SAVE50", "FREESHIP", "WELCOME20"</li>
+            </ul>
+            <div class="alert alert-warning mt-2">
+              <strong>Important:</strong> Win rewards (positions 1, 3, 5, 7, 9, 11) must have a coupon code. If you leave it blank, you'll receive a validation error when saving.
+            </div>
+
+            <h3 class="section-subtitle">3. Weight (%)</h3>
+            <p class="description-text">
+              <strong>Purpose:</strong> Determines the probability or chance that a user will win that specific reward.
+            </p>
+            <ul>
+              <li>Weight is expressed as a percentage (0-100).</li>
+              <li>Higher weight = higher chance of winning that reward.</li>
+              <li>Maximum value: <strong>99</strong> (2 digits maximum)</li>
+              <li>Weight cannot be negative.</li>
+              <li>When Smart Reward is <strong>disabled</strong>, the total of all weights must equal <strong>100%</strong>.</li>
+              <li>When Smart Reward is <strong>enabled</strong>, weights are managed by AI and don't need to total 100%.</li>
+            </ul>
+            <div class="alert alert-info mt-2">
+              <strong>Example:</strong> If Reward 1 has weight 30 and Reward 3 has weight 70, users have a 30% chance of winning Reward 1 and a 70% chance of winning Reward 3 (assuming only these two have weights).
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Configuring Rewards (Smart Reward Disabled)</h2>
+          <div class="description-step">
+            <p class="description-text">
+              When Smart Reward (AI-powered triggers) is <strong>disabled</strong>, you have manual control over rewards:
+            </p>
+            <ol>
+              <li>Only <strong>win rewards</strong> (positions 1, 3, 5, 7, 9, 11) can be edited.</li>
+              <li>No-win rewards (positions 2, 4, 6, 8, 10, 12) are locked and cannot be changed.</li>
+              <li>For each win reward, fill in:
+                <ul>
+                  <li><strong>Label:</strong> What appears on the wheel (required, max 13 characters)</li>
+                  <li><strong>Coupon Code:</strong> The discount code users receive (required, max 10 characters)</li>
+                  <li><strong>Weight:</strong> Win probability percentage (required, 0-99)</li>
+                </ul>
+              </li>
+              <li><strong>Total Weight Must Equal 100%:</strong> The sum of all reward weights must equal exactly 100. For example:
+                <ul>
+                  <li>Reward 1: 30%</li>
+                  <li>Reward 3: 50%</li>
+                  <li>Reward 5: 20%</li>
+                  <li>Total: 100% ✓</li>
+                </ul>
+              </li>
+              <li>You can use the weight calculator buttons (if available) to help distribute weights automatically.</li>
+              <li>Click <strong>Save</strong> to save your reward configuration.</li>
+            </ol>
+            <div class="alert alert-warning mt-3">
+              <strong>Validation Rule:</strong> If the total weight doesn't equal 100%, you'll receive an error: "The total weight of the rewards must be 100". You must adjust weights until they total exactly 100.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Smart Reward (AI-Powered Triggers) - Overview</h2>
+          <div class="description-step">
+            <p class="description-text">
+              <strong>Smart Reward</strong> is an AI-powered feature that uses Google Analytics data to intelligently manage reward distribution. When enabled, the AI system analyzes user behavior and determines optimal reward timing and distribution.
+            </p>
+            <div class="alert alert-info mt-3">
+              <strong>How It Works:</strong> When Google Analytics is available on your site, Smart Reward can use traffic and behavior signals to decide when to show promotions and which rewards to offer, with the goal of improving conversion and engagement.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">What Happens When Smart Reward Is Enabled?</h2>
+          <div class="description-step">
+            <p class="description-text">
+              When you enable <strong>"AI powered triggers"</strong> (Smart Reward) in the Options section:
+            </p>
+            
+            <h3 class="section-subtitle">1. All Reward Fields Become Locked</h3>
+            <ul>
+              <li><strong>All 12 rewards</strong> (both win and no-win) become disabled and cannot be edited.</li>
+              <li>Label, Coupon Code, and Weight fields for all rewards are locked.</li>
+              <li>You cannot manually change reward labels, codes, or weights.</li>
+              <li>The AI system manages all reward configurations automatically.</li>
+            </ul>
+
+            <h3 class="section-subtitle">2. Weight Requirements Change</h3>
+            <ul>
+              <li><strong>Total weight no longer needs to equal 100%.</strong></li>
+              <li>The AI system manages weight distribution intelligently.</li>
+              <li>You don't need to manually calculate or adjust weights.</li>
+              <li>All weight values are set to 0 and managed by the AI.</li>
+            </ul>
+
+            <h3 class="section-subtitle">3. Google Analytics Property ID Required</h3>
+            <ul>
+              <li>A <strong>Google Analytics Property ID</strong> field appears and becomes required.</li>
+              <li>You must enter your Google Analytics Property ID (format: UA-123456789-1 or G-XXXXXXXXXX).</li>
+              <li>This ID is used to connect your promotion to Google Analytics data.</li>
+              <li>If you leave this field empty, you'll receive an error: "If the Ai powered triggers is active, the property id field cannot be left empty".</li>
+            </ul>
+
+            <h3 class="section-subtitle">4. Weight Calculator Disappears</h3>
+            <ul>
+              <li>The weight calculator buttons (if available) are hidden.</li>
+              <li>Manual weight calculation tools are no longer needed since AI manages weights.</li>
+            </ul>
+
+            <h3 class="section-subtitle">5. Analytics Active Message Appears</h3>
+            <ul>
+              <li>An "Analytics Active" message or indicator appears to confirm Smart Reward is enabled.</li>
+              <li>This confirms that the AI system is using Google Analytics data.</li>
+            </ul>
+
+            <h3 class="section-subtitle">6. Some Options Become Disabled</h3>
+            <ul>
+              <li><strong>"Trigger when the user intends to leave"</strong> is automatically disabled and unchecked.</li>
+              <li><strong>"Trigger when scroll down"</strong> is automatically disabled and unchecked.</li>
+              <li><strong>"Trigger with delay"</strong> is automatically disabled, unchecked, and cleared.</li>
+              <li>These options are disabled because Smart Reward uses AI to determine optimal trigger timing instead.</li>
+            </ul>
+
+            <h3 class="section-subtitle">7. Reward Distribution Becomes Intelligent</h3>
+            <ul>
+              <li>The AI analyzes user behavior patterns from Google Analytics.</li>
+              <li>Reward distribution is optimized based on user data and conversion patterns.</li>
+              <li>The system makes data-driven decisions about which rewards to offer and when.</li>
+              <li>This can lead to better conversion rates and more effective promotions.</li>
+            </ul>
+
+            <div class="alert alert-success mt-3">
+              <strong>Benefits of Smart Reward:</strong> By using AI and Google Analytics data, Smart Reward can optimize your promotion performance, improve conversion rates, and provide better user experiences through intelligent, data-driven reward management.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Enabling Smart Reward</h2>
+          <div class="description-step">
+            <p class="description-text">
+              To enable Smart Reward:
+            </p>
+            <ol>
+              <li>Go to the <strong>Options</strong> section in your promotion editor.</li>
+              <li>Find the <strong>"AI powered triggers"</strong> checkbox.</li>
+              <li>Click the checkbox to enable Smart Reward.</li>
+              <li>The Google Analytics Property ID field will appear.</li>
+              <li>Enter your Google Analytics Property ID (you can find this in your Google Analytics account).</li>
+              <li>All reward fields will become locked automatically.</li>
+              <li>Click <strong>Save</strong> to save your changes.</li>
+            </ol>
+            <div class="alert alert-warning mt-3">
+              <strong>Important:</strong> Once Smart Reward is enabled, you cannot manually edit rewards. If you need to change rewards, you must first disable Smart Reward, make your changes, then re-enable it (if desired).
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Disabling Smart Reward</h2>
+          <div class="description-step">
+            <p class="description-text">
+              To disable Smart Reward and regain manual control:
+            </p>
+            <ol>
+              <li>Go to the <strong>Options</strong> section.</li>
+              <li>Uncheck the <strong>"AI powered triggers"</strong> checkbox.</li>
+              <li>All reward fields will become editable again (win rewards only).</li>
+              <li>The system may automatically assign random weights that total 100%.</li>
+              <li>You can then manually edit reward labels, codes, and weights.</li>
+              <li>Make sure the total weight equals 100% before saving.</li>
+              <li>Click <strong>Save</strong> to save your changes.</li>
+            </ol>
+            <div class="alert alert-info mt-3">
+              <strong>Automatic Weight Assignment:</strong> When you disable Smart Reward, the system may automatically assign random weights to help you get started. You can then adjust these weights manually to total 100%.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Validation Rules</h2>
+          <div class="description-step">
+            <p class="description-text">
+              The following validation rules apply when configuring rewards:
+            </p>
+            <h3 class="section-subtitle">General Rules (Apply to All Rewards)</h3>
+            <ul>
+              <li><strong>Label Required:</strong> All rewards must have a label. Empty labels are not allowed.</li>
+              <li><strong>Weight Required:</strong> All rewards must have a weight value. Empty weights are not allowed.</li>
+              <li><strong>Weight Must Be a Number:</strong> Weight values must be valid numbers (0-99).</li>
+              <li><strong>Weight Cannot Be Negative:</strong> Weight values cannot be negative numbers.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Win Reward Rules (Positions 1, 3, 5, 7, 9, 11)</h3>
+            <ul>
+              <li><strong>Coupon Code Required:</strong> Win rewards must have a coupon code. Empty coupon codes are not allowed for these positions.</li>
+              <li><strong>Code Maximum Length:</strong> Coupon codes cannot exceed 10 characters.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Weight Total Rules</h3>
+            <ul>
+              <li><strong>When Smart Reward is Disabled:</strong> The total of all reward weights must equal exactly <strong>100%</strong>. If it doesn't, you'll receive an error: "The total weight of the rewards must be 100".</li>
+              <li><strong>When Smart Reward is Enabled:</strong> Total weight does not need to equal 100%. The AI system manages weight distribution automatically.</li>
+            </ul>
+
+            <div class="alert alert-danger mt-3">
+              <strong>Validation Errors:</strong> If any of these rules are violated, you'll see specific error messages indicating what needs to be corrected before you can save your promotion.
+            </div>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Best Practices</h2>
+          <div class="description-step">
+            <h3 class="section-subtitle">For Manual Reward Configuration (Smart Reward Disabled)</h3>
+            <ul>
+              <li><strong>Balance Your Weights:</strong> Distribute weights strategically. Higher-value rewards (like 50% OFF) should typically have lower weights, while lower-value rewards can have higher weights.</li>
+              <li><strong>Test Different Distributions:</strong> Experiment with different weight combinations to find what works best for your business goals.</li>
+              <li><strong>Keep Labels Short:</strong> Since labels are limited to 13 characters, use concise, clear text that users can quickly understand.</li>
+              <li><strong>Use Meaningful Coupon Codes:</strong> Create coupon codes that are easy to remember and relate to your brand or campaign.</li>
+              <li><strong>Verify Total Weight:</strong> Always double-check that your weights total exactly 100% before saving.</li>
+            </ul>
+
+            <h3 class="section-subtitle">For Smart Reward (AI-Powered)</h3>
+            <ul>
+              <li><strong>Ensure Google Analytics is Set Up:</strong> Make sure you have Google Analytics properly configured on your website before enabling Smart Reward.</li>
+              <li><strong>Use Correct Property ID:</strong> Double-check that you're entering the correct Google Analytics Property ID. You can find this in your Google Analytics account under Admin → Property Settings.</li>
+              <li><strong>Allow Time for Learning:</strong> The AI system needs time to analyze data and learn patterns. Allow the system to run for a while to see optimal results.</li>
+              <li><strong>Monitor Performance:</strong> Keep an eye on your promotion performance metrics to see how Smart Reward is affecting conversions.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Important Notes</h2>
+          <div class="description-step">
+            <ul>
+              <li><strong>Reward Positions:</strong> Remember that positions 1, 3, 5, 7, 9, 11 are win rewards (editable when Smart Reward is off), while positions 2, 4, 6, 8, 10, 12 are no-win messages (always locked when Smart Reward is off).</li>
+              <li><strong>Smart Reward Lock:</strong> When Smart Reward is enabled, you cannot edit any rewards. You must disable Smart Reward first to make changes.</li>
+              <li><strong>Weight Total:</strong> When Smart Reward is disabled, weights must total exactly 100%. Use a calculator if needed to verify.</li>
+              <li><strong>Coupon Code Requirements:</strong> Only win rewards (positions 1, 3, 5, 7, 9, 11) require coupon codes. No-win rewards don't need codes.</li>
+              <li><strong>Save Your Changes:</strong> Always remember to click the <strong>Save</strong> button after configuring rewards to ensure the changes are saved permanently.</li>
+              <li><strong>Preview Updates:</strong> Changes to reward labels are immediately reflected in the preview panel, so you can see how they look on the wheel.</li>
+            </ul>
+          </div>
+
+          <h2 class="section-subtitle mt-5">Troubleshooting</h2>
+          <div class="description-step">
+            <h3 class="section-subtitle">"The total weight of the rewards must be 100" Error</h3>
+            <ul>
+              <li>This error appears when Smart Reward is disabled and your total weight doesn't equal 100%.</li>
+              <li>Check the sum of all reward weights. They must total exactly 100.</li>
+              <li>Adjust individual weights until the total equals 100.</li>
+              <li>Use the weight calculator buttons (if available) to help distribute weights automatically.</li>
+              <li>Alternatively, enable Smart Reward if you want the AI to manage weights automatically.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"The rewards label cannot be blank" Error</h3>
+            <ul>
+              <li>One or more rewards have an empty label field.</li>
+              <li>All rewards must have a label, even if it's just a placeholder.</li>
+              <li>Fill in labels for all rewards that are showing this error.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"The rewards weight cannot be blank" Error</h3>
+            <ul>
+              <li>One or more rewards have an empty weight field.</li>
+              <li>All rewards must have a weight value (can be 0 for no-win rewards).</li>
+              <li>Enter a weight value (0-99) for all rewards.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"The rewards weight cannot be negative" Error</h3>
+            <ul>
+              <li>You've entered a negative number in a weight field.</li>
+              <li>Weight values must be 0 or positive numbers.</li>
+              <li>Change any negative weights to 0 or a positive number.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"The rewards weight must be a valid number" Error</h3>
+            <ul>
+              <li>You've entered non-numeric text in a weight field.</li>
+              <li>Weight values must be numbers only (0-99).</li>
+              <li>Remove any letters or special characters from weight fields.</li>
+            </ul>
+
+            <h3 class="section-subtitle">"The rewards coupon code cannot be blank" Error</h3>
+            <ul>
+              <li>One of the win rewards (positions 1, 3, 5, 7, 9, 11) has an empty coupon code.</li>
+              <li>Win rewards require coupon codes.</li>
+              <li>Enter a coupon code (max 10 characters) for all win rewards.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Cannot Edit Rewards (All Fields Disabled)</h3>
+            <ul>
+              <li>Check if Smart Reward (AI powered triggers) is enabled in the Options section.</li>
+              <li>When Smart Reward is enabled, all reward fields are locked.</li>
+              <li>Disable Smart Reward in the Options section to regain manual control over rewards.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Cannot Edit Specific Rewards (Some Fields Disabled)</h3>
+            <ul>
+              <li>When Smart Reward is disabled, only win rewards (positions 1, 3, 5, 7, 9, 11) can be edited.</li>
+              <li>No-win rewards (positions 2, 4, 6, 8, 10, 12) are always locked when Smart Reward is off.</li>
+              <li>This is normal behavior - only win rewards are editable in manual mode.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Weight Calculator Buttons Not Visible</h3>
+            <ul>
+              <li>Check if Smart Reward is enabled. Weight calculator is hidden when Smart Reward is active.</li>
+              <li>Disable Smart Reward to see and use the weight calculator buttons.</li>
+              <li>The calculator helps automatically distribute weights to total 100%.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Cannot Enter More Than 2 Digits in Weight Field</h3>
+            <ul>
+              <li>Weight fields are limited to 2 digits (0-99).</li>
+              <li>This is a system limitation to keep weights manageable.</li>
+              <li>If you need higher percentages, distribute them across multiple rewards.</li>
+            </ul>
+
+            <h3 class="section-subtitle">Label or Code Text Gets Cut Off</h3>
+            <ul>
+              <li>Labels are limited to 13 characters and codes to 10 characters.</li>
+              <li>If your text is too long, it will be truncated.</li>
+              <li>Use shorter, more concise text that fits within the limits.</li>
+              <li>Consider using abbreviations for labels if needed.</li>
+            </ul>
+          </div>
+  </div>
+</div>
+{% endblock %}
+
+
